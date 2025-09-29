@@ -14,11 +14,21 @@ export default defineConfig({
     }
   },
   build: {
-    // Ensure proper module format
+    // Ensure proper module format and compatibility
     rollupOptions: {
       output: {
-        format: 'es'
+        format: 'es',
+        // Ensure consistent file extensions
+        entryFileNames: 'assets/[name]-[hash].js',
+        chunkFileNames: 'assets/[name]-[hash].js',
+        assetFileNames: 'assets/[name]-[hash].[ext]'
       }
-    }
-  }
+    },
+    // Target modern browsers for better ES module support
+    target: 'es2015',
+    // Ensure source maps for debugging
+    sourcemap: false
+  },
+  // Base URL for deployment
+  base: './'
 });
