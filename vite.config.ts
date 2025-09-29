@@ -7,4 +7,18 @@ export default defineConfig({
   optimizeDeps: {
     exclude: ['lucide-react'],
   },
+  server: {
+    // Ensure proper MIME types for module scripts
+    headers: {
+      'Content-Type': 'application/javascript; charset=utf-8'
+    }
+  },
+  build: {
+    // Ensure proper module format
+    rollupOptions: {
+      output: {
+        format: 'es'
+      }
+    }
+  }
 });
