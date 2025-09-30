@@ -145,7 +145,7 @@ const HomePage = () => {
       </section>
 
       {/* What is Lunar Nidra Section - Chico-inspired with organic shapes */}
-      <section className="relative py-32 bg-white overflow-hidden">
+      <section className="relative py-32 bg-blush-50 overflow-hidden">
         <OrganicShapes variant="section" />
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -230,8 +230,11 @@ const HomePage = () => {
       </section>
 
       {/* Product Showcase Section - Chico-inspired */}
-      <section className="py-32 bg-ethereal-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="relative py-32 bg-organic-gradient overflow-hidden">
+        {/* Wave top border */}
+        <WaveTop variant="ethereal-50" className="z-10" />
+        <OrganicShapes variant="section" />
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8">
           <div className="text-center mb-20">
             <h2 className="text-5xl md:text-6xl font-serif font-bold text-ethereal-800 mb-8">
               A practice of Lunar Nidra a day, keeps the chaos away.
@@ -297,10 +300,13 @@ const HomePage = () => {
             </Link>
           </div>
         </div>
+
+        {/* Wave bottom border transitioning to white background */}
+        <WaveBottom variant="white" className="z-10" />
       </section>
 
       {/* Testimonials Section */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-blush-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-serif font-bold text-purple-900 mb-4">

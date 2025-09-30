@@ -29,6 +29,18 @@ export default {
           800: '#ee7fc0',
           900: '#e86db7',
         },
+        'pink': {
+          50: '#fdf2f8',
+          100: '#fce7f3',
+          200: '#fbcfe8',
+          300: '#f9a8d4',
+          400: '#f472b6',
+          500: '#ec4899',
+          600: '#db2777',
+          700: '#be185d',
+          800: '#9d174d',
+          900: '#831843',
+        },
         'lavender': {
           50: '#faf8fe',
           100: '#f5f1fd',
@@ -84,6 +96,9 @@ export default {
         'blush-gradient': 'linear-gradient(135deg, #FEEBF6 0%, #EBD6FB 100%)',
         'lavender-gradient': 'linear-gradient(135deg, #EBD6FB 0%, #FCD8CD 100%)',
         'brand-gradient': 'linear-gradient(135deg, #FCD8CD 0%, #FEEBF6 50%, #EBD6FB 100%)',
+        'pink-gradient': 'linear-gradient(135deg, #fce7f3 0%, #fbcfe8 50%, #f9a8d4 100%)',
+        'rose-pink-gradient': 'linear-gradient(135deg, #FEEBF6 0%, #fbcfe8 50%, #f472b6 100%)',
+        'soft-pink-gradient': 'linear-gradient(135deg, #fdf2f8 0%, #fce7f3 100%)',
       }
     },
   },
