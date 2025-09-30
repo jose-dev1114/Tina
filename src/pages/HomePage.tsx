@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom';
 import { Moon, Heart, Star, Users } from 'lucide-react';
 import OrganicShapes from '../components/OrganicShapes';
+import WaveBottom from '../components/WaveBottom';
+import WaveTop from '../components/WaveTop';
 
 const HomePage = () => {
   const benefits = [
@@ -49,6 +51,7 @@ const HomePage = () => {
 
   return (
     <div className="min-h-screen">
+
       {/* Hero Section - Chico-inspired design */}
       <section className="relative overflow-hidden bg-organic-gradient min-h-screen flex items-center">
         <OrganicShapes variant="hero" />
@@ -136,6 +139,9 @@ const HomePage = () => {
             </div>
           </div>
         </div>
+
+        {/* Wave bottom border */}
+        <WaveBottom variant="white" className="z-10" />
       </section>
 
       {/* What is Lunar Nidra Section - Chico-inspired with organic shapes */}
@@ -218,6 +224,9 @@ const HomePage = () => {
             </Link>
           </div>
         </div>
+
+        {/* Wave bottom border transitioning to ethereal-50 background */}
+        <WaveBottom variant="ethereal-50" className="z-10" />
       </section>
 
       {/* Product Showcase Section - Chico-inspired */}
@@ -330,6 +339,8 @@ const HomePage = () => {
 
       {/* FAQ Section - Chico-inspired */}
       <section className="relative py-32 bg-blush-gradient overflow-hidden">
+        {/* Wave top border */}
+        <WaveTop variant="white" className="z-10" />
         <OrganicShapes variant="accent" />
 
         <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">

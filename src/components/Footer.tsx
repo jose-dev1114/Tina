@@ -1,5 +1,5 @@
 
-import { Moon, Instagram, Youtube, Mail } from 'lucide-react';
+import { Instagram, Youtube, Mail } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const Footer = () => {

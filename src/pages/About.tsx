@@ -1,5 +1,5 @@
 
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Heart, MapPin, Sparkles } from 'lucide-react';
 
 // Astral Sign Animation Component

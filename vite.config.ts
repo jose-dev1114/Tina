@@ -8,10 +8,9 @@ export default defineConfig({
     exclude: ['lucide-react'],
   },
   server: {
-    // Ensure proper MIME types for module scripts
-    headers: {
-      'Content-Type': 'application/javascript; charset=utf-8'
-    }
+    port: 4000,
+    host: true,
+    strictPort: true
   },
   build: {
     // Ensure proper module format and compatibility
@@ -30,5 +29,5 @@ export default defineConfig({
     sourcemap: false
   },
   // Base URL for deployment
-  base: './'
+  base: '/'
 });
