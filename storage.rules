@@ -1,0 +1,37 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    // User profile images
+    match /users/{userId}/profile/{allPaths=**} {
+      allow read: if true;
+      allow write: if request.auth != null && request.auth.uid == userId;
+    }
+
+    // Meditation audio files - publicly readable, admin writable
+    match /meditations/{meditationId}/audio/{allPaths=**} {
+      allow read: if true;
+      allow write: if request.auth != null && 
+        (request.auth.token.admin == true || 
+         get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin');
+    }
+
+    // Meditation thumbnails - publicly readable, admin writable
+    match /meditations/{meditationId}/thumbnails/{allPaths=**} {
+      allow read: if true;
+      allow write: if request.auth != null && 
+        (request.auth.token.admin == true || 
+         get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin');
+    }
+
+    // Community post images
+    match /community/{postId}/{allPaths=**} {
+      allow read: if true;
+      allow write: if request.auth != null;
+    }
+
+    // General uploads (temporary files, etc.)
+    match /uploads/{userId}/{allPaths=**} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+  }
+}

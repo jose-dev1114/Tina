@@ -1,0 +1,85 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Users can read and write their own user document
+    match /users/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+
+    // Meditations are publicly readable, but only admins can write
+    match /meditations/{meditationId} {
+      allow read: if true;
+      allow write: if request.auth != null && 
+        (request.auth.token.admin == true || 
+         get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin');
+    }
+
+    // Purchases are private to the user
+    match /purchases/{purchaseId} {
+      allow read, write: if request.auth != null && 
+        request.auth.uid == resource.data.userId;
+      allow create: if request.auth != null && 
+        request.auth.uid == request.resource.data.userId;
+    }
+
+    // User progress is private to the user
+    match /userProgress/{progressId} {
+      allow read, write: if request.auth != null && 
+        request.auth.uid == resource.data.userId;
+      allow create: if request.auth != null && 
+        request.auth.uid == request.resource.data.userId;
+    }
+
+    // Quiz results can be created anonymously, but only read by the user
+    match /quizResults/{resultId} {
+      allow create: if true; // Allow anonymous quiz submissions
+      allow read: if request.auth != null && 
+        (request.auth.uid == resource.data.userId || 
+         resource.data.userId == null);
+      allow update: if request.auth != null && 
+        request.auth.uid == resource.data.userId;
+    }
+
+    // Community posts are publicly readable, users can write their own
+    match /communityPosts/{postId} {
+      allow read: if resource.data.isPublished == true;
+      allow create: if request.auth != null && 
+        request.auth.uid == request.resource.data.userId;
+      allow update, delete: if request.auth != null && 
+        request.auth.uid == resource.data.userId;
+    }
+
+    // Comments are publicly readable, users can write their own
+    match /comments/{commentId} {
+      allow read: if resource.data.isDeleted == false;
+      allow create: if request.auth != null && 
+        request.auth.uid == request.resource.data.userId;
+      allow update, delete: if request.auth != null && 
+        request.auth.uid == resource.data.userId;
+    }
+
+    // Coaching sessions are private between user and coach
+    match /coachingSessions/{sessionId} {
+      allow read, write: if request.auth != null && 
+        (request.auth.uid == resource.data.userId || 
+         request.auth.uid == resource.data.coachId);
+      allow create: if request.auth != null && 
+        request.auth.uid == request.resource.data.userId;
+    }
+
+    // Newsletter subscriptions can be created by anyone
+    match /newsletter/{subscriptionId} {
+      allow create: if true;
+      allow read, update: if request.auth != null && 
+        request.auth.token.email == resource.data.email;
+    }
+
+    // Moon phases are publicly readable, only admins can write
+    match /moonPhases/{phaseId} {
+      allow read: if true;
+      allow write: if request.auth != null && 
+        (request.auth.token.admin == true || 
+         get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin');
+    }
+  }
+}

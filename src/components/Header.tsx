@@ -1,6 +1,90 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { useAuth } from '@clerk/clerk-react';
 import { Menu, X } from 'lucide-react';
+import SignInButton from './auth/SignInButton';
+import SignUpButton from './auth/SignUpButton';
+import UserButton from './auth/UserButton';
+
+// Auth buttons component
+const AuthButtons = () => {
+  const { isSignedIn, isLoaded } = useAuth();
+
+  // Show loading state while Clerk is initializing
+  if (!isLoaded) {
+    return (
+      <div className="flex items-center space-x-3">
+        <div className="w-16 h-8 bg-gray-200 rounded animate-pulse"></div>
+        <div className="w-20 h-8 bg-gray-200 rounded animate-pulse"></div>
+      </div>
+    );
+  }
+
+  if (isSignedIn) {
+    return (
+      <div className="flex items-center">
+        <UserButton afterSignOutUrl="/" showName={false} />
+      </div>
+    );
+  }
+
+  return (
+    <div className="flex items-center space-x-3">
+      <SignInButton
+        mode="modal"
+        className="text-ethereal-700 hover:text-ethereal-900 font-medium transition-colors duration-200 px-4 py-2 rounded-lg hover:bg-ethereal-50"
+      >
+        <span>Sign In</span>
+      </SignInButton>
+      <SignUpButton
+        mode="modal"
+        className="bg-lavender-600 text-white px-4 py-2 rounded-full font-medium hover:bg-lavender-700 transition-colors duration-200 shadow-sm"
+      >
+        <span>Sign Up</span>
+      </SignUpButton>
+    </div>
+  );
+};
+
+// Mobile auth buttons component
+const MobileAuthButtons = () => {
+  const { isSignedIn, isLoaded } = useAuth();
+
+  // Show loading state while Clerk is initializing
+  if (!isLoaded) {
+    return (
+      <div className="space-y-3">
+        <div className="w-full h-12 bg-gray-200 rounded-lg animate-pulse"></div>
+        <div className="w-full h-12 bg-gray-200 rounded-lg animate-pulse"></div>
+      </div>
+    );
+  }
+
+  if (isSignedIn) {
+    return (
+      <div className="flex items-center justify-center py-2">
+        <UserButton afterSignOutUrl="/" showName={true} />
+      </div>
+    );
+  }
+
+  return (
+    <div className="space-y-3">
+      <SignInButton
+        mode="modal"
+        className="w-full text-center bg-white border-2 border-ethereal-200 text-ethereal-700 px-4 py-3 rounded-xl font-medium hover:bg-ethereal-50 hover:border-ethereal-300 transition-all duration-200"
+      >
+        <span>Sign In</span>
+      </SignInButton>
+      <SignUpButton
+        mode="modal"
+        className="w-full text-center bg-lavender-600 text-white px-4 py-3 rounded-xl font-medium hover:bg-lavender-700 transition-colors duration-200 shadow-sm"
+      >
+        <span>Create Account</span>
+      </SignUpButton>
+    </div>
+  );
+};
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -86,6 +170,11 @@ const Header = () => {
             </div>
           </nav>
 
+          {/* Authentication Buttons */}
+          <div className="hidden lg:flex items-center space-x-4">
+            <AuthButtons />
+          </div>
+
           {/* Mobile menu button */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -111,6 +200,11 @@ const Header = () => {
                   {item.name}
                 </Link>
               ))}
+
+              {/* Mobile Auth Buttons */}
+              <div className="pt-4 border-t border-lavender-100 mt-4">
+                <MobileAuthButtons />
+              </div>
             </nav>
           </div>
         )}
