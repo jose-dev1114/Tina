@@ -40,31 +40,6 @@ const firebaseConfig = {
 
 ### 3. Update Your .env File
 
-**Replace the demo values** in your `.env` file with your actual Firebase config:
-
-```bash
-# Clerk Authentication (keep your existing values)
-VITE_CLERK_PUBLISHABLE_KEY=pk_test_your_actual_clerk_key
-CLERK_SECRET_KEY=sk_test_your_actual_clerk_secret
-
-# Firebase Configuration - REPLACE WITH YOUR ACTUAL VALUES
-VITE_FIREBASE_API_KEY=AIzaSyC_your_actual_api_key_here
-VITE_FIREBASE_AUTH_DOMAIN=your-project-id.firebaseapp.com
-VITE_FIREBASE_PROJECT_ID=your-actual-project-id
-VITE_FIREBASE_STORAGE_BUCKET=your-project-id.appspot.com
-VITE_FIREBASE_MESSAGING_SENDER_ID=your_actual_sender_id
-VITE_FIREBASE_APP_ID=1:your_sender_id:web:your_app_id
-VITE_FIREBASE_MEASUREMENT_ID=G-your_measurement_id
-
-# Other services (keep existing)
-VITE_STRIPE_PUBLISHABLE_KEY=your_stripe_key_here
-VITE_EMAILJS_SERVICE_ID=your_service_id_here
-VITE_EMAILJS_TEMPLATE_ID=your_template_id_here
-VITE_EMAILJS_PUBLIC_KEY=your_public_key_here
-VITE_ASTROLOGY_API_KEY=your_api_key_here
-NODE_ENV=development
-```
-
 ### 4. Enable Firestore Database
 
 1. **In Firebase Console**, go to **"Firestore Database"**

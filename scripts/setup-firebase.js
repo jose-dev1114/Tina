@@ -10,30 +10,6 @@
 const fs = require('fs');
 const path = require('path');
 
-const FIREBASE_CONFIG_TEMPLATE = `# Firebase Configuration
-# Get these values from your Firebase project settings
-VITE_FIREBASE_API_KEY=your_api_key_here
-VITE_FIREBASE_AUTH_DOMAIN=your_project_id.firebaseapp.com
-VITE_FIREBASE_PROJECT_ID=your_project_id
-VITE_FIREBASE_STORAGE_BUCKET=your_project_id.appspot.com
-VITE_FIREBASE_MESSAGING_SENDER_ID=your_sender_id
-VITE_FIREBASE_APP_ID=your_app_id
-VITE_FIREBASE_MEASUREMENT_ID=your_measurement_id
-
-# Payment Processing (Stripe)
-VITE_STRIPE_PUBLISHABLE_KEY=your_stripe_publishable_key
-
-# Email Service (EmailJS or similar)
-VITE_EMAILJS_SERVICE_ID=your_emailjs_service_id
-VITE_EMAILJS_TEMPLATE_ID=your_emailjs_template_id
-VITE_EMAILJS_PUBLIC_KEY=your_emailjs_public_key
-
-# Astrology API (optional)
-VITE_ASTROLOGY_API_KEY=your_astrology_api_key
-
-# Environment
-NODE_ENV=development`;
-
 const FIREBASE_CLI_COMMANDS = [
   'npm install -g firebase-tools',
   'firebase login',

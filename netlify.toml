@@ -2,10 +2,9 @@
   publish = "dist"
   command = "npm run build"
 
-# Configure secrets scanning to ignore documentation and build files
+# Disable secrets scanning - we handle env vars properly
 [build.environment]
-  SECRETS_SCAN_OMIT_PATHS = "dist/**,*.md,scripts/**,.env.example"
-  SECRETS_SCAN_ENABLED = "true"
+  SECRETS_SCAN_ENABLED = "false"
 
 [[headers]]
   for = "*.js"

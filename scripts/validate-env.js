@@ -25,6 +25,9 @@ const optionalVars = [
   'CLERK_SECRET_KEY'
 ];
 
+// Standard environment variables that should be ignored
+const standardVars = ['NODE_ENV', 'CI', 'NETLIFY'];
+
 console.log('🔍 Validating environment variables...\n');
 
 let hasErrors = false;
