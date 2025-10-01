@@ -186,7 +186,7 @@ const FirebaseConnectionTest = () => {
           <h3 className="font-semibold text-red-800 mb-4">Setup Instructions:</h3>
           <ol className="list-decimal list-inside space-y-2 text-red-700">
             <li>Go to <a href="https://console.firebase.google.com" className="underline" target="_blank" rel="noopener noreferrer">Firebase Console</a></li>
-            <li>Select your "meditation-2b92f" project</li>
+            <li>Select your Firebase project</li>
             <li>Go to "Firestore Database" → "Create database"</li>
             <li>Choose "Start in test mode"</li>
             <li>Select your preferred location</li>

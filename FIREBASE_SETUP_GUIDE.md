@@ -57,11 +57,11 @@ VITE_FIREBASE_APP_ID=1:your_sender_id:web:your_app_id
 VITE_FIREBASE_MEASUREMENT_ID=G-your_measurement_id
 
 # Other services (keep existing)
-VITE_STRIPE_PUBLISHABLE_KEY=pk_test_demo_key
-VITE_EMAILJS_SERVICE_ID=demo_service_id
-VITE_EMAILJS_TEMPLATE_ID=demo_template_id
-VITE_EMAILJS_PUBLIC_KEY=demo_public_key
-VITE_ASTROLOGY_API_KEY=demo_astrology_key
+VITE_STRIPE_PUBLISHABLE_KEY=your_stripe_key_here
+VITE_EMAILJS_SERVICE_ID=your_service_id_here
+VITE_EMAILJS_TEMPLATE_ID=your_template_id_here
+VITE_EMAILJS_PUBLIC_KEY=your_public_key_here
+VITE_ASTROLOGY_API_KEY=your_api_key_here
 NODE_ENV=development
 ```
 
