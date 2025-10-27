@@ -32,13 +32,13 @@ const AuthButtons = () => {
     <div className="flex items-center space-x-3">
       <SignInButton
         mode="modal"
-        className="text-ethereal-700 hover:text-ethereal-900 font-medium transition-colors duration-200 px-4 py-2 rounded-lg hover:bg-ethereal-50"
+        className="text-primary-700 hover:text-primary-900 font-medium transition-colors duration-200 px-4 py-2 rounded-lg hover:bg-primary-100"
       >
         <span>Sign In</span>
       </SignInButton>
       <SignUpButton
         mode="modal"
-        className="bg-lavender-600 text-white px-4 py-2 rounded-full font-medium hover:bg-lavender-700 transition-colors duration-200 shadow-sm"
+        className="bg-primary-700 text-white px-4 py-2 rounded-full font-medium hover:bg-primary-800 transition-colors duration-200 shadow-sm"
       >
         <span>Sign Up</span>
       </SignUpButton>
@@ -72,13 +72,13 @@ const MobileAuthButtons = () => {
     <div className="space-y-3">
       <SignInButton
         mode="modal"
-        className="w-full text-center bg-white border-2 border-ethereal-200 text-ethereal-700 px-4 py-3 rounded-xl font-medium hover:bg-ethereal-50 hover:border-ethereal-300 transition-all duration-200"
+        className="w-full text-center bg-white border-2 border-primary-200 text-primary-700 px-4 py-3 rounded-xl font-medium hover:bg-primary-50 hover:border-primary-300 transition-all duration-200"
       >
         <span>Sign In</span>
       </SignInButton>
       <SignUpButton
         mode="modal"
-        className="w-full text-center bg-lavender-600 text-white px-4 py-3 rounded-xl font-medium hover:bg-lavender-700 transition-colors duration-200 shadow-sm"
+        className="w-full text-center bg-primary-700 text-white px-4 py-3 rounded-xl font-medium hover:bg-primary-800 transition-colors duration-200 shadow-sm"
       >
         <span>Create Account</span>
       </SignUpButton>
@@ -103,9 +103,9 @@ const Header = () => {
   const isActive = (path: string) => location.pathname === path;
 
   return (
-    <header className="bg-white/90 backdrop-blur-md sticky top-0 z-50 border-b border-lavender-100/50">
+    <header className="bg-white/90 backdrop-blur-md sticky top-0 z-50 shadow-none">
       {/* Top banner */}
-      <div className="bg-ethereal-800 text-white text-center py-2">
+      <div className="bg-primary-700 text-white text-center py-2">
         <p className="text-sm font-medium">Free Gift for Every Meditation Order!</p>
       </div>
 
@@ -116,18 +116,18 @@ const Header = () => {
             <div className="relative">
               {/* Crescent moon logo inspired by the image */}
               <div className="w-14 h-14 relative">
-                <div className="absolute inset-0 bg-blush-200 rounded-full opacity-30"></div>
+                <div className="absolute inset-0 bg-primary-200 rounded-full opacity-30"></div>
                 <div className="absolute inset-1 bg-white rounded-full shadow-inner"></div>
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="w-8 h-8 bg-blush-300 rounded-full relative overflow-hidden">
+                  <div className="w-8 h-8 bg-primary-300 rounded-full relative overflow-hidden">
                     <div className="absolute top-1 right-1 w-6 h-6 bg-white rounded-full"></div>
                   </div>
                 </div>
               </div>
             </div>
             <div>
-              <h1 className="text-xl font-serif font-bold text-ethereal-800">Our Healing Practices</h1>
-              <p className="text-xs text-blush-500 font-medium italic -mt-1">Feel your lunar energy. Rest with intention.</p>
+              <h1 className="text-xl font-serif font-bold text-primary-700">Our Healing Practices</h1>
+              <p className="text-xs text-primary-600 font-medium italic -mt-1">Feel your lunar energy. Rest with intention.</p>
             </div>
           </Link>
 
@@ -136,7 +136,7 @@ const Header = () => {
             <div className="flex items-center space-x-5">
               <Link
                 to="/shop"
-                className="text-sm font-medium text-ethereal-700 hover:text-ethereal-900 transition-colors duration-200 flex items-center space-x-1"
+                className="text-sm font-medium text-primary-700 hover:text-primary-900 transition-colors duration-200 flex items-center space-x-1"
               >
                 <span>Shop</span>
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -146,7 +146,7 @@ const Header = () => {
 
               <Link
                 to="/learn"
-                className="text-sm font-medium text-ethereal-700 hover:text-ethereal-900 transition-colors duration-200 flex items-center space-x-1"
+                className="text-sm font-medium text-primary-700 hover:text-primary-900 transition-colors duration-200 flex items-center space-x-1"
               >
                 <span>Learn</span>
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -156,16 +156,23 @@ const Header = () => {
 
               <Link
                 to="/community"
-                className="text-sm font-medium text-ethereal-700 hover:text-ethereal-900 transition-colors duration-200"
+                className="text-sm font-medium text-primary-700 hover:text-primary-900 transition-colors duration-200"
               >
                 Join Our Community
               </Link>
 
               <Link
                 to="/about"
-                className="text-sm font-medium text-ethereal-700 hover:text-ethereal-900 transition-colors duration-200"
+                className="text-sm font-medium text-primary-700 hover:text-primary-900 transition-colors duration-200"
               >
                 About Tina
+              </Link>
+
+              <Link
+                to="/coaching"
+                className="text-sm font-medium text-primary-700 hover:text-primary-900 transition-colors duration-200"
+              >
+                1:1 Coaching
               </Link>
             </div>
           </nav>
@@ -178,15 +185,15 @@ const Header = () => {
           {/* Mobile menu button */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="lg:hidden p-2 rounded-full hover:bg-lavender-50 transition-colors duration-200"
+            className="lg:hidden p-2 rounded-full hover:bg-primary-100 transition-colors duration-200"
           >
-            {isMenuOpen ? <X className="h-6 w-6 text-ethereal-700" /> : <Menu className="h-6 w-6 text-ethereal-700" />}
+            {isMenuOpen ? <X className="h-6 w-6 text-primary-700" /> : <Menu className="h-6 w-6 text-primary-700" />}
           </button>
         </div>
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="lg:hidden pb-6 border-t border-lavender-100 mt-4 pt-6">
+          <div className="lg:hidden pb-6 mt-4 pt-6">
             <nav className="flex flex-col space-y-4">
               {navigation.map((item) => (
                 <Link
@@ -194,7 +201,7 @@ const Header = () => {
                   to={item.href}
                   onClick={() => setIsMenuOpen(false)}
                   className={`text-base font-medium px-4 py-3 rounded-xl transition-colors duration-200 ${
-                    isActive(item.href) ? 'text-ethereal-900 bg-lavender-50' : 'text-ethereal-600 hover:text-ethereal-900 hover:bg-lavender-50'
+                    isActive(item.href) ? 'text-primary-700 bg-primary-100' : 'text-primary-600 hover:text-primary-700 hover:bg-primary-100'
                   }`}
                 >
                   {item.name}
@@ -202,7 +209,7 @@ const Header = () => {
               ))}
 
               {/* Mobile Auth Buttons */}
-              <div className="pt-4 border-t border-lavender-100 mt-4">
+              <div className="pt-4 mt-4">
                 <MobileAuthButtons />
               </div>
             </nav>

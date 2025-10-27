@@ -111,25 +111,25 @@ const Coaching = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-ethereal-50 to-blush-50 py-12">
+    <div className="min-h-screen bg-gradient-to-br from-primary-50 to-primary-100 py-12">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16">
-          <div className="inline-flex items-center space-x-2 bg-white/60 backdrop-blur-sm px-4 py-2 rounded-full text-sm text-ethereal-700 font-medium mb-4">
+          <div className="inline-flex items-center space-x-2 bg-white/60 backdrop-blur-sm px-4 py-2 rounded-full text-sm text-primary-700 font-medium mb-4">
             <Heart className="h-4 w-4" />
             <span>Sacred Space for You</span>
           </div>
           
-          <h1 className="text-4xl md:text-5xl font-serif font-bold text-ethereal-900 mb-4">
+          <h1 className="text-4xl md:text-5xl font-serif font-bold text-primary-900 mb-4">
             1:1 Coaching with Tina
           </h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed mb-8">
-            Step into sacred space for personalized guidance, deep healing, and cosmic alignment. 
+            Step into sacred space for personalized guidance, deep healing, and cosmic alignment.
             Discover your unique path through astrology and conscious practice.
           </p>
-          
-          <div className="bg-gradient-to-r from-ethereal-100 to-blush-100 rounded-xl p-6 max-w-2xl mx-auto">
-            <h3 className="font-semibold text-ethereal-900 mb-2">✨ What Makes These Sessions Sacred</h3>
+
+          <div className="bg-gradient-to-r from-primary-100 to-primary-200 rounded-xl p-6 max-w-2xl mx-auto">
+            <h3 className="font-semibold text-primary-900 mb-2">✨ What Makes These Sessions Sacred</h3>
             <p className="text-gray-700 text-sm leading-relaxed">
               No pressure, no agenda—just sacred space held for your highest healing. Each session is intuitively 
               guided and deeply personalized to your soul's needs and cosmic blueprint.
@@ -139,37 +139,37 @@ const Coaching = () => {
 
         {/* Session Options */}
         <div className="mb-20">
-          <h2 className="text-3xl font-serif font-bold text-purple-900 text-center mb-12">
+          <h2 className="text-3xl font-serif font-bold text-primary-900 text-center mb-12">
             Choose Your Sacred Container
           </h2>
           
           <div className="grid lg:grid-cols-3 gap-8">
             {sessions.map((session) => (
               <div key={session.id} className={`relative bg-white rounded-2xl shadow-xl p-8 hover:shadow-2xl transition-all duration-300 ${
-                session.popular ? 'ring-2 ring-purple-500 transform scale-105' : ''
+                session.popular ? 'ring-2 ring-primary-500 transform scale-105' : ''
               }`}>
                 {session.popular && (
                   <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                    <div className="bg-gradient-to-r from-ethereal-700 to-blush-600 text-white px-6 py-2 rounded-full text-sm font-medium flex items-center space-x-2">
+                    <div className="bg-gradient-to-r from-primary-600 to-primary-500 text-white px-6 py-2 rounded-full text-sm font-medium flex items-center space-x-2">
                       <Star className="h-4 w-4" />
                       <span>Most Popular</span>
                     </div>
                   </div>
                 )}
-                
+
                 <div className="text-center mb-8">
-                  <h3 className="text-2xl font-serif font-bold text-purple-900 mb-2">{session.name}</h3>
+                  <h3 className="text-2xl font-serif font-bold text-primary-700 mb-2">{session.name}</h3>
                   <p className="text-gray-600 text-sm mb-4">{session.description}</p>
-                  
+
                   <div className="flex items-center justify-center space-x-4 mb-4">
                     <div className="flex items-center space-x-2 text-gray-500">
                       <Clock className="h-4 w-4" />
                       <span className="text-sm">{session.duration}</span>
                     </div>
-                    <div className="text-3xl font-bold text-purple-900">{session.price}</div>
+                    <div className="text-3xl font-bold text-primary-700">{session.price}</div>
                   </div>
-                  
-                  <div className="bg-purple-50 rounded-lg p-3 text-sm text-gray-700">
+
+                  <div className="bg-primary-50 rounded-lg p-3 text-sm text-gray-700">
                     <strong>Perfect for:</strong> {session.ideal}
                   </div>
                 </div>
@@ -351,26 +351,26 @@ const Coaching = () => {
         </div>
 
         {/* CTA Section */}
-        <div className="bg-gradient-to-r from-ethereal-800 to-blush-700 rounded-2xl p-8 md:p-12 text-white text-center">
+        <div className="bg-gradient-to-r from-primary-700 to-primary-600 rounded-2xl p-8 md:p-12 text-white text-center">
           <div className="max-w-3xl mx-auto">
             <h2 className="text-3xl md:text-4xl font-serif font-bold mb-6">
               Ready for Sacred Alignment?
             </h2>
-            <p className="text-xl text-blush-100 mb-8 leading-relaxed">
+            <p className="text-xl text-primary-100 mb-8 leading-relaxed">
               Your soul is calling you toward deeper understanding and healing. Trust that inner knowing
               and take the next step in your sacred journey.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-6">
-              <button className="bg-white text-ethereal-900 px-8 py-4 rounded-full font-medium text-lg hover:bg-blush-50 transition-colors duration-300 flex items-center space-x-2">
+              <button className="bg-white text-primary-700 px-8 py-4 rounded-full font-medium text-lg hover:bg-primary-50 transition-colors duration-300 flex items-center space-x-2">
                 <Calendar className="h-5 w-5" />
                 <span>Book Your Session</span>
               </button>
-              <button className="flex items-center space-x-2 text-rose-200 hover:text-white transition-colors duration-300">
+              <button className="flex items-center space-x-2 text-primary-100 hover:text-white transition-colors duration-300">
                 <MessageCircle className="h-5 w-5" />
                 <span>Have questions? Message Tina</span>
               </button>
             </div>
-            <p className="text-sm text-rose-200">
+            <p className="text-sm text-primary-100">
               Sessions are held in sacred confidence • All calls recorded for your reference
             </p>
           </div>

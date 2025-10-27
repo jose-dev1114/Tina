@@ -5,15 +5,20 @@ interface SignUpButtonProps {
   mode?: 'modal' | 'redirect';
   className?: string;
   children?: React.ReactNode;
+  redirectUrl?: string;
 }
 
 const SignUpButton = ({
   mode = 'modal',
   className = "bg-lavender-600 text-white px-6 py-3 rounded-full font-medium hover:bg-lavender-700 transition-colors duration-200 flex items-center justify-center space-x-2",
-  children
+  children,
+  redirectUrl
 }: SignUpButtonProps) => {
   return (
-    <ClerkSignUpButton mode={mode}>
+    <ClerkSignUpButton
+      mode={mode}
+      redirectUrl={redirectUrl}
+    >
       <button className={className}>
         <div className="flex items-center justify-center space-x-2">
           {children || (

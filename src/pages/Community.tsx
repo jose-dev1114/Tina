@@ -95,25 +95,25 @@ const Community = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-rose-50 py-12">
+    <div className="min-h-screen bg-gradient-to-br from-primary-50 to-primary-100 py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16">
-          <div className="inline-flex items-center space-x-2 bg-white/60 backdrop-blur-sm px-4 py-2 rounded-full text-sm text-purple-700 font-medium mb-4">
+          <div className="inline-flex items-center space-x-2 bg-white/60 backdrop-blur-sm px-4 py-2 rounded-full text-sm text-primary-700 font-medium mb-4">
             <Users className="h-4 w-4" />
             <span>Sacred Community</span>
           </div>
-          
-          <h1 className="text-4xl md:text-5xl font-serif font-bold text-purple-900 mb-4">
+
+          <h1 className="text-4xl md:text-5xl font-serif font-bold text-primary-700 mb-4">
             Join Our Sacred Circle
           </h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed mb-8">
-            Connect with like-minded souls on the path of conscious healing. Experience live group meditations, 
+            Connect with like-minded souls on the path of conscious healing. Experience live group meditations,
             receive ongoing guidance from Tina, and be part of a supportive spiritual community.
           </p>
-          
-          <div className="bg-gradient-to-r from-purple-100 to-rose-100 rounded-xl p-6 max-w-2xl mx-auto">
-            <h3 className="font-semibold text-purple-900 mb-2">🌙 What Makes Our Community Special</h3>
+
+          <div className="bg-gradient-to-r from-primary-100 to-primary-200 rounded-xl p-6 max-w-2xl mx-auto">
+            <h3 className="font-semibold text-primary-700 mb-2">🌙 What Makes Our Community Special</h3>
             <p className="text-gray-700 text-sm leading-relaxed">
               Unlike generic meditation apps, our community is built around your unique astrological blueprint. 
               Every practice, teaching, and connection is designed to support your personal spiritual evolution.
@@ -130,22 +130,22 @@ const Community = () => {
           <div className="grid lg:grid-cols-3 gap-8">
             {membershipTiers.map((tier, index) => (
               <div key={index} className={`relative bg-white rounded-2xl shadow-xl p-8 ${
-                tier.popular ? 'ring-2 ring-purple-500 transform scale-105' : ''
+                tier.popular ? 'ring-2 ring-primary-500 transform scale-105' : ''
               }`}>
                 {tier.popular && (
                   <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                    <div className="bg-gradient-to-r from-ethereal-700 to-blush-600 text-white px-6 py-2 rounded-full text-sm font-medium flex items-center space-x-2">
+                    <div className="bg-gradient-to-r from-primary-600 to-primary-500 text-white px-6 py-2 rounded-full text-sm font-medium flex items-center space-x-2">
                       <Crown className="h-4 w-4" />
                       <span>Most Popular</span>
                     </div>
                   </div>
                 )}
-                
+
                 <div className="text-center mb-8">
-                  <h3 className="text-2xl font-serif font-bold text-purple-900 mb-2">{tier.name}</h3>
+                  <h3 className="text-2xl font-serif font-bold text-primary-700 mb-2">{tier.name}</h3>
                   <p className="text-gray-600 text-sm mb-4">{tier.description}</p>
                   <div className="flex items-baseline justify-center space-x-1">
-                    <span className="text-4xl font-bold text-purple-900">{tier.price}</span>
+                    <span className="text-4xl font-bold text-primary-700">{tier.price}</span>
                     <span className="text-gray-500">{tier.period}</span>
                   </div>
                 </div>
@@ -279,25 +279,25 @@ const Community = () => {
         </div>
 
         {/* CTA Section */}
-        <div className="bg-gradient-to-r from-ethereal-800 to-blush-700 rounded-2xl p-8 md:p-12 text-white text-center">
+        <div className="bg-gradient-to-r from-primary-700 to-primary-600 rounded-2xl p-8 md:p-12 text-white text-center">
           <div className="max-w-3xl mx-auto">
             <h2 className="text-3xl md:text-4xl font-serif font-bold mb-6">
               Your Sacred Community Awaits
             </h2>
-            <p className="text-xl text-blush-100 mb-8 leading-relaxed">
+            <p className="text-xl text-primary-100 mb-8 leading-relaxed">
               Stop walking the spiritual path alone. Join hundreds of conscious souls who support each other's
               growth and healing. Your transformation accelerates when you're held by community.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="bg-white text-ethereal-900 px-8 py-4 rounded-full font-medium text-lg hover:bg-blush-50 transition-colors duration-300 flex items-center justify-center space-x-2">
+              <button className="bg-white text-primary-700 px-8 py-4 rounded-full font-medium text-lg hover:bg-primary-50 transition-colors duration-300 flex items-center justify-center space-x-2">
                 <Users className="h-5 w-5" />
                 <span>Start Your Journey Today</span>
               </button>
-              <button className="border-2 border-white text-white px-8 py-4 rounded-full font-medium text-lg hover:bg-white hover:text-ethereal-900 transition-colors duration-300">
+              <button className="border-2 border-white text-white px-8 py-4 rounded-full font-medium text-lg hover:bg-white hover:text-primary-700 transition-colors duration-300">
                 Ask Tina a Question
               </button>
             </div>
-            <p className="text-sm text-rose-200 mt-6">
+            <p className="text-sm text-primary-100 mt-6">
               30-day money-back guarantee • Join risk-free
             </p>
           </div>

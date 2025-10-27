@@ -9,6 +9,8 @@ export interface User {
   firstName?: string;
   lastName?: string;
   photoURL?: string;
+  username?: string;
+  phone?: string;
 
   // Authentication info
   clerkUserId?: string;
@@ -26,6 +28,37 @@ export interface User {
   sunSign?: string;
   moonSign?: string;
   risingSign?: string;
+
+  // ✨ NEW: Full birth chart data from API
+  birthChartData?: {
+    moonSign?: string;
+    moonHouse?: number;
+    apiHouse?: number;
+    computedHouse?: number | null;
+    moonLongitude?: number;
+    cusps?: any;
+    timezoneUsed?: string;
+    tzone?: number;
+    lat?: number;
+    lon?: number;
+    date?: string;
+    time?: string;
+    houseSystem?: string;
+    zodiac?: string;
+    cuspsFound?: boolean;
+    cuspsEndpointTried?: string[];
+    lastCuspsStatus?: number;
+    lastCuspsKeys?: string[];
+    chartUrl?: string;
+    chartError?: string | null;
+    sunSign?: string;
+    risingSign?: string;
+    sunDegree?: number;
+    moonDegree?: number;
+    risingDegree?: number;
+    moonPhase?: string;
+    rawData?: any;
+  };
 
   // Spiritual preferences
   spiritualGoals?: string[];

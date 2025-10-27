@@ -6,6 +6,7 @@ import Footer from './components/Footer';
 import AdminPanel from './components/AdminPanel';
 import HomePage from './pages/HomePage';
 import AstroQuiz from './pages/AstroQuiz';
+import Dashboard from './pages/Dashboard';
 import Shop from './pages/Shop';
 import Learn from './pages/Learn';
 import Community from './pages/Community';
@@ -50,6 +51,7 @@ function App() {
             <Routes>
               <Route path="/" element={<HomePage />} />
               <Route path="/quiz" element={<AstroQuiz />} />
+              <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/shop" element={<Shop />} />
               <Route path="/learn" element={<Learn />} />
               <Route path="/community" element={<Community />} />

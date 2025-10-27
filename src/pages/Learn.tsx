@@ -98,16 +98,16 @@ const Learn = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-rose-50 py-12">
+    <div className="min-h-screen bg-gradient-to-br from-primary-50 to-primary-100 py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16">
-          <div className="inline-flex items-center space-x-2 bg-white/60 backdrop-blur-sm px-4 py-2 rounded-full text-sm text-purple-700 font-medium mb-4">
+          <div className="inline-flex items-center space-x-2 bg-white/60 backdrop-blur-sm px-4 py-2 rounded-full text-sm text-primary-700 font-medium mb-4">
             <BookOpen className="h-4 w-4" />
             <span>Sacred Wisdom Library</span>
           </div>
-          
-          <h1 className="text-4xl md:text-5xl font-serif font-bold text-purple-900 mb-4">
+
+          <h1 className="text-4xl md:text-5xl font-serif font-bold text-primary-700 mb-4">
             Learn & Grow
           </h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
@@ -126,13 +126,13 @@ const Learn = () => {
                   alt={featuredArticles[0].title}
                   className="w-full h-full object-cover"
                 />
-                <div className="absolute top-4 left-4 bg-gradient-to-r from-ethereal-700 to-blush-600 text-white px-4 py-2 rounded-full text-sm font-medium">
+                <div className="absolute top-4 left-4 bg-gradient-to-r from-primary-700 to-primary-600 text-white px-4 py-2 rounded-full text-sm font-medium">
                   Featured Article
                 </div>
               </div>
               <div className="p-8 lg:p-12 flex flex-col justify-center">
                 <div className="flex items-center space-x-4 text-sm text-gray-500 mb-4">
-                  <span className="bg-purple-100 text-purple-700 px-3 py-1 rounded-full">{featuredArticles[0].category}</span>
+                  <span className="bg-primary-100 text-primary-700 px-3 py-1 rounded-full">{featuredArticles[0].category}</span>
                   <span className="flex items-center space-x-1">
                     <Clock className="h-4 w-4" />
                     <span>{featuredArticles[0].readTime}</span>
@@ -142,13 +142,13 @@ const Learn = () => {
                     <span>{featuredArticles[0].author}</span>
                   </span>
                 </div>
-                <h2 className="text-3xl font-serif font-bold text-purple-900 mb-4">
+                <h2 className="text-3xl font-serif font-bold text-primary-700 mb-4">
                   {featuredArticles[0].title}
                 </h2>
                 <p className="text-gray-600 mb-6 leading-relaxed">
                   {featuredArticles[0].excerpt}
                 </p>
-                <button className="bg-gradient-to-r from-ethereal-700 to-blush-600 text-white px-8 py-3 rounded-full font-medium hover:shadow-lg transition-all duration-300 self-start">
+                <button className="bg-gradient-to-r from-primary-700 to-primary-600 text-white px-8 py-3 rounded-full font-medium hover:shadow-lg transition-all duration-300 self-start">
                   Read Article
                 </button>
               </div>
@@ -158,21 +158,21 @@ const Learn = () => {
 
         {/* Videos Section */}
         <div className="mb-16">
-          <h2 className="text-3xl font-serif font-bold text-purple-900 mb-8 text-center">
+          <h2 className="text-3xl font-serif font-bold text-primary-700 mb-8 text-center">
             Sacred Teachings & Mini-Practices
           </h2>
           <div className="grid md:grid-cols-3 gap-8">
             {videos.map((video, index) => (
               <div key={index} className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 group">
                 <div className="relative">
-                  <img 
-                    src={video.thumbnail} 
+                  <img
+                    src={video.thumbnail}
                     alt={video.title}
                     className="w-full h-48 object-cover"
                   />
                   <div className="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     <div className="bg-white/90 w-16 h-16 rounded-full flex items-center justify-center">
-                      <Play className="h-8 w-8 text-purple-700 ml-1" />
+                      <Play className="h-8 w-8 text-primary-700 ml-1" />
                     </div>
                   </div>
                   <div className="absolute bottom-2 right-2 bg-black/70 text-white px-2 py-1 rounded text-sm">
@@ -180,7 +180,7 @@ const Learn = () => {
                   </div>
                 </div>
                 <div className="p-6">
-                  <h3 className="text-lg font-semibold text-purple-900 mb-2">{video.title}</h3>
+                  <h3 className="text-lg font-semibold text-primary-700 mb-2">{video.title}</h3>
                   <p className="text-gray-600 text-sm">{video.description}</p>
                 </div>
               </div>
@@ -193,7 +193,7 @@ const Learn = () => {
           {categories.map((category) => (
             <button
               key={category}
-              className="px-6 py-2 rounded-full font-medium transition-all duration-200 bg-white text-gray-600 hover:bg-purple-50 hover:text-purple-700 border border-gray-200"
+              className="px-6 py-2 rounded-full font-medium transition-all duration-200 bg-white text-gray-600 hover:bg-primary-50 hover:text-primary-700 border border-gray-200"
             >
               {category}
             </button>
@@ -211,15 +211,15 @@ const Learn = () => {
               />
               <div className="p-6">
                 <div className="flex items-center space-x-4 text-sm text-gray-500 mb-3">
-                  <span className="bg-purple-100 text-purple-700 px-3 py-1 rounded-full">{article.category}</span>
+                  <span className="bg-primary-100 text-primary-700 px-3 py-1 rounded-full">{article.category}</span>
                   <span className="flex items-center space-x-1">
                     <Clock className="h-4 w-4" />
                     <span>{article.readTime}</span>
                   </span>
                 </div>
-                <h3 className="text-xl font-semibold text-purple-900 mb-3 leading-tight">{article.title}</h3>
+                <h3 className="text-xl font-semibold text-primary-700 mb-3 leading-tight">{article.title}</h3>
                 <p className="text-gray-600 text-sm mb-4 leading-relaxed">{article.excerpt}</p>
-                <button className="text-purple-600 hover:text-purple-800 font-medium text-sm">
+                <button className="text-primary-700 hover:text-primary-900 font-medium text-sm">
                   Read More →
                 </button>
               </div>
@@ -229,15 +229,15 @@ const Learn = () => {
           {allArticles.map((article, index) => (
             <div key={index} className="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow duration-300">
               <div className="flex items-center space-x-4 text-sm text-gray-500 mb-3">
-                <span className="bg-purple-100 text-purple-700 px-3 py-1 rounded-full">{article.category}</span>
+                <span className="bg-primary-100 text-primary-700 px-3 py-1 rounded-full">{article.category}</span>
                 <span className="flex items-center space-x-1">
                   <Clock className="h-4 w-4" />
                   <span>{article.readTime}</span>
                 </span>
               </div>
-              <h3 className="text-xl font-semibold text-purple-900 mb-3 leading-tight">{article.title}</h3>
+              <h3 className="text-xl font-semibold text-primary-700 mb-3 leading-tight">{article.title}</h3>
               <p className="text-gray-600 text-sm mb-4 leading-relaxed">{article.excerpt}</p>
-              <button className="text-purple-600 hover:text-purple-800 font-medium text-sm">
+              <button className="text-primary-700 hover:text-primary-900 font-medium text-sm">
                 Read More →
               </button>
             </div>
@@ -245,22 +245,22 @@ const Learn = () => {
         </div>
 
         {/* Newsletter CTA */}
-        <div className="bg-gradient-to-r from-ethereal-800 to-blush-700 rounded-2xl p-8 text-white text-center">
+        <div className="bg-gradient-to-r from-primary-700 to-primary-600 rounded-2xl p-8 text-white text-center">
           <div className="max-w-2xl mx-auto">
             <Star className="h-12 w-12 text-yellow-400 mx-auto mb-4" />
             <h3 className="text-2xl font-serif font-bold mb-4">
               Never Miss Sacred Wisdom
             </h3>
-            <p className="text-rose-100 mb-6">
+            <p className="text-white/80 mb-6">
               Get our latest articles, moon phase reminders, and exclusive meditations delivered to your inbox with love.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
               <input
                 type="email"
                 placeholder="Your sacred email..."
-                className="flex-1 px-4 py-3 rounded-full text-gray-900 focus:outline-none focus:ring-2 focus:ring-rose-300"
+                className="flex-1 px-4 py-3 rounded-full text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-300"
               />
-              <button className="bg-white text-purple-900 px-8 py-3 rounded-full font-medium hover:bg-rose-50 transition-colors duration-300">
+              <button className="bg-white text-primary-700 px-8 py-3 rounded-full font-medium hover:bg-primary-50 transition-colors duration-300">
                 Subscribe
               </button>
             </div>

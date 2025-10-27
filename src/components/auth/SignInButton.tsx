@@ -9,7 +9,7 @@ interface SignInButtonProps {
 
 const SignInButton = ({
   mode = 'modal',
-  className = "bg-ethereal-800 text-white px-6 py-3 rounded-full font-medium hover:bg-ethereal-700 transition-colors duration-200 flex items-center justify-center space-x-2",
+  className = "bg-primary-800 text-white px-6 py-3 rounded-full font-medium hover:bg-primary-700 transition-colors duration-200 flex items-center justify-center space-x-2",
   children
 }: SignInButtonProps) => {
   return (

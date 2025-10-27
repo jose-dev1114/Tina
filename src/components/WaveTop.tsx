@@ -1,7 +1,7 @@
 interface WaveTopProps {
   fillColor?: string;
   className?: string;
-  variant?: 'default' | 'white' | 'ethereal-50' | 'blush' | 'lavender';
+  variant?: 'default' | 'white' | 'ethereal-50' | 'blush' | 'lavender' | 'primary-50' | 'primary-300';
 }
 
 const WaveTop = ({
@@ -15,7 +15,9 @@ const WaveTop = ({
     'white': '#ffffff',
     'ethereal-50': '#f8fafc',
     'blush': '#FEEBF6',
-    'lavender': '#EBD6FB'
+    'lavender': '#EBD6FB',
+    'primary-50': '#FFFBF5',
+    'primary-300': '#C0C9EE'
   };
 
   const finalFillColor = fillColor || colorVariants[variant];
@@ -35,6 +37,7 @@ const WaveTop = ({
         <g>
           <path
             fill={finalFillColor}
+            stroke="none"
             d="M1920.1,118.2c0,15.7,0,31.3,0,47c-640,0-1280,0-1920,0c0-26.3,0-52.7,0-79c0.9-0.3,1.9-0.7,2.8-1
             C101,53.2,201.6,32.4,303.7,18.3C363.5,10.1,423.5,5.1,483.9,3C587.1-0.6,689.7,4.6,791.7,21c79.7,12.8,158.1,31.5,233.7,59.7
             c94.2,35.2,191.2,58.3,290.9,70.2c61.8,7.4,123.8,10.7,186,10.8c70,0.1,139.9-3.4,209.5-11.5c37.7-4.3,75.4-9.3,112.9-15.1

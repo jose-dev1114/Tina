@@ -22,8 +22,8 @@ const OrganicShapes = ({ variant = 'section', className = '' }: OrganicShapeProp
           <defs>
             <linearGradient id="heroGradient1" x1="0%" y1="0%" x2="100%" y2="100%">
               <stop offset="0%" stopColor="#EBD6FB" stopOpacity="0.8" />
-              <stop offset="50%" stopColor="#FEEBF6" stopOpacity="0.6" />
-              <stop offset="100%" stopColor="#FCD8CD" stopOpacity="0.4" />
+              <stop offset="50%" stopColor="#C0C9EE" stopOpacity="0.6" />
+              <stop offset="100%" stopColor="#A2AADB" stopOpacity="0.4" />
             </linearGradient>
           </defs>
         </svg>
@@ -42,16 +42,16 @@ const OrganicShapes = ({ variant = 'section', className = '' }: OrganicShapeProp
           />
           <defs>
             <linearGradient id="heroGradient2" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#FEEBF6" stopOpacity="0.6" />
-              <stop offset="100%" stopColor="#FCD8CD" stopOpacity="0.3" />
+              <stop offset="0%" stopColor="#C0C9EE" stopOpacity="0.6" />
+              <stop offset="100%" stopColor="#A2AADB" stopOpacity="0.3" />
             </linearGradient>
           </defs>
         </svg>
 
         {/* Small floating elements */}
-        <div className="absolute top-1/4 right-1/4 w-16 h-16 bg-lavender-100 rounded-full opacity-60 animate-float" style={{ animationDelay: '1s' }}></div>
-        <div className="absolute bottom-1/3 left-1/4 w-12 h-12 bg-blush-100 rounded-full opacity-50 animate-float" style={{ animationDelay: '2s' }}></div>
-        <div className="absolute top-1/2 left-1/6 w-8 h-8 bg-peach-200 rounded-full opacity-40 animate-pulse-slow"></div>
+        <div className="absolute top-1/4 right-1/4 w-16 h-16 bg-primary-100 rounded-full opacity-60 animate-float" style={{ animationDelay: '1s' }}></div>
+        <div className="absolute bottom-1/3 left-1/4 w-12 h-12 bg-primary-100 rounded-full opacity-50 animate-float" style={{ animationDelay: '2s' }}></div>
+        <div className="absolute top-1/2 left-1/6 w-8 h-8 bg-primary-200 rounded-full opacity-40 animate-pulse-slow"></div>
       </div>
     ),
 
@@ -70,7 +70,7 @@ const OrganicShapes = ({ variant = 'section', className = '' }: OrganicShapeProp
           <defs>
             <linearGradient id="sectionGradient" x1="0%" y1="0%" x2="100%" y2="100%">
               <stop offset="0%" stopColor="#EBD6FB" stopOpacity="0.5" />
-              <stop offset="100%" stopColor="#FEEBF6" stopOpacity="0.2" />
+              <stop offset="100%" stopColor="#C0C9EE" stopOpacity="0.2" />
             </linearGradient>
           </defs>
         </svg>
@@ -95,7 +95,7 @@ const OrganicShapes = ({ variant = 'section', className = '' }: OrganicShapeProp
           <defs>
             <linearGradient id="accentGradient" x1="0%" y1="0%" x2="100%" y2="100%">
               <stop offset="0%" stopColor="#EBD6FB" stopOpacity="0.6" />
-              <stop offset="100%" stopColor="#FCD8CD" stopOpacity="0.3" />
+              <stop offset="100%" stopColor="#A2AADB" stopOpacity="0.3" />
             </linearGradient>
           </defs>
         </svg>

@@ -1,5 +1,10 @@
-import { useState } from 'react';
-import { Star, Moon, Sun, Download, ShoppingCart } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { useSearchParams, useNavigate } from 'react-router-dom';
+import { Star, Moon, Sun, Download, ShoppingCart, X } from 'lucide-react';
+import { geocodeBirthPlace } from '../utils/geocoding';
+import { useAuth } from '../hooks/useClerkAuth';
+import SignUpButton from '../components/auth/SignUpButton';
+import SignInButton from '../components/auth/SignInButton';
 
 interface QuizData {
   birthDate: string;
@@ -10,6 +15,8 @@ interface QuizData {
 }
 
 const AstroQuiz = () => {
+  const { isSignedIn, loading, updateUserProfile } = useAuth();
+  const navigate = useNavigate();
   const [currentStep, setCurrentStep] = useState(1);
   const [quizData, setQuizData] = useState<QuizData>({
     birthDate: '',
@@ -19,6 +26,70 @@ const AstroQuiz = () => {
     challenges: []
   });
   const [showResults, setShowResults] = useState(false);
+  const [showSignUpModal, setShowSignUpModal] = useState(false);
+  const [tempBirthData, setTempBirthData] = useState<any>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // ✨ NEW: Watch for user signup and save birth data
+  useEffect(() => {
+    const saveBirthDataAfterSignup = async () => {
+      // Check if user just signed in AND we have pending birth data
+      if (isSignedIn && tempBirthData && !showSignUpModal) {
+        try {
+          console.log('✨ User signed up! Saving birth data...');
+          console.log('📋 Pending birth data:', tempBirthData);
+
+          // Get geocoding data
+          const geoData = await geocodeBirthPlace(
+            tempBirthData.birthPlace,
+            tempBirthData.birthDate,
+            tempBirthData.birthTime
+          );
+
+          // Save birth data to user profile
+          console.log('💾 Saving birth data to Firebase...');
+
+          // ✨ Filter out undefined values from birthChartData
+          const cleanBirthChartData = geoData.birthChart ?
+            Object.fromEntries(
+              Object.entries(geoData.birthChart).filter(([_, v]) => v !== undefined)
+            ) as any : null;
+
+          // Build update object with ALL birth chart data
+          const updateData: any = {
+            birthDate: tempBirthData.birthDate,
+            birthTime: tempBirthData.birthTime,
+            birthPlace: tempBirthData.birthPlace,
+            sunSign: geoData.birthChart?.sunSign || '',
+            moonSign: geoData.birthChart?.moonSign || '',
+            risingSign: geoData.birthChart?.risingSign || '',
+            spiritualGoals: tempBirthData.spiritualGoals,
+            challenges: tempBirthData.challenges,
+            hasCompletedAstroQuiz: true,
+            // ✨ Always add the complete birthChartData object
+            birthChartData: cleanBirthChartData || {}
+          };
+
+          console.log('📤 Signup flow - birthChartData:', cleanBirthChartData);
+          await updateUserProfile(updateData);
+          console.log('✅ Birth data saved successfully after signup!');
+
+          // Clear temp data
+          setTempBirthData(null);
+
+          // ✨ NEW: Redirect to dashboard
+          setTimeout(() => {
+            navigate('/dashboard');
+          }, 1000);
+        } catch (error) {
+          console.error('❌ Error saving birth data after signup:', error);
+          alert('Error saving your birth information. Please try again.');
+        }
+      }
+    };
+
+    saveBirthDataAfterSignup();
+  }, [isSignedIn, tempBirthData, showSignUpModal, updateUserProfile]);
 
   const spiritualGoalOptions = [
     'Deeper sleep and rest',
@@ -56,8 +127,109 @@ const AstroQuiz = () => {
     }));
   };
 
-  const handleSubmit = () => {
-    setShowResults(true);
+  const handleSubmit = async () => {
+    try {
+      console.log('🚀 Reveal My Meditations clicked!');
+      console.log('📋 Quiz Data:', quizData);
+
+      // Validate required fields
+      if (!quizData.birthDate || !quizData.birthPlace) {
+        console.warn('⚠️ Missing required fields: Birth Date and Birth Place are required');
+        alert('Please fill in your Birth Date and Birth Place');
+        return;
+      }
+
+      // Check if user is logged in
+      if (!isSignedIn) {
+        console.log('👤 User not logged in - showing signup modal');
+        // Save birth data temporarily
+        setTempBirthData({
+          birthDate: quizData.birthDate,
+          birthTime: quizData.birthTime,
+          birthPlace: quizData.birthPlace,
+          spiritualGoals: quizData.spiritualGoals,
+          challenges: quizData.challenges
+        });
+
+        // ✨ NEW: Add birth data to URL parameters for Clerk signup
+        const params = new URLSearchParams({
+          birthDate: quizData.birthDate,
+          birthTime: quizData.birthTime || '',
+          birthPlace: quizData.birthPlace,
+          spiritualGoals: JSON.stringify(quizData.spiritualGoals),
+          challenges: JSON.stringify(quizData.challenges)
+        });
+        window.history.replaceState({}, '', `${window.location.pathname}?${params.toString()}`);
+        console.log('🔗 Birth data added to URL:', params.toString());
+
+        setShowSignUpModal(true);
+        return;
+      }
+
+      // User is logged in - proceed with geocoding and chart calculation
+      setIsSubmitting(true);
+      console.log('🔄 Geocoding birth place and calculating birth chart...');
+      const geoData = await geocodeBirthPlace(
+        quizData.birthPlace,
+        quizData.birthDate,
+        quizData.birthTime
+      );
+
+      // Log all the data
+      console.log('📊 Complete Data:');
+      console.log({
+        birthDate: quizData.birthDate,
+        birthTime: quizData.birthTime || 'Not provided (will use noon)',
+        birthPlace: quizData.birthPlace,
+        latitude: geoData.lat,
+        longitude: geoData.lon,
+        timezone: geoData.timezone,
+        birthChart: geoData.birthChart,
+        spiritualGoals: quizData.spiritualGoals,
+        challenges: quizData.challenges
+      });
+
+      // Save birth data to user profile
+      console.log('💾 Saving birth data to user profile...');
+
+      // ✨ Filter out undefined values from birthChartData
+      const cleanBirthChartData = geoData.birthChart ?
+        Object.fromEntries(
+          Object.entries(geoData.birthChart).filter(([_, v]) => v !== undefined)
+        ) as any : null;
+
+      console.log('🔍 cleanBirthChartData:', cleanBirthChartData);
+      console.log('🔍 cleanBirthChartData keys:', cleanBirthChartData ? Object.keys(cleanBirthChartData) : 'null');
+
+      // Build update object with ALL birth chart data
+      const updateData: any = {
+        birthDate: quizData.birthDate,
+        birthTime: quizData.birthTime,
+        birthPlace: quizData.birthPlace,
+        sunSign: geoData.birthChart?.sunSign || '',
+        moonSign: geoData.birthChart?.moonSign || '',
+        risingSign: geoData.birthChart?.risingSign || '',
+        spiritualGoals: quizData.spiritualGoals,
+        challenges: quizData.challenges,
+        hasCompletedAstroQuiz: true,
+        // ✨ Always add the complete birthChartData object
+        birthChartData: cleanBirthChartData || {}
+      };
+
+      console.log('📤 Final updateData being saved:', updateData);
+      console.log('📤 birthChartData fields:', cleanBirthChartData ? Object.keys(cleanBirthChartData) : 'empty');
+      await updateUserProfile(updateData);
+      console.log('✅ Birth data saved successfully');
+
+      // ✨ NEW: Redirect to dashboard
+      setTimeout(() => {
+        navigate('/dashboard');
+      }, 1000);
+    } catch (error) {
+      console.error('❌ Error in handleSubmit:', error);
+      setIsSubmitting(false);
+      alert('Error processing your birth information. Please check the console for details.');
+    }
   };
 
   const mockResults = {
@@ -91,18 +263,88 @@ const AstroQuiz = () => {
     ]
   };
 
+  // Sign-up modal component
+  const SignUpModal = () => (
+    <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+      <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full p-8 animate-slide-up">
+        <div className="flex justify-between items-center mb-6">
+          <h2 className="text-2xl font-serif font-bold text-primary-900">
+            Join Our Sacred Community
+          </h2>
+          <button
+            onClick={() => setShowSignUpModal(false)}
+            className="text-gray-400 hover:text-gray-600 transition-colors"
+          >
+            <X className="h-6 w-6" />
+          </button>
+        </div>
+
+        <p className="text-gray-600 mb-6 leading-relaxed">
+          Create an account to save your birth chart and get personalized meditation recommendations based on your unique astrological blueprint.
+        </p>
+
+        <div className="bg-primary-50 rounded-lg p-4 mb-6">
+          <h3 className="font-semibold text-primary-900 mb-3">Your Birth Information:</h3>
+          <div className="space-y-2 text-sm text-gray-700">
+            <p><span className="font-medium">Birth Date:</span> {tempBirthData?.birthDate}</p>
+            <p><span className="font-medium">Birth Time:</span> {tempBirthData?.birthTime || 'Not provided'}</p>
+            <p><span className="font-medium">Birth Place:</span> {tempBirthData?.birthPlace}</p>
+          </div>
+        </div>
+
+        <p className="text-sm text-gray-600 mb-6">
+          ✨ We'll save this information with your account so you can access your personalized meditations anytime.
+        </p>
+
+        <SignUpButton
+          mode="modal"
+          className="w-full bg-gradient-to-r from-primary-700 to-primary-600 text-white px-6 py-3 rounded-full font-medium hover:shadow-lg transition-all duration-300 flex items-center justify-center space-x-2"
+          redirectUrl={`${window.location.pathname}?${new URLSearchParams({
+            birthDate: tempBirthData?.birthDate || '',
+            birthTime: tempBirthData?.birthTime || '',
+            birthPlace: tempBirthData?.birthPlace || '',
+            spiritualGoals: JSON.stringify(tempBirthData?.spiritualGoals || []),
+            challenges: JSON.stringify(tempBirthData?.challenges || [])
+          }).toString()}`}
+        >
+          <Star className="h-5 w-5" />
+          <span>Create Sacred Account</span>
+        </SignUpButton>
+
+        <div className="mt-6 pt-6 border-t border-gray-200">
+          <p className="text-center text-sm text-gray-600 mb-4">
+            Already have an account?
+          </p>
+          <SignInButton
+            mode="modal"
+            className="w-full bg-white border-2 border-primary-600 text-primary-600 px-6 py-3 rounded-full font-medium hover:bg-primary-50 transition-all duration-300 flex items-center justify-center space-x-2"
+          >
+            <span>Sign In</span>
+          </SignInButton>
+        </div>
+
+        <button
+          onClick={() => setShowSignUpModal(false)}
+          className="w-full mt-4 text-gray-500 hover:text-gray-700 font-medium transition-colors"
+        >
+          Maybe Later
+        </button>
+      </div>
+    </div>
+  );
+
   if (showResults) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-ethereal-50 to-blush-50 py-12">
+      <div className="min-h-screen bg-gradient-to-br from-primary-50 to-primary-100 py-12">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Results Header */}
           <div className="text-center mb-12">
-            <div className="inline-flex items-center space-x-2 bg-gradient-to-r from-ethereal-700 to-blush-600 text-white px-6 py-3 rounded-full mb-6">
+            <div className="inline-flex items-center space-x-2 bg-gradient-to-r from-primary-700 to-primary-600 text-white px-6 py-3 rounded-full mb-6">
               <Star className="h-5 w-5" />
               <span className="font-medium">Your Cosmic Blueprint Revealed</span>
             </div>
-            
-            <h1 className="text-4xl font-serif font-bold text-ethereal-900 mb-4">
+
+            <h1 className="text-4xl font-serif font-bold text-primary-900 mb-4">
               Your Personalized Meditations
             </h1>
             
@@ -111,15 +353,15 @@ const AstroQuiz = () => {
                 <div className="bg-gradient-to-br from-yellow-400 to-orange-500 w-20 h-20 rounded-full flex items-center justify-center mb-2">
                   <Sun className="h-10 w-10 text-white" />
                 </div>
-                <p className="text-lg font-semibold text-ethereal-900">Sun in {mockResults.sunSign}</p>
+                <p className="text-lg font-semibold text-primary-700">Sun in {mockResults.sunSign}</p>
                 <p className="text-sm text-gray-600">Your core essence</p>
               </div>
               
               <div className="text-center">
-                <div className="bg-gradient-to-br from-purple-400 to-blue-500 w-20 h-20 rounded-full flex items-center justify-center mb-2">
+                <div className="bg-gradient-to-br from-primary-400 to-primary-600 w-20 h-20 rounded-full flex items-center justify-center mb-2">
                   <Moon className="h-10 w-10 text-white" />
                 </div>
-                <p className="text-lg font-semibold text-ethereal-900">Moon in {mockResults.moonSign}</p>
+                <p className="text-lg font-semibold text-primary-900">Moon in {mockResults.moonSign}</p>
                 <p className="text-sm text-gray-600">Your emotional nature</p>
               </div>
             </div>
@@ -158,7 +400,7 @@ const AstroQuiz = () => {
                   <div className="text-center lg:text-right">
                     <div className="text-2xl font-bold text-purple-900 mb-2">{meditation.price}</div>
                     <div className="text-sm text-green-600 font-medium mb-3">+ Free Astro PDF Guide</div>
-                    <button className="bg-gradient-to-r from-ethereal-700 to-blush-600 text-white px-6 py-3 rounded-full font-medium hover:shadow-lg transition-all duration-300 flex items-center space-x-2">
+                    <button className="bg-gradient-to-r from-primary-600 to-primary-500 text-white px-6 py-3 rounded-full font-medium hover:shadow-lg transition-all duration-300 flex items-center space-x-2">
                       <ShoppingCart className="h-4 w-4" />
                       <span>Add to Cart</span>
                     </button>
@@ -184,7 +426,7 @@ const AstroQuiz = () => {
                 placement, how the meditation works with your chart, plus intention-setting exercises and journaling prompts.
               </p>
               
-              <button className="bg-white text-purple-900 px-6 py-3 rounded-full font-medium hover:bg-purple-50 transition-colors duration-300 border border-purple-200">
+              <button className="bg-white text-primary-700 px-6 py-3 rounded-full font-medium hover:bg-primary-50 transition-colors duration-300 border border-primary-200">
                 Preview Your Guide
               </button>
             </div>
@@ -204,7 +446,7 @@ const AstroQuiz = () => {
                   challenges: []
                 });
               }}
-              className="text-purple-600 hover:text-purple-800 font-medium"
+              className="text-primary-600 hover:text-primary-800 font-medium"
             >
               ← Retake Quiz
             </button>
@@ -215,16 +457,19 @@ const AstroQuiz = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-rose-50 py-12">
+    <div className="min-h-screen bg-gradient-to-br from-primary-50 to-primary-100 py-12">
+      {/* Sign-up Modal */}
+      {showSignUpModal && <SignUpModal />}
+
       <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Quiz Header */}
         <div className="text-center mb-8">
-          <div className="inline-flex items-center space-x-2 bg-white/60 backdrop-blur-sm px-4 py-2 rounded-full text-sm text-purple-700 font-medium mb-4">
+          <div className="inline-flex items-center space-x-2 bg-white/60 backdrop-blur-sm px-4 py-2 rounded-full text-sm text-primary-700 font-medium mb-4">
             <Moon className="h-4 w-4" />
             <span>Step {currentStep} of 4</span>
           </div>
-          
-          <h1 className="text-3xl font-serif font-bold text-purple-900 mb-2">
+
+          <h1 className="text-3xl font-serif font-bold text-primary-700 mb-2">
             Discover Your Sacred Practice
           </h1>
           <p className="text-gray-600">
@@ -236,7 +481,7 @@ const AstroQuiz = () => {
         <div className="mb-8">
           <div className="bg-white rounded-full h-2 overflow-hidden">
             <div
-              className="bg-gradient-to-r from-ethereal-700 to-blush-600 h-full transition-all duration-500 ease-out"
+              className="bg-gradient-to-r from-primary-600 to-primary-500 h-full transition-all duration-500 ease-out"
               style={{ width: `${(currentStep / 4) * 100}%` }}
             ></div>
           </div>
@@ -246,7 +491,7 @@ const AstroQuiz = () => {
         <div className="bg-white rounded-xl shadow-xl p-8">
           {currentStep === 1 && (
             <div>
-              <h2 className="text-2xl font-serif font-semibold text-purple-900 mb-6 text-center">
+              <h2 className="text-2xl font-serif font-semibold text-primary-700 mb-6 text-center">
                 Your Cosmic Coordinates
               </h2>
               <p className="text-gray-600 mb-8 text-center">
@@ -355,11 +600,11 @@ const AstroQuiz = () => {
 
           {currentStep === 4 && (
             <div className="text-center">
-              <div className="bg-gradient-to-br from-purple-100 to-rose-100 w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-6">
-                <Star className="h-12 w-12 text-purple-600" />
+              <div className="bg-gradient-to-br from-primary-100 to-primary-200 w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-6">
+                <Star className="h-12 w-12 text-primary-600" />
               </div>
-              
-              <h2 className="text-2xl font-serif font-semibold text-purple-900 mb-4">
+
+              <h2 className="text-2xl font-serif font-semibold text-primary-900 mb-4">
                 Ready to Discover Your Practice?
               </h2>
               
@@ -396,7 +641,7 @@ const AstroQuiz = () => {
               className={`px-6 py-3 rounded-full font-medium transition-colors duration-200 ${
                 currentStep === 1
                   ? 'text-gray-400 cursor-not-allowed'
-                  : 'text-purple-600 hover:text-purple-800'
+                  : 'text-primary-600 hover:text-primary-800'
               }`}
               disabled={currentStep === 1}
             >
@@ -411,7 +656,7 @@ const AstroQuiz = () => {
                   setCurrentStep(Math.min(4, currentStep + 1));
                 }
               }}
-              className="bg-gradient-to-r from-ethereal-700 to-blush-600 text-white px-8 py-3 rounded-full font-medium hover:shadow-lg transition-all duration-300"
+              className="bg-gradient-to-r from-primary-700 to-primary-600 text-white px-8 py-3 rounded-full font-medium hover:shadow-lg transition-all duration-300"
             >
               {currentStep === 4 ? 'Reveal My Meditations' : 'Continue →'}
             </button>

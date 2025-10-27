@@ -76,7 +76,7 @@ const Profile = () => {
                   <h1 className="text-3xl font-serif font-bold">
                     {user?.fullName || user?.firstName || 'Sacred Soul'}
                   </h1>
-                  <p className="text-lavender-100 mt-2">
+                  <p className="text-primary-100 mt-2">
                     {user?.primaryEmailAddress?.emailAddress}
                   </p>
                   <div className="flex items-center mt-3 space-x-4">
@@ -209,7 +209,7 @@ const Profile = () => {
                       </button>
                       <button
                         onClick={handleSave}
-                        className="px-6 py-3 bg-lavender-600 text-white rounded-lg hover:bg-lavender-700 transition-colors"
+                        className="px-6 py-3 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors"
                       >
                         Save Changes
                       </button>

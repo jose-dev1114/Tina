@@ -87,16 +87,16 @@ const Shop = () => {
     : sampleMeditations.filter(med => med.element === selectedFilter);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-rose-50 py-12">
+    <div className="min-h-screen bg-gradient-to-br from-primary-50 to-primary-100 py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-12">
-          <div className="inline-flex items-center space-x-2 bg-white/60 backdrop-blur-sm px-4 py-2 rounded-full text-sm text-purple-700 font-medium mb-4">
+          <div className="inline-flex items-center space-x-2 bg-white/60 backdrop-blur-sm px-4 py-2 rounded-full text-sm text-primary-700 font-medium mb-4">
             <Star className="h-4 w-4" />
             <span>Digital Sanctuary</span>
           </div>
-          
-          <h1 className="text-4xl font-serif font-bold text-purple-900 mb-4">
+
+          <h1 className="text-4xl font-serif font-bold text-primary-700 mb-4">
             Personalized Meditation Collection
           </h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
@@ -106,10 +106,10 @@ const Shop = () => {
         </div>
 
         {/* CTA to take quiz */}
-        <div className="bg-gradient-to-r from-ethereal-800 to-blush-700 rounded-xl p-8 text-white text-center mb-12">
+        <div className="bg-gradient-to-r from-primary-600 to-primary-500 rounded-xl p-8 text-white text-center mb-12">
           <h2 className="text-2xl font-serif font-bold mb-4">Not Sure Which Meditation is Right for You?</h2>
-          <p className="text-blush-100 mb-6">Take our personalized quiz to discover your perfect practice based on your birth chart.</p>
-          <a href="/quiz" className="bg-white text-ethereal-900 px-8 py-3 rounded-full font-medium hover:bg-blush-50 transition-colors duration-300">
+          <p className="text-primary-100 mb-6">Take our personalized quiz to discover your perfect practice based on your birth chart.</p>
+          <a href="/quiz" className="bg-white text-primary-700 px-8 py-3 rounded-full font-medium hover:bg-primary-50 transition-colors duration-300">
             Find My Perfect Meditation
           </a>
         </div>
@@ -126,8 +126,8 @@ const Shop = () => {
               onClick={() => setSelectedFilter(filter.id)}
               className={`px-6 py-2 rounded-full font-medium transition-all duration-200 ${
                 selectedFilter === filter.id
-                  ? 'bg-gradient-to-r from-ethereal-700 to-blush-600 text-white shadow-lg'
-                  : 'bg-white text-gray-600 hover:bg-ethereal-50 hover:text-ethereal-700 border border-gray-200'
+                  ? 'bg-gradient-to-r from-primary-700 to-primary-600 text-white shadow-lg'
+                  : 'bg-white text-gray-600 hover:bg-primary-50 hover:text-primary-700 border border-gray-200'
               }`}
             >
               {filter.name}
