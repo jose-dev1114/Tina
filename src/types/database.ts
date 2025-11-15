@@ -233,6 +233,99 @@ export interface MoonPhase {
   createdAt: Date;
 }
 
+// Product Types for Shop
+export type ProductType = 'digital' | 'physical';
+
+export interface Product {
+  id: string;
+  name: string;
+  description: string;
+  price: number;
+  currency: string;
+  type: ProductType;
+  category: 'recording' | 'card-deck' | 'meditation' | 'course';
+  images: string[];
+  featured: boolean;
+  isActive: boolean;
+  stripePriceId?: string; // Stripe Price ID for checkout
+  stripeProductId?: string; // Stripe Product ID
+  createdAt: Date;
+  updatedAt: Date;
+
+  // Digital product specific
+  downloadUrl?: string;
+  fileSize?: string;
+  duration?: string; // for audio/video
+  format?: string; // mp3, pdf, etc.
+
+  // Physical product specific
+  requiresShipping?: boolean;
+  weight?: number; // in grams
+  dimensions?: {
+    length: number;
+    width: number;
+    height: number;
+  };
+  inventory?: number;
+
+  // Metadata
+  tags?: string[];
+  sunSign?: string;
+  moonSign?: string;
+  element?: 'fire' | 'earth' | 'air' | 'water';
+}
+
+export interface CartItem {
+  product: Product;
+  quantity: number;
+}
+
+export interface ShippingAddress {
+  fullName: string;
+  email: string;
+  addressLine1: string;
+  addressLine2?: string;
+  city: string;
+  state: string;
+  postalCode: string;
+  country: string;
+  phone?: string;
+}
+
+export interface Order {
+  id: string;
+  userId?: string;
+  email: string;
+  items: CartItem[];
+  subtotal: number;
+  shipping: number;
+  tax: number;
+  total: number;
+  currency: string;
+
+  // Shipping info (for physical products)
+  shippingAddress?: ShippingAddress;
+
+  // Payment info
+  stripeSessionId?: string;
+  stripePaymentIntentId?: string;
+  paymentStatus: 'pending' | 'processing' | 'succeeded' | 'failed' | 'refunded';
+
+  // Order status
+  orderStatus: 'pending' | 'processing' | 'shipped' | 'delivered' | 'cancelled';
+  trackingNumber?: string;
+
+  // Digital delivery
+  downloadLinks?: {
+    productId: string;
+    url: string;
+    expiresAt: Date;
+  }[];
+
+  createdAt: Date;
+  updatedAt: Date;
+}
+
 // Firestore collection names
 export const COLLECTIONS = {
   USERS: 'users',
@@ -244,5 +337,7 @@ export const COLLECTIONS = {
   COMMENTS: 'comments',
   COACHING_SESSIONS: 'coachingSessions',
   NEWSLETTER: 'newsletter',
-  MOON_PHASES: 'moonPhases'
+  MOON_PHASES: 'moonPhases',
+  PRODUCTS: 'products',
+  ORDERS: 'orders'
 } as const;

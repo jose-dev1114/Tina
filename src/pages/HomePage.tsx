@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
-import { Moon, Heart, Star, Users, Zap, Eye, Compass, Leaf, Wind, Sparkles, Cloud, Feather, Flame } from 'lucide-react';
+import { Moon, Heart, Star, Users, Zap, Eye, Compass, Leaf, Wind, Sparkles, Cloud, Feather, Flame, ChevronDown } from 'lucide-react';
+import { useState } from 'react';
 import OrganicShapes from '../components/OrganicShapes';
 import WaveBottom from '../components/WaveBottom';
 import WaveTop from '../components/WaveTop';
@@ -8,6 +9,11 @@ import MoonLogo from '../components/MoonLogo';
 import MoonPhaseSelector from '../components/MoonPhaseSelector';
 
 const HomePage = () => {
+  const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
+
+  const toggleFaq = (index: number) => {
+    setOpenFaqIndex(openFaqIndex === index ? null : index);
+  };
   const benefits = [
     {
       icon: Moon,
@@ -49,6 +55,29 @@ const HomePage = () => {
       sign: "Leo Sun, Aquarius Moon",
       text: "Tina's guidance helped me understand my chart on a soul level. The free PDF guide was incredibly insightful.",
       image: "https://images.pexels.com/photos/1385472/pexels-photo-1385472.jpeg?auto=compress&cs=tinysrgb&w=400"
+    }
+  ];
+
+  const faqs = [
+    {
+      question: "How does Lunar Nidra differ from regular meditation?",
+      answer: "Lunar Nidra combines the ancient practice of Yoga Nidra (yogic sleep) with astrological wisdom. Unlike traditional meditation where you focus on staying alert, Lunar Nidra guides you into a state between waking and sleeping—where deep healing happens. Each practice is personalized to your Sun and Moon signs, aligning with lunar phases for maximum spiritual benefit. It's meditation without the mental effort, perfect for those who struggle with traditional practices."
+    },
+    {
+      question: "Do I need to know my exact birth time?",
+      answer: "While knowing your exact birth time gives us the most accurate Moon sign and Rising sign, you can still experience profound benefits with just your birth date and location. Our quiz will calculate your Sun sign and approximate Moon sign. If you don't know your birth time, we recommend checking your birth certificate or asking family members—but it's not required to get started on your healing journey."
+    },
+    {
+      question: "Is Lunar Nidra suitable for beginners?",
+      answer: "Absolutely! Lunar Nidra is actually perfect for beginners because it requires no prior meditation experience. You simply lie down, listen, and let the practice guide you. There's no 'doing it wrong'—your only job is to rest and receive. Many people who've struggled with traditional meditation find Lunar Nidra to be a game-changer because it works with your natural state of relaxation rather than fighting against it."
+    },
+    {
+      question: "Can we talk about the spiritual benefits?",
+      answer: "Lunar Nidra opens doorways to profound spiritual experiences: deep emotional healing, connection to your higher self, access to intuitive wisdom, release of karmic patterns, and alignment with your soul's purpose. By working with your unique astrological blueprint and lunar rhythms, you're not just relaxing—you're recalibrating your entire energetic system. Many practitioners report enhanced intuition, vivid dreams, synchronicities, and a deeper sense of connection to the cosmos."
+    },
+    {
+      question: "How is Lunar Nidra... practiced?",
+      answer: "Lunar Nidra is practiced lying down in a comfortable position (savasana). You'll listen to a guided audio meditation personalized to your astrological signs. Each session lasts 30-45 minutes and takes you through stages of body awareness, breath work, visualization, and deep rest. You can practice anytime—morning for energizing, evening for deep sleep, or during specific moon phases for amplified effects. All you need is a quiet space, headphones, and an open heart."
     }
   ];
 
@@ -396,60 +425,32 @@ const HomePage = () => {
               </h2>
 
               <div className="space-y-4">
-                <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow duration-300 cursor-pointer group">
-                  <div className="flex items-center justify-between">
-                    <h3 className="font-medium text-primary-800 group-hover:text-primary-600 transition-colors duration-200">
-                      How does Lunar Nidra differ from regular meditation?
-                    </h3>
-                    <div className="w-8 h-8 bg-primary-100 rounded-full flex items-center justify-center group-hover:bg-primary-200 transition-colors duration-200">
-                      <span className="text-primary-600 font-bold">+</span>
-                    </div>
-                  </div>
-                </div>
+                {faqs.map((faq, index) => (
+                  <div
+                    key={index}
+                    className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 cursor-pointer overflow-hidden"
+                    onClick={() => toggleFaq(index)}
+                  >
+                    <div className="p-6">
+                      <div className="flex items-center justify-between">
+                        <h3 className="font-medium text-primary-800 group-hover:text-primary-600 transition-colors duration-200 pr-4">
+                          {faq.question}
+                        </h3>
+                        <div className={`w-8 h-8 bg-primary-100 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-300 ${openFaqIndex === index ? 'bg-primary-200 rotate-180' : ''}`}>
+                          <ChevronDown className="h-5 w-5 text-primary-600" />
+                        </div>
+                      </div>
 
-                <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow duration-300 cursor-pointer group">
-                  <div className="flex items-center justify-between">
-                    <h3 className="font-medium text-ethereal-800 group-hover:text-lavender-600 transition-colors duration-200">
-                      Do I need to know my exact birth time?
-                    </h3>
-                    <div className="w-8 h-8 bg-lavender-100 rounded-full flex items-center justify-center group-hover:bg-lavender-200 transition-colors duration-200">
-                      <span className="text-lavender-600 font-bold">+</span>
+                      {openFaqIndex === index && (
+                        <div className="mt-4 pt-4 border-t border-primary-200 animate-fade-in">
+                          <p className="text-gray-700 leading-relaxed">
+                            {faq.answer}
+                          </p>
+                        </div>
+                      )}
                     </div>
                   </div>
-                </div>
-
-                <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow duration-300 cursor-pointer group">
-                  <div className="flex items-center justify-between">
-                    <h3 className="font-medium text-ethereal-800 group-hover:text-lavender-600 transition-colors duration-200">
-                      Is Lunar Nidra suitable for beginners?
-                    </h3>
-                    <div className="w-8 h-8 bg-lavender-100 rounded-full flex items-center justify-center group-hover:bg-lavender-200 transition-colors duration-200">
-                      <span className="text-lavender-600 font-bold">+</span>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow duration-300 cursor-pointer group">
-                  <div className="flex items-center justify-between">
-                    <h3 className="font-medium text-primary-800 group-hover:text-primary-600 transition-colors duration-200">
-                      Can we talk about the spiritual benefits?
-                    </h3>
-                    <div className="w-8 h-8 bg-primary-100 rounded-full flex items-center justify-center group-hover:bg-primary-200 transition-colors duration-200">
-                      <span className="text-primary-600 font-bold">+</span>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow duration-300 cursor-pointer group">
-                  <div className="flex items-center justify-between">
-                    <h3 className="font-medium text-ethereal-800 group-hover:text-lavender-600 transition-colors duration-200">
-                      How is Lunar Nidra... practiced?
-                    </h3>
-                    <div className="w-8 h-8 bg-lavender-100 rounded-full flex items-center justify-center group-hover:bg-lavender-200 transition-colors duration-200">
-                      <span className="text-lavender-600 font-bold">+</span>
-                    </div>
-                  </div>
-                </div>
+                ))}
               </div>
             </div>
 

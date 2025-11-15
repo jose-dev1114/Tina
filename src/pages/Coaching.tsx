@@ -1,71 +1,7 @@
-import { useState } from 'react';
-import { Calendar, Clock, Star, Heart, CheckCircle, MessageCircle } from 'lucide-react';
+import { Calendar, Clock, Star, Heart, CheckCircle, MessageCircle, Sparkles, Music, BookOpen, Moon } from 'lucide-react';
 
-interface Session {
-  id: number;
-  name: string;
-  duration: string;
-  price: string;
-  description: string;
-  features: string[];
-  ideal: string;
-  popular: boolean;
-}
 
 const Coaching = () => {
-  const [selectedSession, setSelectedSession] = useState<Session | null>(null);
-
-  const sessions = [
-    {
-      id: 1,
-      name: "Sacred Discovery Session",
-      duration: "30 minutes",
-      price: "$88",
-      description: "Perfect for newcomers seeking clarity on their spiritual path",
-      features: [
-        "Birth chart overview and key insights",
-        "Personalized meditation recommendation",
-        "Sacred space creation guidance",
-        "Pathway for continued growth"
-      ],
-      ideal: "First-time seekers, those feeling lost or disconnected",
-      popular: false
-    },
-    {
-      id: 2,
-      name: "Deep Soul Alignment",
-      duration: "60 minutes",
-      price: "$177",
-      description: "Comprehensive session for profound transformation and healing",
-      features: [
-        "Complete birth chart reading",
-        "Custom Lunar Nidra practice creation",
-        "Emotional healing & release work",
-        "Life purpose & soul mission clarity",
-        "Follow-up email with resources"
-      ],
-      ideal: "Those ready for deep healing and major life transitions",
-      popular: true
-    },
-    {
-      id: 3,
-      name: "Spiritual Mentorship Intensive",
-      duration: "90 minutes",
-      price: "$333",
-      description: "Elite session for spiritual leaders and advanced practitioners",
-      features: [
-        "Advanced chart synthesis & timing",
-        "Spiritual gifts activation",
-        "Shadow work & integration",
-        "Teaching & sharing your gifts",
-        "30-day integration support",
-        "Recording of the session"
-      ],
-      ideal: "Healers, coaches, and those called to serve others",
-      popular: false
-    }
-  ];
-
   const testimonials = [
     {
       name: "Jennifer L.",
@@ -137,107 +73,175 @@ const Coaching = () => {
           </div>
         </div>
 
-        {/* Session Options */}
+        {/* Our Healing Practices Offerings */}
         <div className="mb-20">
-          <h2 className="text-3xl font-serif font-bold text-primary-900 text-center mb-12">
-            Choose Your Sacred Container
-          </h2>
-          
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-serif font-bold text-primary-900 mb-4">
+              Our Healing Practices Offerings
+            </h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              Personalized astrological guidance and healing practices designed for your unique journey
+            </p>
+          </div>
+
           <div className="grid lg:grid-cols-3 gap-8">
-            {sessions.map((session) => (
-              <div key={session.id} className={`relative bg-white rounded-2xl shadow-xl p-8 hover:shadow-2xl transition-all duration-300 ${
-                session.popular ? 'ring-2 ring-primary-500 transform scale-105' : ''
-              }`}>
-                {session.popular && (
-                  <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                    <div className="bg-gradient-to-r from-primary-600 to-primary-500 text-white px-6 py-2 rounded-full text-sm font-medium flex items-center space-x-2">
-                      <Star className="h-4 w-4" />
-                      <span>Most Popular</span>
-                    </div>
-                  </div>
-                )}
-
-                <div className="text-center mb-8">
-                  <h3 className="text-2xl font-serif font-bold text-primary-700 mb-2">{session.name}</h3>
-                  <p className="text-gray-600 text-sm mb-4">{session.description}</p>
-
-                  <div className="flex items-center justify-center space-x-4 mb-4">
-                    <div className="flex items-center space-x-2 text-gray-500">
-                      <Clock className="h-4 w-4" />
-                      <span className="text-sm">{session.duration}</span>
-                    </div>
-                    <div className="text-3xl font-bold text-primary-700">{session.price}</div>
-                  </div>
-
-                  <div className="bg-primary-50 rounded-lg p-3 text-sm text-gray-700">
-                    <strong>Perfect for:</strong> {session.ideal}
-                  </div>
+            {/* Offering 1: Sun • Moon • Rising Recording */}
+            <div className="bg-white rounded-2xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-300">
+              <div className="bg-gradient-to-br from-yellow-400 to-orange-500 p-6 text-white">
+                <div className="flex items-center justify-center mb-4">
+                  <Sparkles className="h-8 w-8" />
                 </div>
-                
-                <div className="mb-8">
-                  <h4 className="font-semibold text-purple-900 mb-4">What's Included:</h4>
-                  <ul className="space-y-3">
-                    {session.features.map((feature, featureIndex) => (
-                      <li key={featureIndex} className="flex items-start space-x-3">
-                        <div className="bg-green-100 rounded-full p-1 mt-0.5">
-                          <CheckCircle className="h-3 w-3 text-green-600" />
-                        </div>
-                        <span className="text-gray-700 text-sm leading-relaxed">{feature}</span>
-                      </li>
-                    ))}
+                <h3 className="text-2xl font-serif font-bold text-center mb-2">
+                  Sun • Moon • Rising Recording
+                </h3>
+                <p className="text-center text-yellow-50 text-sm">The Big Three</p>
+              </div>
+
+              <div className="p-8">
+                <div className="text-center mb-6">
+                  <div className="text-4xl font-bold text-gray-900 mb-2">$97</div>
+                  <p className="text-sm text-gray-600">20-minute personalized audio journey</p>
+                </div>
+
+                <p className="text-gray-700 mb-6 leading-relaxed">
+                  Offers insight into your astrological blueprint—personality traits, reactions, and how others may see you.
+                </p>
+
+                <div className="bg-primary-50 rounded-xl p-4 mb-6">
+                  <h4 className="font-semibold text-primary-900 mb-3 text-sm">Bonuses Included:</h4>
+                  <ul className="space-y-2">
+                    <li className="flex items-start space-x-2">
+                      <CheckCircle className="h-4 w-4 text-green-600 mt-0.5 flex-shrink-0" />
+                      <span className="text-sm text-gray-700">Journal prompts tailored for each placement</span>
+                    </li>
+                    <li className="flex items-start space-x-2">
+                      <CheckCircle className="h-4 w-4 text-green-600 mt-0.5 flex-shrink-0" />
+                      <span className="text-sm text-gray-700">A prerecorded Lunar Nidra meditation</span>
+                    </li>
                   </ul>
                 </div>
-                
-                <button 
-                  className={`w-full py-4 rounded-full font-medium text-lg transition-all duration-300 mb-4 ${
-                    session.popular
-                      ? 'bg-gradient-to-r from-ethereal-700 to-blush-600 text-white hover:shadow-xl'
-                      : 'bg-ethereal-100 text-ethereal-900 hover:bg-ethereal-200'
-                  }`}
-                  onClick={() => setSelectedSession(session)}
-                >
-                  Book This Session
+
+                <div className="flex items-center justify-center space-x-2 text-sm text-gray-500 mb-6">
+                  <Clock className="h-4 w-4" />
+                  <span>Delivery: 2–3 weeks</span>
+                </div>
+
+                <button className="w-full bg-gradient-to-r from-yellow-400 to-orange-500 text-white py-4 rounded-full font-semibold hover:shadow-xl hover:scale-105 transition-all duration-300">
+                  Purchase Now
                 </button>
-                
-                <p className="text-center text-xs text-gray-500">
-                  Zoom session • Recording provided • 48hr cancellation
-                </p>
+
+                <p className="text-xs text-center text-gray-500 mt-4">Digital product • Stripe checkout</p>
               </div>
-            ))}
+            </div>
+
+            {/* Offering 2: Exploring Your Astrological Signature */}
+            <div className="bg-white rounded-2xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-300">
+              <div className="bg-gradient-to-br from-primary-600 to-primary-700 p-6 text-white">
+                <div className="flex items-center justify-center mb-4">
+                  <BookOpen className="h-8 w-8" />
+                </div>
+                <h3 className="text-2xl font-serif font-bold text-center mb-2">
+                  Exploring Your Astrological Signature
+                </h3>
+                <p className="text-center text-primary-100 text-sm">Deep Dive Journey</p>
+              </div>
+
+              <div className="p-8">
+                <div className="text-center mb-6">
+                  <div className="text-4xl font-bold text-gray-900 mb-2">$250</div>
+                  <p className="text-sm text-gray-600">Three 60-minute sessions</p>
+                </div>
+
+                <p className="text-gray-700 mb-6 leading-relaxed">
+                  Deep dive into Sun, Moon, Rising, then full chart themes and planetary influences.
+                  Includes journal prompts + aligned Lunar Nidra practices.
+                </p>
+
+                <div className="bg-primary-50 rounded-xl p-4 mb-6">
+                  <h4 className="font-semibold text-primary-900 mb-3 text-sm">What You'll Explore:</h4>
+                  <ul className="space-y-2">
+                    <li className="flex items-start space-x-2">
+                      <CheckCircle className="h-4 w-4 text-green-600 mt-0.5 flex-shrink-0" />
+                      <span className="text-sm text-gray-700">Session 1: Sun, Moon, Rising deep dive</span>
+                    </li>
+                    <li className="flex items-start space-x-2">
+                      <CheckCircle className="h-4 w-4 text-green-600 mt-0.5 flex-shrink-0" />
+                      <span className="text-sm text-gray-700">Session 2: Full chart themes & patterns</span>
+                    </li>
+                    <li className="flex items-start space-x-2">
+                      <CheckCircle className="h-4 w-4 text-green-600 mt-0.5 flex-shrink-0" />
+                      <span className="text-sm text-gray-700">Session 3: Planetary influences & integration</span>
+                    </li>
+                    <li className="flex items-start space-x-2">
+                      <CheckCircle className="h-4 w-4 text-green-600 mt-0.5 flex-shrink-0" />
+                      <span className="text-sm text-gray-700">Custom journal prompts & Lunar Nidra practices</span>
+                    </li>
+                  </ul>
+                </div>
+
+                <button className="w-full bg-gradient-to-r from-primary-600 to-primary-700 text-white py-4 rounded-full font-semibold hover:shadow-xl hover:scale-105 transition-all duration-300">
+                  Book First Session
+                </button>
+
+                <p className="text-xs text-center text-gray-500 mt-4">Schedule via booking tool • Zoom sessions</p>
+              </div>
+            </div>
+
+            {/* Offering 3: Personalised Lunar Nidra */}
+            <div className="bg-white rounded-2xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-300">
+              <div className="bg-gradient-to-br from-indigo-500 to-purple-600 p-6 text-white">
+                <div className="flex items-center justify-center mb-4">
+                  <Moon className="h-8 w-8" />
+                </div>
+                <h3 className="text-2xl font-serif font-bold text-center mb-2">
+                  Personalised Lunar Nidra
+                </h3>
+                <p className="text-center text-indigo-100 text-sm">Your Moon Placement Audio Journey</p>
+              </div>
+
+              <div className="p-8">
+                <div className="text-center mb-6">
+                  <div className="text-4xl font-bold text-gray-900 mb-2">$97</div>
+                  <p className="text-sm text-gray-600">20–30 min guided recording</p>
+                </div>
+
+                <p className="text-gray-700 mb-6 leading-relaxed">
+                  A customized recording for your Moon placement. Helps reset the nervous system and connect to the Moon's elemental expression.
+                </p>
+
+                <div className="bg-indigo-50 rounded-xl p-4 mb-6">
+                  <h4 className="font-semibold text-indigo-900 mb-3 text-sm">After Purchase:</h4>
+                  <ul className="space-y-2">
+                    <li className="flex items-start space-x-2">
+                      <CheckCircle className="h-4 w-4 text-green-600 mt-0.5 flex-shrink-0" />
+                      <span className="text-sm text-gray-700">Complete a brief survey with your birth details</span>
+                    </li>
+                    <li className="flex items-start space-x-2">
+                      <CheckCircle className="h-4 w-4 text-green-600 mt-0.5 flex-shrink-0" />
+                      <span className="text-sm text-gray-700">Share any intentions or notes</span>
+                    </li>
+                    <li className="flex items-start space-x-2">
+                      <CheckCircle className="h-4 w-4 text-green-600 mt-0.5 flex-shrink-0" />
+                      <span className="text-sm text-gray-700">Receive your personalized recording</span>
+                    </li>
+                  </ul>
+                </div>
+
+                <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-3 mb-6">
+                  <p className="text-xs text-yellow-800">
+                    <strong>📋 Required:</strong> Birth date, time, location, and email (collected via survey after purchase)
+                  </p>
+                </div>
+
+                <button className="w-full bg-gradient-to-r from-indigo-500 to-purple-600 text-white py-4 rounded-full font-semibold hover:shadow-xl hover:scale-105 transition-all duration-300">
+                  Purchase Now
+                </button>
+
+                <p className="text-xs text-center text-gray-500 mt-4">Digital product • Survey form after checkout</p>
+              </div>
+            </div>
           </div>
         </div>
-
-        {/* Booking Calendar Placeholder */}
-        {selectedSession && (
-          <div className="mb-20 bg-white rounded-2xl shadow-xl p-8">
-            <div className="text-center mb-8">
-              <h3 className="text-2xl font-serif font-bold text-purple-900 mb-2">
-                Book Your {selectedSession.name}
-              </h3>
-              <p className="text-gray-600">Choose a time that feels aligned for your sacred session</p>
-            </div>
-            
-            {/* This would integrate with a real booking system like Calendly */}
-            <div className="bg-gradient-to-br from-purple-50 to-rose-50 rounded-xl p-12 text-center">
-              <Calendar className="h-16 w-16 text-purple-400 mx-auto mb-4" />
-              <h4 className="text-lg font-semibold text-purple-900 mb-2">Calendar Integration</h4>
-              <p className="text-gray-600 mb-6">
-                In a live implementation, this would show Tina's available appointment slots via Calendly or similar booking platform.
-              </p>
-              <button
-                className="bg-gradient-to-r from-ethereal-700 to-blush-600 text-white px-6 py-3 rounded-full font-medium mr-4"
-              >
-                View Available Times
-              </button>
-              <button 
-                className="text-purple-600 hover:text-purple-800 font-medium"
-                onClick={() => setSelectedSession(null)}
-              >
-                ← Choose Different Session
-              </button>
-            </div>
-          </div>
-        )}
 
         {/* Testimonials */}
         <div className="mb-20">

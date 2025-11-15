@@ -1,53 +1,53 @@
 
-import { Users, Star, Calendar, MessageCircle, Video, Gift, Check, Crown } from 'lucide-react';
+import { Users, Star, Calendar, MessageCircle, Video, Gift, Check, Crown, Sparkles } from 'lucide-react';
 
 const Community = () => {
-  const membershipTiers = [
-    {
-      name: "Moon Circle",
-      price: "$33",
-      period: "per month",
-      description: "Perfect for beginners seeking community and guidance",
-      features: [
-        "Weekly live group meditations with Tina",
-        "Private community forum access",
-        "Monthly moon phase meditation releases",
-        "Member-only Discord channel",
-        "Digital meditation library (20+ recordings)"
-      ],
-      popular: false
-    },
-    {
-      name: "Soul Circle",
-      price: "$67",
-      period: "per month",
-      description: "For dedicated practitioners ready to dive deeper",
-      features: [
-        "Everything in Moon Circle",
-        "Bi-weekly Q&A + coaching calls with Tina",
-        "Exclusive advanced meditations",
-        "Personalized birth chart reading (quarterly)",
-        "Early access to new programs",
-        "Sacred journal & reflection prompts"
-      ],
-      popular: true
-    },
-    {
-      name: "Lunar Priestess",
-      price: "$144",
-      period: "per month",
-      description: "Elite mentorship for spiritual leaders and healers",
-      features: [
-        "Everything in Soul Circle",
-        "Monthly 1:1 private session with Tina",
-        "Teacher training & certification path",
-        "Co-creation opportunities",
-        "VIP retreat invitations",
-        "Lifetime access to all digital content"
-      ],
-      popular: false
-    }
-  ];
+  // const membershipTiers = [
+  //   {
+  //     name: "Moon Circle",
+  //     price: "$33",
+  //     period: "per month",
+  //     description: "Perfect for beginners seeking community and guidance",
+  //     features: [
+  //       "Weekly live group meditations with Tina",
+  //       "Private community forum access",
+  //       "Monthly moon phase meditation releases",
+  //       "Member-only Discord channel",
+  //       "Digital meditation library (20+ recordings)"
+  //     ],
+  //     popular: false
+  //   },
+  //   {
+  //     name: "Soul Circle",
+  //     price: "$67",
+  //     period: "per month",
+  //     description: "For dedicated practitioners ready to dive deeper",
+  //     features: [
+  //       "Everything in Moon Circle",
+  //       "Bi-weekly Q&A + coaching calls with Tina",
+  //       "Exclusive advanced meditations",
+  //       "Personalized birth chart reading (quarterly)",
+  //       "Early access to new programs",
+  //       "Sacred journal & reflection prompts"
+  //     ],
+  //     popular: true
+  //   },
+  //   {
+  //     name: "Lunar Priestess",
+  //     price: "$144",
+  //     period: "per month",
+  //     description: "Elite mentorship for spiritual leaders and healers",
+  //     features: [
+  //       "Everything in Soul Circle",
+  //       "Monthly 1:1 private session with Tina",
+  //       "Teacher training & certification path",
+  //       "Co-creation opportunities",
+  //       "VIP retreat invitations",
+  //       "Lifetime access to all digital content"
+  //     ],
+  //     popular: false
+  //   }
+  // ];
 
   const testimonials = [
     {
@@ -115,14 +115,132 @@ const Community = () => {
           <div className="bg-gradient-to-r from-primary-100 to-primary-200 rounded-xl p-6 max-w-2xl mx-auto">
             <h3 className="font-semibold text-primary-700 mb-2">🌙 What Makes Our Community Special</h3>
             <p className="text-gray-700 text-sm leading-relaxed">
-              Unlike generic meditation apps, our community is built around your unique astrological blueprint. 
+              Unlike generic meditation apps, our community is built around your unique astrological blueprint.
               Every practice, teaching, and connection is designed to support your personal spiritual evolution.
             </p>
           </div>
         </div>
 
-        {/* Membership Tiers */}
+        {/* Skool Community Section */}
         <div className="mb-20">
+          <div className="bg-gradient-to-br from-white to-gray-50 rounded-3xl shadow-2xl overflow-hidden">
+            <div className="grid lg:grid-cols-2 gap-0">
+              {/* Left Side - Content */}
+              <div className="p-12 flex flex-col justify-center">
+                <div className="inline-flex items-center space-x-2 bg-primary-100 px-4 py-2 rounded-full text-sm text-primary-700 font-medium mb-6 w-fit">
+                  <Sparkles className="h-4 w-4" />
+                  <span>Join Our Community</span>
+                </div>
+
+                <h2 className="text-4xl font-serif font-bold text-gray-900 mb-6">
+                  Nova Nidra Community on Skool
+                </h2>
+
+                <p className="text-lg text-gray-700 mb-6 leading-relaxed">
+                  Lunar Nidra is a fusion of the moon's energy and the yogic sleep practice.
+                  Join our thriving community on Skool where you'll discover peace in just 20 minutes.
+                </p>
+
+                <div className="space-y-4 mb-8">
+                  <div className="flex items-start space-x-3">
+                    <div className="bg-green-100 rounded-full p-1 mt-1">
+                      <Check className="h-4 w-4 text-green-600" />
+                    </div>
+                    <div>
+                      <p className="font-semibold text-gray-900">20-minute guided yoga nidra</p>
+                      <p className="text-sm text-gray-600">Deep rest and nervous system restoration</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start space-x-3">
+                    <div className="bg-green-100 rounded-full p-1 mt-1">
+                      <Check className="h-4 w-4 text-green-600" />
+                    </div>
+                    <div>
+                      <p className="font-semibold text-gray-900">Full Library of 100+ recordings</p>
+                      <p className="text-sm text-gray-600">Access to extensive meditation collection</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start space-x-3">
+                    <div className="bg-green-100 rounded-full p-1 mt-1">
+                      <Check className="h-4 w-4 text-green-600" />
+                    </div>
+                    <div>
+                      <p className="font-semibold text-gray-900">Relief from insomnia & burnout</p>
+                      <p className="text-sm text-gray-600">Release overwhelm, anxiety, and stress</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start space-x-3">
+                    <div className="bg-green-100 rounded-full p-1 mt-1">
+                      <Check className="h-4 w-4 text-green-600" />
+                    </div>
+                    <div>
+                      <p className="font-semibold text-gray-900">Supportive community space</p>
+                      <p className="text-sm text-gray-600">Connect with 748+ members on the same journey</p>
+                    </div>
+                  </div>
+                </div>
+
+                <a
+                  href="https://www.skool.com/novanidracommunity/about"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center space-x-3 bg-gradient-to-r from-yellow-400 to-yellow-500 text-gray-900 px-8 py-4 rounded-full font-bold text-lg hover:shadow-2xl hover:scale-105 transition-all duration-300"
+                >
+                  <span>Join the Community on Skool</span>
+                  <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                  </svg>
+                </a>
+
+                <p className="text-sm text-gray-500 mt-4">
+                  🍯 Pay what you can • Free to join • 748 members
+                </p>
+              </div>
+
+              {/* Right Side - Visual */}
+              <div className="bg-gradient-to-br from-primary-600 to-primary-700 p-12 flex flex-col justify-center items-center text-white relative overflow-hidden">
+                {/* Decorative elements */}
+                <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -mr-32 -mt-32"></div>
+                <div className="absolute bottom-0 left-0 w-48 h-48 bg-white/10 rounded-full -ml-24 -mb-24"></div>
+
+                <div className="relative z-10 text-center">
+                  {/* Skool Logo Text */}
+                  <div className="mb-8">
+                    <div className="text-6xl font-black mb-2" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+                      Skool
+                    </div>
+                    <div className="text-primary-100 text-sm font-medium tracking-wider">
+                      COMMUNITY PLATFORM
+                    </div>
+                  </div>
+
+                  <div className="space-y-6">
+                    <div className="bg-white/20 backdrop-blur-sm rounded-2xl p-6">
+                      <div className="text-5xl font-bold mb-2">748+</div>
+                      <div className="text-primary-100">Active Members</div>
+                    </div>
+
+                    <div className="bg-white/20 backdrop-blur-sm rounded-2xl p-6">
+                      <div className="text-5xl font-bold mb-2">100+</div>
+                      <div className="text-primary-100">Yoga Nidra Recordings</div>
+                    </div>
+
+                    <div className="bg-white/20 backdrop-blur-sm rounded-2xl p-6">
+                      <div className="text-3xl font-bold mb-2">🌙✨</div>
+                      <div className="text-primary-100">"When in doubt, nidra out"</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Membership Tiers */}
+        {/* <div className="mb-20">
           <h2 className="text-3xl font-serif font-bold text-purple-900 text-center mb-12">
             Choose Your Sacred Path
           </h2>
@@ -175,7 +293,7 @@ const Community = () => {
               </div>
             ))}
           </div>
-        </div>
+        </div> */}
 
         {/* Community Features */}
         <div className="mb-20">

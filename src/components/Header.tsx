@@ -105,25 +105,20 @@ const Header = () => {
   return (
     <header className="bg-white/90 backdrop-blur-md sticky top-0 z-50 shadow-none">
       {/* Top banner */}
-      <div className="bg-primary-700 text-white text-center py-2">
+      {/* <div className="bg-primary-700 text-white text-center py-2">
         <p className="text-sm font-medium">Free Gift for Every Meditation Order!</p>
-      </div>
+      </div> */}
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center py-6">
-          {/* Logo - Inspired by the crescent moon design */}
+        <div className="flex justify-between items-center py-4">
+          {/* Logo */}
           <Link to="/" className="flex items-center space-x-4 group">
             <div className="relative">
-              {/* Crescent moon logo inspired by the image */}
-              <div className="w-14 h-14 relative">
-                <div className="absolute inset-0 bg-primary-200 rounded-full opacity-30"></div>
-                <div className="absolute inset-1 bg-white rounded-full shadow-inner"></div>
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="w-8 h-8 bg-primary-300 rounded-full relative overflow-hidden">
-                    <div className="absolute top-1 right-1 w-6 h-6 bg-white rounded-full"></div>
-                  </div>
-                </div>
-              </div>
+              <img
+                src="/logo.jpg"
+                alt="Our Healing Practices Logo"
+                className="w-14 h-14 object-contain rounded-full"
+              />
             </div>
             <div>
               <h1 className="text-xl font-serif font-bold text-primary-700">Our Healing Practices</h1>
@@ -139,9 +134,9 @@ const Header = () => {
                 className="text-sm font-medium text-primary-700 hover:text-primary-900 transition-colors duration-200 flex items-center space-x-1"
               >
                 <span>Shop</span>
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                {/* <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                </svg>
+                </svg> */}
               </Link>
 
               <Link
@@ -149,9 +144,6 @@ const Header = () => {
                 className="text-sm font-medium text-primary-700 hover:text-primary-900 transition-colors duration-200 flex items-center space-x-1"
               >
                 <span>Learn</span>
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                </svg>
               </Link>
 
               <Link
