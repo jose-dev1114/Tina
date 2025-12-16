@@ -10,14 +10,12 @@ const Footer = () => {
           {/* Brand Section */}
           <div className="col-span-1 md:col-span-2">
             <div className="flex items-center space-x-4 mb-4">
-              <div className="w-14 h-14 relative">
-                <div className="absolute inset-0 bg-primary-200 rounded-full opacity-30"></div>
-                <div className="absolute inset-1 bg-white rounded-full shadow-inner"></div>
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="w-8 h-8 bg-primary-300 rounded-full relative overflow-hidden">
-                    <div className="absolute top-1 right-1 w-6 h-6 bg-white rounded-full"></div>
-                  </div>
-                </div>
+              <div className="relative">
+                <img
+                  src="/logo.jpg"
+                  alt="Our Healing Practices Logo"
+                  className="w-14 h-14 object-contain rounded-full"
+                />
               </div>
               <div>
                 <h3 className="text-xl font-serif font-bold text-white">Our Healing Practices</h3>

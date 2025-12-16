@@ -1,12 +1,12 @@
 import { Link } from 'react-router-dom';
-import { Moon, Heart, Star, Users, Zap, Eye, Compass, Leaf, Wind, Sparkles, Cloud, Feather, Flame, ChevronDown } from 'lucide-react';
+import { Moon, Heart, Star, Users, Zap, Eye, Compass, Leaf, Wind, Sparkles, Cloud, Feather, Flame, ChevronDown, Waves, HeartHandshake, BookHeart } from 'lucide-react';
 import { useState } from 'react';
 import OrganicShapes from '../components/OrganicShapes';
 import WaveBottom from '../components/WaveBottom';
 import WaveTop from '../components/WaveTop';
 import AnimatedHeading from '../components/AnimatedHeading';
 import MoonLogo from '../components/MoonLogo';
-import MoonPhaseSelector from '../components/MoonPhaseSelector';
+import CardShuffle from '../components/CardShuffle';
 
 const HomePage = () => {
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
@@ -16,17 +16,17 @@ const HomePage = () => {
   };
   const benefits = [
     {
-      icon: Moon,
+      icon: Waves,
       title: "Lunar-Aligned Healing",
       description: "Meditations synchronized with moon phases for deeper spiritual connection"
     },
     {
-      icon: Heart,
+      icon: HeartHandshake,
       title: "Personalized to Your Soul",
       description: "Each practice tailored to your unique Sun and Moon sign combination"
     },
     {
-      icon: Star,
+      icon: BookHeart,
       title: "Ancient Wisdom, Modern Practice",
       description: "Yoga Nidra techniques enhanced with astrological insights"
     },
@@ -54,7 +54,7 @@ const HomePage = () => {
       name: "Maya R.",
       sign: "Leo Sun, Aquarius Moon",
       text: "Tina's guidance helped me understand my chart on a soul level. The free PDF guide was incredibly insightful.",
-      image: "https://images.pexels.com/photos/1385472/pexels-photo-1385472.jpeg?auto=compress&cs=tinysrgb&w=400"
+      image: "https://images.pexels.com/photos/1130626/pexels-photo-1130626.jpeg?auto=compress&cs=tinysrgb&w=400"
     }
   ];
 
@@ -131,9 +131,9 @@ const HomePage = () => {
               </p>
             </div>
 
-            {/* Right side - Interactive Moon Phase Selector */}
+            {/* Right side - Card Shuffle Animation */}
             <div className="relative animate-slide-up h-96 md:h-full min-h-96">
-              <MoonPhaseSelector />
+              <CardShuffle />
             </div>
           </div>
         </div>
@@ -151,9 +151,9 @@ const HomePage = () => {
           <div className="text-center mb-20">
             <div className="inline-block relative mb-8">
               <div className="absolute inset-0 bg-gradient-to-r from-primary-400 to-primary-300 rounded-full blur-2xl opacity-40 animate-pulse"></div>
-              <div className="relative">
+              {/* <div className="relative">
                 <MoonLogo size={80} />
-              </div>
+              </div> */}
             </div>
             <h2 className="text-5xl md:text-6xl font-serif font-bold text-primary-700 mb-4">
               Soul-powered transformation
@@ -164,7 +164,7 @@ const HomePage = () => {
           </div>
 
           {/* Clean benefits grid inspired by Chico's simple approach */}
-          <div className="grid md:grid-cols-3 gap-8 mb-20 max-w-5xl mx-auto">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-6 md:gap-8 mb-20 max-w-5xl mx-auto">
             {[
               { title: "Deep Rest", description: "Profound relaxation beyond sleep", icon: Cloud },
               { title: "Soul Alignment", description: "Connect with your authentic self", icon: Compass },
@@ -189,89 +189,8 @@ const HomePage = () => {
             })}
           </div>
 
-          {/* Central meditation visual with orbiting benefit icons */}
-          <div className="flex justify-center mb-20">
-            <div className="relative w-96 h-96 flex items-center justify-center">
-              {/* Outer orbit ring */}
-              <div className="absolute inset-0 rounded-full border-2 border-primary-200/30 opacity-50"></div>
-              <div className="absolute inset-8 rounded-full border-2 border-primary-300/20 opacity-30"></div>
-
-              {/* Icon 1 - Cloud (orbits) */}
-              <div
-                className="absolute w-14 h-14 bg-gradient-to-br from-primary-400 to-primary-500 rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-shadow"
-                style={{
-                  animation: 'orbit 20s linear infinite',
-                  width: '56px',
-                  height: '56px',
-                  marginLeft: '-28px',
-                  marginTop: '-28px'
-                }}
-              >
-                <Cloud className="h-6 w-6 text-white" strokeWidth={1.5} />
-              </div>
-
-              {/* Icon 2 - Heart (orbits with delay) */}
-              <div
-                className="absolute w-14 h-14 bg-gradient-to-br from-primary-300 to-primary-400 rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-shadow"
-                style={{
-                  animation: 'orbit 20s linear infinite',
-                  animationDelay: '-5s',
-                  width: '56px',
-                  height: '56px',
-                  marginLeft: '-28px',
-                  marginTop: '-28px'
-                }}
-              >
-                <Heart className="h-6 w-6 text-white" strokeWidth={1.5} />
-              </div>
-
-              {/* Icon 3 - Eye (orbits with delay) */}
-              <div
-                className="absolute w-14 h-14 bg-gradient-to-br from-primary-500 to-primary-600 rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-shadow"
-                style={{
-                  animation: 'orbit 20s linear infinite',
-                  animationDelay: '-10s',
-                  width: '56px',
-                  height: '56px',
-                  marginLeft: '-28px',
-                  marginTop: '-28px'
-                }}
-              >
-                <Eye className="h-6 w-6 text-white" strokeWidth={1.5} />
-              </div>
-
-              {/* Icon 4 - Flame (orbits with delay) */}
-              <div
-                className="absolute w-14 h-14 bg-gradient-to-br from-primary-400 to-primary-500 rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-shadow"
-                style={{
-                  animation: 'orbit 20s linear infinite',
-                  animationDelay: '-15s',
-                  width: '56px',
-                  height: '56px',
-                  marginLeft: '-28px',
-                  marginTop: '-28px'
-                }}
-              >
-                <Flame className="h-6 w-6 text-white" strokeWidth={1.5} />
-              </div>
-
-              {/* Central circle */}
-              <div className="relative z-10 w-64 h-64 bg-gradient-to-br from-primary-500 to-primary-600 rounded-full flex items-center justify-center shadow-2xl">
-                <div className="w-48 h-48 bg-white rounded-full flex items-center justify-center shadow-inner">
-                  <div className="text-center">
-                    <div className="w-20 h-20 bg-gradient-to-br from-primary-600 to-primary-700 rounded-full flex items-center justify-center mx-auto mb-3 shadow-lg">
-                      <Moon className="h-10 w-10 text-white" />
-                    </div>
-                    <h3 className="text-lg font-serif font-bold text-primary-700">Lunar Nidra</h3>
-                    <p className="text-xs text-primary-600">Sacred Practice</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
           {/* Description section */}
-          <div className="max-w-4xl mx-auto text-center pb-16">
+          <div className="max-w-6xl mx-auto text-center pb-16">
             <h3 className="text-3xl font-serif font-bold text-primary-700 mb-6">
               Looks like meditation.
             </h3>
@@ -305,39 +224,27 @@ const HomePage = () => {
           </div>
 
           {/* Product cards inspired by Chico's flavor showcase */}
-          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
             {benefits.map((benefit, index) => {
               const IconComponent = benefit.icon;
               const colors = [
                 { bg: 'bg-gradient-to-br from-primary-100 to-primary-200', border: 'border-primary-200', icon: 'text-primary-700' },
                 { bg: 'bg-gradient-to-br from-primary-50 to-primary-100', border: 'border-primary-100', icon: 'text-primary-700' },
-                { bg: 'bg-gradient-to-br from-primary-50 to-primary-100', border: 'border-primary-50', icon: 'text-primary-700' }
+                { bg: 'bg-gradient-to-br from-primary-50 to-primary-100', border: 'border-primary-50', icon: 'text-primary-700' },
+                { bg: 'bg-gradient-to-br from-primary-100 to-primary-150', border: 'border-primary-150', icon: 'text-primary-700' }
               ];
-              const colorScheme = colors[index % 3];
+              const colorScheme = colors[index % 4];
 
               return (
-                <div key={index} className="bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border border-gray-100">
+                <div key={index} className={`${colorScheme.bg} rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border ${colorScheme.border}`}>
                   <div className="text-center">
                     <div className="text-sm font-medium text-primary-500 mb-2">Sacred Practice</div>
                     <h3 className="text-2xl font-serif font-bold text-primary-800 mb-6">{benefit.title}</h3>
 
-                    {/* Product mockup */}
-                    <div className="relative mb-8">
-                      <div className={`w-48 h-64 ${colorScheme.bg} rounded-2xl mx-auto shadow-lg transform rotate-3 hover:rotate-0 transition-transform duration-300 border ${colorScheme.border}`}>
-                        <div className="flex flex-col items-center justify-center h-full p-6">
-                          <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center mb-4 shadow-md">
-                            <IconComponent className={`h-8 w-8 ${colorScheme.icon}`} />
-                          </div>
-                          <div className="text-center">
-                            <div className="text-xs font-medium text-primary-700 mb-2">Lunar Nidra</div>
-                            <div className="text-sm font-bold text-primary-700">{benefit.title}</div>
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* Hand holding effect */}
-                      <div className="absolute -bottom-4 -right-2 w-16 h-20 opacity-60">
-                        <div className="w-full h-full bg-gradient-to-br from-amber-100 to-amber-200 rounded-full transform rotate-12"></div>
+                    {/* Large Icon */}
+                    <div className="relative mb-8 flex justify-center">
+                      <div className="w-32 h-32 bg-white rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-110">
+                        <IconComponent className={`h-16 w-16 ${colorScheme.icon}`} strokeWidth={1.5} />
                       </div>
                     </div>
 
@@ -416,7 +323,7 @@ const HomePage = () => {
         <WaveTop variant="primary-300" className="z-10" />
         <OrganicShapes variant="accent" />
 
-        <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             {/* Left side - Content */}
             <div>
@@ -458,15 +365,21 @@ const HomePage = () => {
             <div className="relative">
               <div className="relative">
                 {/* Main meditation container mockup */}
-                <div className="w-80 h-96 bg-white rounded-3xl shadow-2xl transform rotate-6 hover:rotate-3 transition-transform duration-500 mx-auto">
-                  <div className="h-full bg-gradient-to-br from-primary-600 to-primary-700 rounded-3xl p-8 flex flex-col items-center justify-center">
-                    <div className="w-20 h-20 bg-white rounded-full flex items-center justify-center mb-6 shadow-lg">
-                      <Moon className="h-10 w-10 text-primary-700" />
+                <div className="w-80 h-96 bg-white/90 backdrop-blur-sm rounded-[2.5rem] shadow-xl hover:shadow-2xl transform rotate-3 hover:rotate-0 transition-all duration-700 ease-out mx-auto group">
+                  <div className="h-full bg-gradient-to-br from-primary-500 via-primary-600 to-primary-700 rounded-[2.5rem] p-10 flex flex-col items-center justify-center relative overflow-hidden">
+                    {/* Subtle animated background glow */}
+                    <div className="absolute inset-0 bg-gradient-to-tr from-white/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+
+                    {/* Icon with smooth animation */}
+                    <div className="relative w-24 h-24 bg-white/95 backdrop-blur-sm rounded-full flex items-center justify-center mb-8 shadow-lg group-hover:shadow-xl group-hover:scale-110 transition-all duration-500">
+                      <Moon className="h-12 w-12 text-primary-600 group-hover:text-primary-700 transition-colors duration-500" />
                     </div>
-                    <h3 className="text-2xl font-serif font-bold text-white mb-2">Lunar Nidra</h3>
-                    <p className="text-white/80 text-center text-sm mb-6">Personalized Sacred Practice</p>
-                    <div className="bg-white/20 rounded-full px-6 py-2">
-                      <span className="text-white text-sm font-medium">45 min journey</span>
+
+                    <h3 className="text-3xl font-serif font-bold text-white mb-3 group-hover:scale-105 transition-transform duration-500">Lunar Nidra</h3>
+                    <p className="text-white/90 text-center text-base mb-8 leading-relaxed">Personalized Sacred Practice</p>
+
+                    <div className="bg-white/25 backdrop-blur-md rounded-full px-8 py-3 group-hover:bg-white/35 transition-all duration-500 shadow-lg">
+                      <span className="text-white text-sm font-semibold tracking-wide">45 min journey</span>
                     </div>
                   </div>
                 </div>
@@ -486,7 +399,7 @@ const HomePage = () => {
           </div>
         </div>
         {/* Wave bottom border */}
-        <WaveBottom variant="primary-300" className="z-10" />
+        {/* <WaveBottom variant="primary-300" className="z-10" /> */}
       </section>
     </div>
   );
