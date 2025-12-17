@@ -9,6 +9,9 @@ export default function Dashboard() {
   const [chartLoading, setChartLoading] = useState(true);
 
   useEffect(() => {
+    // Scroll to top when component mounts
+    window.scrollTo(0, 0);
+
     // Simulate chart loading
     if (userProfile?.birthChartData?.chartUrl) {
       setChartLoading(false);

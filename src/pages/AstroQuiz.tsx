@@ -30,6 +30,11 @@ const AstroQuiz = () => {
   const [tempBirthData, setTempBirthData] = useState<any>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  // Scroll to top when component mounts
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   // ✨ NEW: Watch for user signup and save birth data
   useEffect(() => {
     const saveBirthDataAfterSignup = async () => {

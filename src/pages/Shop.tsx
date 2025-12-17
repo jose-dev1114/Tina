@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Star, Play, Download, ShoppingCart, Filter, Package, Music, Sparkles, Check } from 'lucide-react';
 import toast from 'react-hot-toast';
 import { useCart } from '../contexts/CartContext';
@@ -9,6 +9,18 @@ const Shop = () => {
   const [selectedFilter, setSelectedFilter] = useState('all');
   const [selectedTab, setSelectedTab] = useState<'recordings' | 'cards'>('recordings');
   const { addToCart, cart } = useCart();
+  const [isLoading, setIsLoading] = useState(true);
+
+  // Scroll to top when component mounts and handle loading
+  useEffect(() => {
+    window.scrollTo(0, 0);
+
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 600);
+
+    return () => clearTimeout(timer);
+  }, []);
   
   const filters = [
     { id: 'all', name: 'All Meditations' },
@@ -219,8 +231,37 @@ const Shop = () => {
     return cart.some(item => item.product.id === productId);
   };
 
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-primary-50 to-primary-100 py-12 animate-pulse">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <div className="inline-flex items-center bg-white/60 px-4 py-2 rounded-full w-32 h-8 mx-auto mb-4"></div>
+            <div className="h-10 bg-primary-200/50 rounded-lg w-1/2 mx-auto mb-4"></div>
+            <div className="h-6 bg-primary-100/50 rounded w-2/3 mx-auto"></div>
+          </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[...Array(6)].map((_, index) => (
+              <div key={index} className="bg-white rounded-xl shadow-lg overflow-hidden">
+                <div className="h-64 bg-primary-200/50"></div>
+                <div className="p-6">
+                  <div className="h-6 bg-primary-200/50 rounded w-3/4 mb-4"></div>
+                  <div className="space-y-2 mb-4">
+                    <div className="h-4 bg-primary-100/50 rounded w-full"></div>
+                    <div className="h-4 bg-primary-100/50 rounded w-5/6"></div>
+                  </div>
+                  <div className="h-10 bg-primary-300/50 rounded-full w-full"></div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-primary-50 to-primary-100 py-12">
+    <div className="min-h-screen bg-gradient-to-br from-primary-50 to-primary-100 py-12 animate-fade-in">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-12">

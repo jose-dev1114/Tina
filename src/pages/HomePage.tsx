@@ -1,15 +1,29 @@
 import { Link } from 'react-router-dom';
 import { Moon, Heart, Star, Users, Zap, Eye, Compass, Leaf, Wind, Sparkles, Cloud, Feather, Flame, ChevronDown, Waves, HeartHandshake, BookHeart } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import OrganicShapes from '../components/OrganicShapes';
 import WaveBottom from '../components/WaveBottom';
 import WaveTop from '../components/WaveTop';
 import AnimatedHeading from '../components/AnimatedHeading';
-import MoonLogo from '../components/MoonLogo';
+// import MoonLogo from '../components/MoonLogo';
 import CardShuffle from '../components/CardShuffle';
+import SkeletonLoader from '../components/SkeletonLoader';
 
 const HomePage = () => {
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  // Scroll to top when component mounts and handle loading
+  useEffect(() => {
+    window.scrollTo(0, 0);
+
+    // Simulate loading time for smooth experience
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 800);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   const toggleFaq = (index: number) => {
     setOpenFaqIndex(openFaqIndex === index ? null : index);
@@ -81,8 +95,13 @@ const HomePage = () => {
     }
   ];
 
+  // Show skeleton loader while loading
+  if (isLoading) {
+    return <SkeletonLoader />;
+  }
+
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen opacity-0 animate-fade-in" style={{ animation: 'fadeIn 0.6s ease-in forwards' }}>
 
       {/* Hero Section - Chico-inspired design with solid lavender background */}
       <section className="relative overflow-hidden bg-primary-300 min-h-screen flex items-center">

@@ -1,7 +1,12 @@
 
 import { BookOpen, Play, Star, Clock, User } from 'lucide-react';
+import { useEffect } from 'react';
 
 const Learn = () => {
+  // Scroll to top when component mounts
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const featuredArticles = [
     {
       id: 1,

@@ -51,9 +51,47 @@ const AstralSign = ({ symbol, sign, delay }: { symbol: string; sign: string; del
 };
 
 const About = () => {
+  const [isLoading, setIsLoading] = useState(true);
+
+  // Scroll to top when component mounts and handle loading
+  useEffect(() => {
+    window.scrollTo(0, 0);
+
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 600);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-primary-50 via-primary-100 to-primary-200 py-12 animate-pulse">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <div className="inline-flex items-center bg-white/60 px-4 py-2 rounded-full w-32 h-8 mx-auto"></div>
+          </div>
+          <div className="bg-white/80 rounded-3xl shadow-2xl overflow-hidden mb-16">
+            <div className="grid lg:grid-cols-2 gap-0">
+              <div className="relative h-[600px] lg:h-auto bg-primary-200/50"></div>
+              <div className="p-8 md:p-12 lg:p-16 flex flex-col justify-center">
+                <div className="h-12 bg-primary-200/50 rounded-lg w-1/2 mb-6"></div>
+                <div className="space-y-4">
+                  <div className="h-4 bg-primary-100/50 rounded w-full"></div>
+                  <div className="h-4 bg-primary-100/50 rounded w-5/6"></div>
+                  <div className="h-4 bg-primary-100/50 rounded w-full"></div>
+                  <div className="h-4 bg-primary-100/50 rounded w-4/5"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-primary-50 via-primary-100 to-primary-200 py-12">
+    <div className="min-h-screen bg-gradient-to-br from-primary-50 via-primary-100 to-primary-200 py-12 animate-fade-in">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header Badge */}
         <div className="text-center mb-12">

@@ -9,6 +9,9 @@ export default function AdminDashboard() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    // Scroll to top when component mounts
+    window.scrollTo(0, 0);
+
     const fetchUsers = async () => {
       try {
         setLoading(true);

@@ -12,9 +12,9 @@ const Footer = () => {
             <div className="flex items-center space-x-4 mb-4">
               <div className="relative">
                 <img
-                  src="/logo.jpg"
+                  src="/logo.png"
                   alt="Our Healing Practices Logo"
-                  className="w-14 h-14 object-contain rounded-full"
+                  className="w-20 h-20 object-contain rounded-full"
                 />
               </div>
               <div>
