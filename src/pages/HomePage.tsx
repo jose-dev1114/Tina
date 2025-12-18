@@ -32,22 +32,26 @@ const HomePage = () => {
     {
       icon: Waves,
       title: "Lunar-Aligned Healing",
-      description: "Meditations synchronized with moon phases for deeper spiritual connection"
+      description: "Meditations synchronized with moon phases for deeper spiritual connection",
+      route: "/shop"
     },
     {
       icon: HeartHandshake,
       title: "Personalized to Your Soul",
-      description: "Each practice tailored to your unique Sun and Moon sign combination"
+      description: "Each practice tailored to your unique Sun and Moon sign combination",
+      route: "/quiz"
     },
     {
       icon: BookHeart,
       title: "Ancient Wisdom, Modern Practice",
-      description: "Yoga Nidra techniques enhanced with astrological insights"
+      description: "Yoga Nidra techniques enhanced with astrological insights",
+      route: "/learn"
     },
     {
       icon: Users,
       title: "Sacred Community",
-      description: "Join a supportive circle of like-minded souls on their healing journey"
+      description: "Join a supportive circle of like-minded souls on their healing journey",
+      route: "/community"
     }
   ];
 
@@ -256,7 +260,7 @@ const HomePage = () => {
 
               return (
                 <div key={index} className={`${colorScheme.bg} rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border ${colorScheme.border}`}>
-                  <div className="text-center">
+                  <div className="text-center flex flex-col h-full">
                     <div className="text-sm font-medium text-primary-500 mb-2">Sacred Practice</div>
                     <h3 className="text-2xl font-serif font-bold text-primary-800 mb-6">{benefit.title}</h3>
 
@@ -267,11 +271,14 @@ const HomePage = () => {
                       </div>
                     </div>
 
-                    <p className="text-primary-600 leading-relaxed mb-6">{benefit.description}</p>
+                    <p className="text-primary-600 leading-relaxed mb-6 flex-grow">{benefit.description}</p>
 
-                    <button className="w-full bg-primary-800 text-white py-4 rounded-full font-medium text-lg hover:bg-primary-700 transition-colors duration-300 shadow-lg">
+                    <Link
+                      to={benefit.route}
+                      className="block w-full bg-primary-800 text-white py-4 rounded-full font-medium text-lg hover:bg-primary-700 transition-colors duration-300 shadow-lg mt-auto"
+                    >
                       EXPERIENCE NOW
-                    </button>
+                    </Link>
                   </div>
                 </div>
               );
@@ -280,7 +287,6 @@ const HomePage = () => {
 
           {/* Bottom CTA */}
           <div className="text-center mt-16">
-            <p className="text-primary-600 mb-6">Start your collection</p>
             <Link
               to="/shop"
               className="inline-flex items-center bg-white text-primary-700 px-8 py-4 rounded-full font-medium text-lg hover:bg-primary-50 transition-all duration-300 shadow-lg border border-primary-200"
@@ -381,37 +387,26 @@ const HomePage = () => {
             </div>
 
             {/* Right side - Visual element */}
-            <div className="relative">
-              <div className="relative">
-                {/* Main meditation container mockup */}
-                <div className="w-80 h-96 bg-white/90 backdrop-blur-sm rounded-[2.5rem] shadow-xl hover:shadow-2xl transform rotate-3 hover:rotate-0 transition-all duration-700 ease-out mx-auto group">
-                  <div className="h-full bg-gradient-to-br from-primary-500 via-primary-600 to-primary-700 rounded-[2.5rem] p-10 flex flex-col items-center justify-center relative overflow-hidden">
-                    {/* Subtle animated background glow */}
-                    <div className="absolute inset-0 bg-gradient-to-tr from-white/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+            <div className="relative flex items-end">
+              {/* Single beautiful Lunar Nidra image - bottom-aligned with FAQ cards */}
+              <div className="relative rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-700 group w-full">
+                {/* Beautiful night meditation background image */}
+                <img
+                  src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=1200&auto=format&fit=crop"
+                  alt="Peaceful nighttime Lunar Nidra meditation practice"
+                  className="w-full h-[480px] object-cover object-bottom group-hover:scale-105 transition-transform duration-700"
+                />
 
-                    {/* Icon with smooth animation */}
-                    <div className="relative w-24 h-24 bg-white/95 backdrop-blur-sm rounded-full flex items-center justify-center mb-8 shadow-lg group-hover:shadow-xl group-hover:scale-110 transition-all duration-500">
-                      <Moon className="h-12 w-12 text-primary-600 group-hover:text-primary-700 transition-colors duration-500" />
-                    </div>
+                {/* Gradient overlay for text readability */}
+                <div className="absolute inset-0 bg-gradient-to-b from-primary-900/50 via-primary-800/60 to-primary-900/80"></div>
 
-                    <h3 className="text-3xl font-serif font-bold text-white mb-3 group-hover:scale-105 transition-transform duration-500">Lunar Nidra</h3>
-                    <p className="text-white/90 text-center text-base mb-8 leading-relaxed">Personalized Sacred Practice</p>
+                {/* Subtle animated glow on hover */}
+                <div className="absolute inset-0 bg-gradient-to-tr from-white/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
 
-                    <div className="bg-white/25 backdrop-blur-md rounded-full px-8 py-3 group-hover:bg-white/35 transition-all duration-500 shadow-lg">
-                      <span className="text-white text-sm font-semibold tracking-wide">45 min journey</span>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Floating meditation pod */}
-                <div className="absolute -bottom-8 -left-8 w-32 h-40 bg-white rounded-2xl shadow-xl transform -rotate-12 hover:rotate-0 transition-transform duration-500">
-                  <div className="h-full bg-gradient-to-br from-primary-100 to-primary-200 rounded-2xl p-4 flex flex-col items-center justify-center">
-                    <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center mb-3 shadow-md">
-                      <Star className="h-6 w-6 text-primary-500" />
-                    </div>
-                    <h4 className="text-sm font-serif font-bold text-primary-800 text-center">Solar Practice</h4>
-                    <p className="text-xs text-primary-600 text-center">Morning ritual</p>
-                  </div>
+                {/* Content overlay - centered */}
+                <div className="absolute inset-0 flex flex-col items-center justify-center p-8 text-center">
+                  <h3 className="text-5xl font-serif font-bold text-white mb-4 drop-shadow-2xl">Lunar Nidra</h3>
+                  <p className="text-white/95 text-xl leading-relaxed drop-shadow-lg">Personalized Sacred Practice</p>
                 </div>
               </div>
             </div>

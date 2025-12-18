@@ -1,12 +1,14 @@
 import { useEffect, useState } from 'react';
 import { useAuth } from '../hooks/useClerkAuth';
-import { Moon, Sun, Star, Calendar, MapPin, Clock, ArrowRight } from 'lucide-react';
+import { Moon, Sun, Star, Calendar, MapPin, Clock, ArrowRight, Download } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
 
 export default function Dashboard() {
   const { userProfile, loading } = useAuth();
   const navigate = useNavigate();
   const [chartLoading, setChartLoading] = useState(true);
+  const [downloading, setDownloading] = useState(false);
 
   useEffect(() => {
     // Scroll to top when component mounts
@@ -17,6 +19,53 @@ export default function Dashboard() {
       setChartLoading(false);
     }
   }, [userProfile?.birthChartData?.chartUrl]);
+
+  // Download birth chart as PNG
+  const handleDownloadChart = async () => {
+    const chartUrl = userProfile?.birthChartData?.chartUrl;
+
+    if (!chartUrl) {
+      toast.error('Birth chart image not available');
+      console.error('❌ No chart URL found');
+      return;
+    }
+
+    try {
+      setDownloading(true);
+      console.log('📥 Downloading chart from:', chartUrl);
+
+      // Fetch the image
+      const response = await fetch(chartUrl);
+      if (!response.ok) {
+        throw new Error('Failed to fetch chart image');
+      }
+
+      // Convert to blob
+      const blob = await response.blob();
+
+      // Create download link
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `birth-chart-${userProfile?.birthDate || 'chart'}.png`;
+
+      // Trigger download
+      document.body.appendChild(link);
+      link.click();
+
+      // Cleanup
+      document.body.removeChild(link);
+      window.URL.revokeObjectURL(url);
+
+      toast.success('Birth chart downloaded successfully! 🎉');
+      console.log('✅ Chart downloaded successfully');
+    } catch (error) {
+      console.error('❌ Error downloading chart:', error);
+      toast.error('Failed to download chart. Please try again.');
+    } finally {
+      setDownloading(false);
+    }
+  };
 
   if (loading) {
     return (
@@ -190,11 +239,31 @@ export default function Dashboard() {
           </div>
         </div>
 
-        {/* CTA Button */}
-        <div className="mt-12 text-center">
+        {/* CTA Buttons */}
+        <div className="mt-12 flex flex-col sm:flex-row gap-4 justify-center items-center">
+          {/* Download Chart Button */}
+          <button
+            onClick={handleDownloadChart}
+            disabled={downloading || !chartUrl}
+            className="bg-gradient-to-r from-green-600 to-green-700 text-white px-8 py-4 rounded-full font-semibold hover:shadow-lg transition-all duration-300 text-lg flex items-center justify-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            {downloading ? (
+              <>
+                <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
+                <span>Downloading...</span>
+              </>
+            ) : (
+              <>
+                <Download className="h-5 w-5" />
+                <span>Download Birth Chart</span>
+              </>
+            )}
+          </button>
+
+          {/* Explore Meditations Button */}
           <button
             onClick={() => navigate('/meditations')}
-            className="bg-gradient-to-r from-primary-600 to-primary-700 text-white px-8 py-4 rounded-full font-semibold hover:shadow-lg transition-all duration-300 text-lg flex items-center justify-center space-x-2 mx-auto"
+            className="bg-gradient-to-r from-primary-600 to-primary-700 text-white px-8 py-4 rounded-full font-semibold hover:shadow-lg transition-all duration-300 text-lg flex items-center justify-center space-x-2"
           >
             <span>Explore Personalized Meditations</span>
             <ArrowRight className="h-5 w-5" />

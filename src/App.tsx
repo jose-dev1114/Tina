@@ -12,10 +12,12 @@ import Dashboard from './pages/Dashboard';
 import Shop from './pages/Shop';
 import Checkout from './pages/Checkout';
 import Learn from './pages/Learn';
+import Article from './pages/Article';
 import Community from './pages/Community';
 import About from './pages/About';
 import Coaching from './pages/Coaching';
 import Profile from './pages/Profile';
+import { articles } from './data/articles';
 
 // Import your publishable key
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
@@ -60,6 +62,7 @@ function App() {
                 <Route path="/shop" element={<Shop />} />
                 <Route path="/checkout" element={<Checkout />} />
                 <Route path="/learn" element={<Learn />} />
+                <Route path="/learn/:slug" element={<Article articles={articles} />} />
                 <Route path="/community" element={<Community />} />
                 <Route path="/about" element={<About />} />
                 <Route path="/coaching" element={<Coaching />} />

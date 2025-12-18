@@ -1,6 +1,7 @@
 
 import { BookOpen, Play, Star, Clock, User } from 'lucide-react';
 import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 const Learn = () => {
   // Scroll to top when component mounts
@@ -10,6 +11,7 @@ const Learn = () => {
   const featuredArticles = [
     {
       id: 1,
+      slug: "what-is-yoga-nidra",
       title: "What is Yoga Nidra? A Complete Guide to Yogic Sleep",
       excerpt: "Discover the ancient practice of conscious sleep and how it can transform your life through deep relaxation and healing.",
       category: "Meditation",
@@ -20,6 +22,7 @@ const Learn = () => {
     },
     {
       id: 2,
+      slug: "moon-sign-sleep-patterns",
       title: "How Your Moon Sign Affects Your Sleep Patterns",
       excerpt: "Learn how lunar energy influences your rest cycles and discover personalized sleep practices based on your Moon sign.",
       category: "Astrology",
@@ -29,6 +32,7 @@ const Learn = () => {
     },
     {
       id: 3,
+      slug: "sacred-sleep-space",
       title: "Creating a Sacred Sleep Space for Deep Rest",
       excerpt: "Transform your bedroom into a sanctuary that supports profound relaxation and spiritual connection.",
       category: "Spiritual Growth",
@@ -40,36 +44,42 @@ const Learn = () => {
 
   const allArticles = [
     {
+      slug: "lunar-nidra-vs-meditation",
       title: "Lunar Nidra vs Traditional Meditation: What's the Difference?",
       category: "Meditation",
       readTime: "10 min read",
       excerpt: "Understanding the unique benefits of astrologically-aligned meditation practices."
     },
     {
+      slug: "astral-projection-science",
       title: "The Science Behind Astral Projection During Yoga Nidra",
       category: "Sleep Science",
       readTime: "15 min read",
       excerpt: "Explore the neuroscience of consciousness during the liminal state."
     },
     {
+      slug: "calculate-moon-sign",
       title: "How to Calculate Your Moon Sign (Free Guide)",
       category: "Astrology",
       readTime: "5 min read",
       excerpt: "Step-by-step instructions for finding your lunar placement."
     },
     {
+      slug: "cancer-moon-healing",
       title: "Emotional Healing Through Cancer Moon Meditations",
       category: "Spiritual Growth",
       readTime: "8 min read",
       excerpt: "Special considerations for water sign emotional processing."
     },
     {
+      slug: "fire-sign-meditation",
       title: "Fire Sign Meditation: Working with Aries, Leo, and Sagittarius Energy",
       category: "Astrology",
       readTime: "12 min read",
       excerpt: "Techniques for channeling fiery energy into peaceful practice."
     },
     {
+      slug: "intention-setting-meditation",
       title: "The Role of Intention Setting in Personalized Meditation",
       category: "Meditation",
       readTime: "7 min read",
@@ -153,9 +163,12 @@ const Learn = () => {
                 <p className="text-gray-600 mb-6 leading-relaxed">
                   {featuredArticles[0].excerpt}
                 </p>
-                <button className="bg-gradient-to-r from-primary-700 to-primary-600 text-white px-8 py-3 rounded-full font-medium hover:shadow-lg transition-all duration-300 self-start">
+                <Link
+                  to={`/learn/${featuredArticles[0].slug}`}
+                  className="bg-gradient-to-r from-primary-700 to-primary-600 text-white px-8 py-3 rounded-full font-medium hover:shadow-lg transition-all duration-300 self-start inline-block"
+                >
                   Read Article
-                </button>
+                </Link>
               </div>
             </div>
           </div>
@@ -224,9 +237,12 @@ const Learn = () => {
                 </div>
                 <h3 className="text-xl font-semibold text-primary-700 mb-3 leading-tight">{article.title}</h3>
                 <p className="text-gray-600 text-sm mb-4 leading-relaxed">{article.excerpt}</p>
-                <button className="text-primary-700 hover:text-primary-900 font-medium text-sm">
+                <Link
+                  to={`/learn/${article.slug}`}
+                  className="text-primary-700 hover:text-primary-900 font-medium text-sm"
+                >
                   Read More →
-                </button>
+                </Link>
               </div>
             </div>
           ))}
@@ -242,9 +258,12 @@ const Learn = () => {
               </div>
               <h3 className="text-xl font-semibold text-primary-700 mb-3 leading-tight">{article.title}</h3>
               <p className="text-gray-600 text-sm mb-4 leading-relaxed">{article.excerpt}</p>
-              <button className="text-primary-700 hover:text-primary-900 font-medium text-sm">
+              <Link
+                to={`/learn/${article.slug}`}
+                className="text-primary-700 hover:text-primary-900 font-medium text-sm"
+              >
                 Read More →
-              </button>
+              </Link>
             </div>
           ))}
         </div>

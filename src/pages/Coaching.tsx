@@ -168,11 +168,17 @@ const Coaching = () => {
                   <span>Delivery: 2–3 weeks</span>
                 </div>
 
-                <button className="w-full bg-gradient-to-r from-yellow-400 to-orange-500 text-white py-4 rounded-full font-semibold hover:shadow-xl hover:scale-105 transition-all duration-300">
-                  Purchase Now
-                </button>
+                <a
+                  href="https://calendly.com/tinamaat3/new-meeting"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full bg-gradient-to-r from-yellow-400 to-orange-500 text-white py-4 rounded-full font-semibold hover:shadow-xl hover:scale-105 transition-all duration-300 flex items-center justify-center space-x-2"
+                >
+                  <Calendar className="h-5 w-5" />
+                  <span>Book Now</span>
+                </a>
 
-                <p className="text-xs text-center text-gray-500 mt-4">Digital product • Stripe checkout</p>
+                <p className="text-xs text-center text-gray-500 mt-4">Schedule via Calendly • Personalized recording</p>
               </div>
             </div>
 
@@ -221,11 +227,17 @@ const Coaching = () => {
                   </ul>
                 </div>
 
-                <button className="w-full bg-gradient-to-r from-primary-600 to-primary-700 text-white py-4 rounded-full font-semibold hover:shadow-xl hover:scale-105 transition-all duration-300">
-                  Book First Session
-                </button>
+                <a
+                  href="https://calendly.com/tinamaat3/new-meeting"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full bg-gradient-to-r from-primary-600 to-primary-700 text-white py-4 rounded-full font-semibold hover:shadow-xl hover:scale-105 transition-all duration-300 flex items-center justify-center space-x-2"
+                >
+                  <Calendar className="h-5 w-5" />
+                  <span>Book First Session</span>
+                </a>
 
-                <p className="text-xs text-center text-gray-500 mt-4">Schedule via booking tool • Zoom sessions</p>
+                <p className="text-xs text-center text-gray-500 mt-4">Schedule via Calendly • Zoom sessions</p>
               </div>
             </div>
 
@@ -275,11 +287,17 @@ const Coaching = () => {
                   </p>
                 </div>
 
-                <button className="w-full bg-gradient-to-r from-indigo-500 to-purple-600 text-white py-4 rounded-full font-semibold hover:shadow-xl hover:scale-105 transition-all duration-300">
-                  Purchase Now
-                </button>
+                <a
+                  href="https://calendly.com/tinamaat3/new-meeting"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full bg-gradient-to-r from-indigo-500 to-purple-600 text-white py-4 rounded-full font-semibold hover:shadow-xl hover:scale-105 transition-all duration-300 flex items-center justify-center space-x-2"
+                >
+                  <Calendar className="h-5 w-5" />
+                  <span>Book Now</span>
+                </a>
 
-                <p className="text-xs text-center text-gray-500 mt-4">Digital product • Survey form after checkout</p>
+                <p className="text-xs text-center text-gray-500 mt-4">Schedule via Calendly • Personalized Lunar Nidra</p>
               </div>
             </div>
           </div>
@@ -407,14 +425,22 @@ const Coaching = () => {
               and take the next step in your sacred journey.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-6">
-              <button className="bg-white text-primary-700 px-8 py-4 rounded-full font-medium text-lg hover:bg-primary-50 transition-colors duration-300 flex items-center space-x-2">
+              <a
+                href="https://calendly.com/tinamaat3/new-meeting"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-white text-primary-700 px-8 py-4 rounded-full font-medium text-lg hover:bg-primary-50 transition-colors duration-300 flex items-center space-x-2"
+              >
                 <Calendar className="h-5 w-5" />
                 <span>Book Your Session</span>
-              </button>
-              <button className="flex items-center space-x-2 text-primary-100 hover:text-white transition-colors duration-300">
+              </a>
+              <a
+                href="mailto:tina@lunarnidra.com"
+                className="flex items-center space-x-2 text-primary-100 hover:text-white transition-colors duration-300"
+              >
                 <MessageCircle className="h-5 w-5" />
                 <span>Have questions? Message Tina</span>
-              </button>
+              </a>
             </div>
             <p className="text-sm text-primary-100">
               Sessions are held in sacred confidence • All calls recorded for your reference

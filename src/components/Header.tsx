@@ -1,10 +1,39 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useAuth } from '@clerk/clerk-react';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, ShoppingCart } from 'lucide-react';
 import SignInButton from './auth/SignInButton';
 import SignUpButton from './auth/SignUpButton';
 import UserButton from './auth/UserButton';
+import { useCart } from '../contexts/CartContext';
+
+// Cart button component - Amazon inspired
+const CartButton = () => {
+  const { cart } = useCart();
+  const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+
+  return (
+    <Link
+      to="/checkout"
+      className="relative flex items-center space-x-1 px-3 py-2 rounded-lg border-2 border-primary-600 hover:border-primary-700 hover:bg-primary-50 transition-all duration-200 group"
+    >
+      {/* Cart Icon with Badge */}
+      <div className="relative">
+        <ShoppingCart className="h-6 w-6 text-primary-700 group-hover:text-primary-800 transition-colors" strokeWidth={2.5} />
+        {/* Item count badge - positioned like Amazon */}
+        {totalItems > 0 && (
+          <div className="absolute -top-2 -right-2 bg-primary-600 text-white text-xs font-bold rounded-full min-w-[18px] h-[18px] flex items-center justify-center px-1 shadow-md">
+            {totalItems}
+          </div>
+        )}
+      </div>
+      {/* Cart Text */}
+      <div className="flex flex-col items-start leading-none">
+        <span className="text-xs text-primary-600 font-medium">Cart</span>
+      </div>
+    </Link>
+  );
+};
 
 // Auth buttons component
 const AuthButtons = () => {
@@ -169,9 +198,10 @@ const Header = () => {
             </div>
           </nav>
 
-          {/* Authentication Buttons */}
-          <div className="hidden lg:flex items-center space-x-4">
+          {/* Authentication & Cart Buttons */}
+          <div className="hidden lg:flex items-center space-x-3">
             <AuthButtons />
+            <CartButton />
           </div>
 
           {/* Mobile menu button */}

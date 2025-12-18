@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
-import { Star, Moon, Sun, Download, ShoppingCart, X } from 'lucide-react';
+import { Star, Moon, Sun, Download, ShoppingCart, X, Loader2 } from 'lucide-react';
 import { geocodeBirthPlace } from '../utils/geocoding';
 import { useAuth } from '../hooks/useClerkAuth';
 import SignUpButton from '../components/auth/SignUpButton';
 import SignInButton from '../components/auth/SignInButton';
+import toast from 'react-hot-toast';
 
 interface QuizData {
   birthDate: string;
@@ -88,7 +89,7 @@ const AstroQuiz = () => {
           }, 1000);
         } catch (error) {
           console.error('❌ Error saving birth data after signup:', error);
-          alert('Error saving your birth information. Please try again.');
+          toast.error('Error saving your birth information. Please try again.');
         }
       }
     };
@@ -140,7 +141,7 @@ const AstroQuiz = () => {
       // Validate required fields
       if (!quizData.birthDate || !quizData.birthPlace) {
         console.warn('⚠️ Missing required fields: Birth Date and Birth Place are required');
-        alert('Please fill in your Birth Date and Birth Place');
+        toast.error('Please fill in your Birth Date and Birth Place');
         return;
       }
 
@@ -233,7 +234,7 @@ const AstroQuiz = () => {
     } catch (error) {
       console.error('❌ Error in handleSubmit:', error);
       setIsSubmitting(false);
-      alert('Error processing your birth information. Please check the console for details.');
+      toast.error('Error processing your birth information. Please check the console for details.');
     }
   };
 
@@ -510,17 +511,18 @@ const AstroQuiz = () => {
                     type="date"
                     value={quizData.birthDate}
                     onChange={(e) => setQuizData(prev => ({ ...prev, birthDate: e.target.value }))}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-200 hover:border-primary-300"
+                    max={new Date().toISOString().split('T')[0]}
                   />
                 </div>
-                
+
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">Birth Time (if known)</label>
                   <input
                     type="time"
                     value={quizData.birthTime}
                     onChange={(e) => setQuizData(prev => ({ ...prev, birthTime: e.target.value }))}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-200 hover:border-primary-300"
                   />
                   <p className="text-sm text-gray-500 mt-1">Birth time helps us be more accurate, but isn't required</p>
                 </div>
@@ -529,10 +531,10 @@ const AstroQuiz = () => {
                   <label className="block text-sm font-medium text-gray-700 mb-2">Birth Place</label>
                   <input
                     type="text"
-                    placeholder="City, Country"
+                    placeholder="e.g., New York, USA"
                     value={quizData.birthPlace}
                     onChange={(e) => setQuizData(prev => ({ ...prev, birthPlace: e.target.value }))}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-200 hover:border-primary-300"
                   />
                 </div>
               </div>
@@ -661,9 +663,11 @@ const AstroQuiz = () => {
                   setCurrentStep(Math.min(4, currentStep + 1));
                 }
               }}
-              className="bg-gradient-to-r from-primary-700 to-primary-600 text-white px-8 py-3 rounded-full font-medium hover:shadow-lg transition-all duration-300"
+              disabled={isSubmitting}
+              className="bg-gradient-to-r from-primary-700 to-primary-600 text-white px-8 py-3 rounded-full font-medium hover:shadow-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center space-x-2"
             >
-              {currentStep === 4 ? 'Reveal My Meditations' : 'Continue →'}
+              {isSubmitting && <Loader2 className="h-5 w-5 animate-spin" />}
+              <span>{isSubmitting ? 'Processing...' : currentStep === 4 ? 'Reveal My Meditations' : 'Continue →'}</span>
             </button>
           </div>
         </div>

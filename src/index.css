@@ -67,3 +67,40 @@
     animation: fadeIn 0.6s ease-in forwards;
   }
 }
+
+/* Article content styling */
+.article-content p {
+  @apply mb-6 text-gray-700 leading-relaxed;
+}
+
+.article-content h2 {
+  @apply text-3xl font-serif font-bold text-primary-700 mt-8 mb-4;
+}
+
+.article-content h3 {
+  @apply text-2xl font-serif font-semibold text-primary-600 mt-6 mb-3;
+}
+
+.article-content ul {
+  @apply list-disc pl-6 mb-6 space-y-2 text-gray-700;
+}
+
+.article-content ol {
+  @apply list-decimal pl-6 mb-6 space-y-2 text-gray-700;
+}
+
+.article-content li {
+  @apply text-gray-700 leading-relaxed;
+}
+
+.article-content strong {
+  @apply font-semibold text-gray-900;
+}
+
+.article-content em {
+  @apply italic;
+}
+
+.article-content a {
+  @apply text-primary-700 hover:text-primary-900 underline;
+}
