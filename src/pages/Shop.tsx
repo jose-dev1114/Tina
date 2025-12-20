@@ -13,6 +13,7 @@ const Shop = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [currentRecording, setCurrentRecording] = useState<{ title: string; fileName: string } | null>(null);
   const { user } = useUser();
+  const [expandedDescriptions, setExpandedDescriptions] = useState<Set<string>>(new Set());
 
   // Scroll to top when component mounts and handle loading
   useEffect(() => {
@@ -428,6 +429,22 @@ const Shop = () => {
     return cart.some(item => item.product.id === productId);
   };
 
+  const toggleDescription = (productId: string) => {
+    setExpandedDescriptions(prev => {
+      const newSet = new Set(prev);
+      if (newSet.has(productId)) {
+        newSet.delete(productId);
+      } else {
+        newSet.add(productId);
+      }
+      return newSet;
+    });
+  };
+
+  const isDescriptionExpanded = (productId: string) => {
+    return expandedDescriptions.has(productId);
+  };
+
   if (isLoading) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-primary-50 to-primary-100 py-12 animate-pulse">
@@ -731,9 +748,26 @@ const Shop = () => {
                   {product.name}
                 </h3>
 
-                <p className="text-gray-600 mb-5 text-sm leading-relaxed line-clamp-3">
-                  {product.description}
-                </p>
+                <div className="mb-5">
+                  <p className={`text-gray-600 text-sm leading-relaxed transition-all duration-300 ${
+                    isDescriptionExpanded(product.id) ? '' : 'line-clamp-3'
+                  }`}>
+                    {product.description}
+                  </p>
+                  {product.description.length > 150 && (
+                    <button
+                      onClick={() => toggleDescription(product.id)}
+                      className="text-primary-600 hover:text-primary-700 text-sm font-medium mt-2 flex items-center space-x-1 transition-colors duration-200"
+                    >
+                      <span>{isDescriptionExpanded(product.id) ? 'Read Less' : 'Read More'}</span>
+                      <span className={`transform transition-transform duration-200 ${
+                        isDescriptionExpanded(product.id) ? 'rotate-180' : ''
+                      }`}>
+                        ▼
+                      </span>
+                    </button>
+                  )}
+                </div>
 
                 {/* Product Details */}
                 <div className="space-y-2 mb-6">
