@@ -4,6 +4,7 @@ import toast from 'react-hot-toast';
 import { useCart } from '../contexts/CartContext';
 import { Product } from '../types/database';
 import AudioPlayer from '../components/AudioPlayer';
+import { useUser } from '@clerk/clerk-react';
 
 const Shop = () => {
   const [selectedFilter, setSelectedFilter] = useState('all');
@@ -11,6 +12,7 @@ const Shop = () => {
   const { addToCart, cart } = useCart();
   const [isLoading, setIsLoading] = useState(true);
   const [currentRecording, setCurrentRecording] = useState<{ title: string; fileName: string } | null>(null);
+  const { user } = useUser();
 
   // Scroll to top when component mounts and handle loading
   useEffect(() => {
@@ -664,7 +666,22 @@ const Shop = () => {
 
                   {/* Play Button - Free for All */}
                   <button
-                    onClick={() => setCurrentRecording({ title: recording.title, fileName: recording.fileName })}
+                    onClick={() => {
+                      if (!user) {
+                        toast.error('Please sign in to listen to meditations', {
+                          duration: 3000,
+                          icon: '🔒',
+                          style: {
+                            borderRadius: '12px',
+                            background: '#333',
+                            color: '#fff',
+                            padding: '16px',
+                          },
+                        });
+                        return;
+                      }
+                      setCurrentRecording({ title: recording.title, fileName: recording.fileName });
+                    }}
                     className="w-full bg-gradient-to-r from-emerald-600 to-teal-500 text-white py-3 rounded-2xl font-bold text-sm hover:from-emerald-700 hover:to-teal-600 transition-all duration-300 flex items-center justify-center space-x-2 shadow-lg hover:shadow-xl hover:scale-105 group/play"
                   >
                     <div className="bg-white/20 p-1 rounded-full group-hover/play:scale-110 transition-transform">

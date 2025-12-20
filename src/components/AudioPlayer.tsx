@@ -26,8 +26,18 @@ const AudioPlayer = ({ title, fileName, onClose }: AudioPlayerProps) => {
   useEffect(() => {
     const fetchAudioUrl = async () => {
       if (!user) {
-        setError('Please sign in to listen');
-        setLoading(false);
+        // User not signed in - close player and show toast
+        toast.error('Please sign in to listen to meditations', {
+          duration: 3000,
+          icon: '🔒',
+          style: {
+            borderRadius: '12px',
+            background: '#333',
+            color: '#fff',
+            padding: '16px',
+          },
+        });
+        onClose();
         return;
       }
 
@@ -39,14 +49,22 @@ const AudioPlayer = ({ title, fileName, onClose }: AudioPlayerProps) => {
       } catch (err) {
         console.error('Error fetching audio URL:', err);
         setError('Failed to load audio. Please try again.');
-        toast.error('Failed to load audio');
+        toast.error('Failed to load audio', {
+          duration: 3000,
+          style: {
+            borderRadius: '12px',
+            background: '#ef4444',
+            color: '#fff',
+            padding: '16px',
+          },
+        });
       } finally {
         setLoading(false);
       }
     };
 
     fetchAudioUrl();
-  }, [fileName, user]);
+  }, [fileName, user, onClose]);
 
   // Setup audio event listeners
   useEffect(() => {
