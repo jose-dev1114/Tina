@@ -9,6 +9,7 @@ import AdminPanel from './components/AdminPanel';
 import HomePage from './pages/HomePage';
 import AstroQuiz from './pages/AstroQuiz';
 import Dashboard from './pages/Dashboard';
+import LunarPortal from './pages/LunarPortal';
 import Shop from './pages/Shop';
 import Checkout from './pages/Checkout';
 import Learn from './pages/Learn';
@@ -59,6 +60,7 @@ function App() {
                 <Route path="/" element={<HomePage />} />
                 <Route path="/quiz" element={<AstroQuiz />} />
                 <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/portal" element={<LunarPortal />} />
                 <Route path="/shop" element={<Shop />} />
                 <Route path="/checkout" element={<Checkout />} />
                 <Route path="/learn" element={<Learn />} />

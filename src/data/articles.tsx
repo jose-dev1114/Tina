@@ -383,18 +383,9 @@ export const articles = {
           If you don't know your exact birth time, check your birth certificate, ask family members, or contact the hospital where you were born. Even being off by an hour can change your Moon sign, as the Moon moves through the zodiac quickly, changing signs approximately every 2.5 days.
         </p>
 
-        <h2 className="text-3xl font-serif font-bold text-primary-700 mt-8 mb-4">Using Online Calculators</h2>
+        <h2 className="text-3xl font-serif font-bold text-primary-700 mt-8 mb-4">We have our own calculator!</h2>
         <p className="text-gray-700 leading-relaxed mb-6">
-          The easiest way to find your Moon sign is through a free online birth chart calculator. Reputable sites include:
-        </p>
-        <ul className="list-disc pl-6 mb-6 space-y-2 text-gray-700">
-          <li>Astro.com (Astrodienst)</li>
-          <li>Cafe Astrology</li>
-          <li>Astro-Seek</li>
-          <li>Co-Star</li>
-        </ul>
-        <p className="text-gray-700 leading-relaxed mb-6">
-          Simply enter your birth information, and the calculator will generate your complete natal chart, including your Moon sign. Most calculators will also provide interpretations of your Moon placement.
+          The easiest way to find your Moon sign is through a free online birth chart calculator.
         </p>
 
         <h2 className="text-3xl font-serif font-bold text-primary-700 mt-8 mb-4">Understanding Your Results</h2>

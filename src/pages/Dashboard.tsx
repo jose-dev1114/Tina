@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useAuth } from '../hooks/useClerkAuth';
-import { Moon, Sun, Star, Calendar, MapPin, Clock, ArrowRight, Download } from 'lucide-react';
+import { Moon, Star, Calendar, MapPin, Clock, ArrowRight, Download } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 
@@ -104,8 +104,6 @@ export default function Dashboard() {
   const chartUrl = birthChart?.chartUrl;
   const moonSign = birthChart?.moonSign || userProfile?.moonSign;
   const moonHouse = birthChart?.moonHouse;
-  const sunSign = birthChart?.sunSign || userProfile?.sunSign;
-  const risingSign = birthChart?.risingSign || userProfile?.risingSign;
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-primary-900 via-primary-800 to-primary-900 py-12 px-4">
@@ -146,53 +144,73 @@ export default function Dashboard() {
             </div>
           </div>
 
-          {/* Birth Chart Information */}
-          <div className="space-y-6">
-            {/* Moon Sign Card */}
-            <div className="bg-gradient-to-br from-blue-500/20 to-purple-500/20 backdrop-blur-md rounded-2xl border border-white/20 p-6 shadow-xl hover:shadow-2xl transition-all duration-300">
-              <div className="flex items-center space-x-4 mb-4">
-                <Moon className="h-8 w-8 text-blue-300" />
-                <h2 className="text-2xl font-bold text-white">Moon Sign</h2>
-              </div>
-              <div className="space-y-3">
-                <div className="text-4xl font-bold text-blue-200">{moonSign || 'N/A'}</div>
-                {moonHouse && (
-                  <div className="flex items-center space-x-2 text-white/80">
-                    <span className="text-sm">House:</span>
-                    <span className="text-lg font-semibold text-blue-300">{moonHouse}</span>
-                  </div>
-                )}
-                <p className="text-white/60 text-sm">
-                  Your emotional nature and inner world
-                </p>
-              </div>
+          {/* Moon Sign Card */}
+          <div className="bg-gradient-to-br from-blue-500/20 to-purple-500/20 backdrop-blur-md rounded-2xl border border-white/20 p-8 shadow-xl hover:shadow-2xl transition-all duration-300 flex flex-col justify-center">
+            <div className="flex items-center space-x-4 mb-6">
+              <Moon className="h-12 w-12 text-blue-300" />
+              <h2 className="text-3xl font-bold text-white">Moon Sign</h2>
             </div>
-
-            {/* Sun Sign Card */}
-            <div className="bg-gradient-to-br from-yellow-500/20 to-orange-500/20 backdrop-blur-md rounded-2xl border border-white/20 p-6 shadow-xl hover:shadow-2xl transition-all duration-300">
-              <div className="flex items-center space-x-4 mb-4">
-                <Sun className="h-8 w-8 text-yellow-300" />
-                <h2 className="text-2xl font-bold text-white">Sun Sign</h2>
-              </div>
-              <div className="text-4xl font-bold text-yellow-200">{sunSign || 'N/A'}</div>
-              <p className="text-white/60 text-sm mt-3">
-                Your core identity and life purpose
-              </p>
-            </div>
-
-            {/* Rising Sign Card */}
-            <div className="bg-gradient-to-br from-pink-500/20 to-rose-500/20 backdrop-blur-md rounded-2xl border border-white/20 p-6 shadow-xl hover:shadow-2xl transition-all duration-300">
-              <div className="flex items-center space-x-4 mb-4">
-                <Star className="h-8 w-8 text-pink-300" />
-                <h2 className="text-2xl font-bold text-white">Rising Sign</h2>
-              </div>
-              <div className="text-4xl font-bold text-pink-200">{risingSign || 'N/A'}</div>
-              <p className="text-white/60 text-sm mt-3">
-                How others perceive you
+            <div className="space-y-4">
+              <div className="text-5xl font-bold text-blue-200">{moonSign || 'N/A'}</div>
+              {moonHouse && (
+                <div className="flex items-center space-x-2 text-white/80">
+                  <span className="text-base">House:</span>
+                  <span className="text-2xl font-semibold text-blue-300">{moonHouse}</span>
+                </div>
+              )}
+              <p className="text-white/70 text-base leading-relaxed">
+                Your emotional nature and inner world
               </p>
             </div>
           </div>
         </div>
+
+        {/* Moon Phase Report */}
+        {birthChart?.moonPhaseReport && (
+          <div className="mb-12 bg-gradient-to-br from-indigo-500/20 via-purple-500/20 to-pink-500/20 backdrop-blur-md rounded-2xl border border-white/30 overflow-hidden shadow-2xl">
+            <div className="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 p-6">
+              <div className="flex items-center space-x-3">
+                <Moon className="h-8 w-8 text-white" />
+                <div>
+                  <h2 className="text-2xl font-bold text-white">Your Birth Moon Phase</h2>
+                  <p className="text-white/80 text-sm mt-1">
+                    {birthChart.moonPhaseReport.consideredDate}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="p-8 space-y-6">
+              {/* Moon Phase Name */}
+              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
+                <p className="text-white/60 text-sm mb-2">Moon Phase</p>
+                <p className="text-4xl font-bold text-white">
+                  {birthChart.moonPhaseReport.moonPhase}
+                </p>
+              </div>
+
+              {/* Significance */}
+              {birthChart.moonPhaseReport.significance && (
+                <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
+                  <p className="text-lg font-semibold text-purple-200 mb-3">Significance</p>
+                  <p className="text-white/80 leading-relaxed">
+                    {birthChart.moonPhaseReport.significance}
+                  </p>
+                </div>
+              )}
+
+              {/* Personal Report */}
+              {birthChart.moonPhaseReport.report && (
+                <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
+                  <p className="text-lg font-semibold text-purple-200 mb-3">Your Moon Phase Guidance</p>
+                  <p className="text-white/80 leading-relaxed">
+                    {birthChart.moonPhaseReport.report}
+                  </p>
+                </div>
+              )}
+            </div>
+          </div>
+        )}
 
         {/* Birth Information */}
         <div className="bg-white/10 backdrop-blur-md rounded-2xl border border-white/20 p-8 shadow-xl">

@@ -1,16 +1,17 @@
 import { UserButton as ClerkUserButton } from '@clerk/clerk-react';
+import { Sparkles } from 'lucide-react';
 
 interface UserButtonProps {
   afterSignOutUrl?: string;
   showName?: boolean;
 }
 
-const UserButton = ({ 
+const UserButton = ({
   afterSignOutUrl = '/',
-  showName = false 
+  showName = false
 }: UserButtonProps) => {
   return (
-    <ClerkUserButton 
+    <ClerkUserButton
       afterSignOutUrl={afterSignOutUrl}
       showName={showName}
       appearance={{
@@ -22,7 +23,15 @@ const UserButton = ({
           userButtonPopoverFooter: "hidden" // Hide Clerk branding
         }
       }}
-    />
+    >
+      <ClerkUserButton.MenuItems>
+        <ClerkUserButton.Link
+          label="Lunar Portal"
+          labelIcon={<Sparkles size={16} />}
+          href="/portal"
+        />
+      </ClerkUserButton.MenuItems>
+    </ClerkUserButton>
   );
 };
 

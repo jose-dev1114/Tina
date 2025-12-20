@@ -57,6 +57,13 @@ export interface User {
     moonDegree?: number;
     risingDegree?: number;
     moonPhase?: string;
+    moonPhaseReport?: {
+      consideredDate?: string;
+      moonPhase?: string;
+      significance?: string;
+      report?: string;
+    };
+    moonPhaseError?: string | null;
     rawData?: any;
   };
 

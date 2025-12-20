@@ -57,21 +57,21 @@ const HomePage = () => {
 
   const testimonials = [
     {
-      name: "Sarah M.",
-      sign: "Scorpio Sun, Cancer Moon",
-      text: "This meditation completely transformed my sleep and emotional healing. I finally feel aligned with my true self.",
+      name: "Jodi Anderson",
+      sign: "Community Member",
+      text: "That Yoga Nidra was just what my soul needed to hear tonight, such a powerful and empowering message. My heart thanks you for your beautiful words.",
       image: "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=400"
     },
     {
-      name: "Luna C.",
-      sign: "Pisces Sun, Virgo Moon",
-      text: "The personalized approach made all the difference. I've never experienced such deep, restorative meditation.",
+      name: "Kaarina Venalainen",
+      sign: "Virgo Lunar Eclipse",
+      text: "This was nothing short of pure bliss! You definitely hit the mark of presence and nourishment, all with your delightful voice. I swear I could hear your smile coming through.",
       image: "https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=400"
     },
     {
-      name: "Maya R.",
-      sign: "Leo Sun, Aquarius Moon",
-      text: "Tina's guidance helped me understand my chart on a soul level. The free PDF guide was incredibly insightful.",
+      name: "Community Member",
+      sign: "Full Moon Practice",
+      text: "What a beautiful and relaxing full moon practice. I am very grateful for the blessings you share with us.",
       image: "https://images.pexels.com/photos/1130626/pexels-photo-1130626.jpeg?auto=compress&cs=tinysrgb&w=400"
     }
   ];

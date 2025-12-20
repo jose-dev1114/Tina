@@ -56,45 +56,39 @@ const Community = () => {
 
   const testimonials = [
     {
-      name: "Sarah Chen",
-      role: "Soul Circle Member",
-      text: "This community has become my spiritual home. The live meditations are transformative, and Tina's guidance has helped me understand my chart on a soul level.",
+      name: "Jodi Anderson",
+      role: "Community Member",
+      text: "That Yoga Nidra was just what my soul needed to hear tonight, such a powerful and empowering message. My heart thanks you for your beautiful words.",
       image: "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=400",
-      sign: "Scorpio Sun, Pisces Moon"
+      sign: "Soul Circle Member"
     },
     {
-      name: "Luna Rodriguez",
-      role: "Lunar Priestess Member",
-      text: "The 1:1 sessions with Tina have been life-changing. I'm now teaching Lunar Nidra in my own practice, thanks to the certification program.",
+      name: "Kaarina Venalainen",
+      role: "Virgo Lunar Eclipse Participant",
+      text: "This was nothing short of pure bliss! You definitely hit the mark of presence and nourishment, all with your delightful voice. I swear I could hear your smile coming through.",
       image: "https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=400",
-      sign: "Leo Sun, Cancer Moon"
+      sign: "Community Member"
     },
     {
-      name: "Maya Patel",
-      role: "Moon Circle Member",
-      text: "I love the weekly group meditations! There's something magical about practicing together, even virtually. The community support is incredible.",
+      name: "Community Member",
+      role: "Full Moon Practice",
+      text: "What a beautiful and relaxing full moon practice. I am very grateful for the blessings you share with us.",
       image: "https://images.pexels.com/photos/1385472/pexels-photo-1385472.jpeg?auto=compress&cs=tinysrgb&w=400",
-      sign: "Gemini Sun, Sagittarius Moon"
+      sign: "Lunar Nidra Member"
     }
   ];
 
   const upcomingEvents = [
     {
-      title: "New Moon Manifestation Circle",
-      date: "January 15, 2024",
-      time: "7:00 PM EST",
+      title: "New Moon Manifestation",
+      date: "Saturday January 17",
+      time: "9:00am PST",
       type: "Live Group Meditation"
     },
     {
-      title: "Monthly Q&A with Tina",
-      date: "January 20, 2024",
-      time: "2:00 PM EST",
-      type: "Soul Circle Only"
-    },
-    {
       title: "Full Moon Release Ceremony",
-      date: "January 28, 2024",
-      time: "8:00 PM EST",
+      date: "Saturday January 31",
+      time: "9:00am PST",
       type: "All Members"
     }
   ];

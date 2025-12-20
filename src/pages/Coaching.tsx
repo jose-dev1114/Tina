@@ -17,22 +17,24 @@ const Coaching = () => {
   }, []);
   const testimonials = [
     {
-      name: "Jennifer L.",
-      session: "Deep Soul Alignment",
-      text: "Tina helped me understand why I've been struggling with traditional meditation. My personalized practice has completely transformed my relationship with myself and my spiritual path.",
-      image: "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=400"
+      name: "Jessica M.",
+      session: "2-Month Coaching Program",
+      text: "In just two months of coaching with Tina, I found the more fun, no-limits version of myself. I'm trusting my intuition and confidently speaking up for what I need, especially at work. My 30s feel lighter, and what started as a tough Saturn Return has turned into a time of real growth.",
+      location: "San Francisco",
+      image: "https://images.pexels.com/photos/1181686/pexels-photo-1181686.jpeg?auto=compress&cs=tinysrgb&w=400"
     },
     {
-      name: "Michael R.",
-      session: "Sacred Discovery",
-      text: "In just 30 minutes, Tina gave me more clarity about my purpose than years of therapy. The meditation she recommended has become my daily anchor.",
-      image: "https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&cs=tinysrgb&w=400"
-    },
-    {
-      name: "Diana K.",
-      session: "Spiritual Mentorship",
-      text: "As a fellow healer, I needed someone who could meet me at my level. Tina's depth of knowledge and intuitive insights helped me step into my full power.",
+      name: "Rebecca B.",
+      session: "Astrology Coaching Sessions",
+      text: "I came in curious but skeptical about astrology and left feeling empowered and seen. My sessions with Tina were so much fun! They've helped me understand myself in a way I never expected. I'm so grateful for her insight and guidance.",
+      location: "New York",
       image: "https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=400"
+    },
+    {
+      name: "Jodi Anderson",
+      session: "Yoga Nidra Session",
+      text: "That Yoga Nidra was just what my soul needed to hear tonight, such a powerful and empowering message. My heart thanks you for your beautiful words.",
+      image: "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=400"
     }
   ];
 
@@ -281,12 +283,6 @@ const Coaching = () => {
                   </ul>
                 </div>
 
-                <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-3 mb-6">
-                  <p className="text-xs text-yellow-800">
-                    <strong>📋 Required:</strong> Birth date, time, location, and email (collected via survey after purchase)
-                  </p>
-                </div>
-
                 <a
                   href="https://calendly.com/tinamaat3/new-meeting"
                   target="_blank"
@@ -313,13 +309,16 @@ const Coaching = () => {
             {testimonials.map((testimonial, index) => (
               <div key={index} className="bg-white rounded-xl shadow-lg p-6">
                 <div className="flex items-center mb-4">
-                  <img 
-                    src={testimonial.image} 
-                    alt={testimonial.name} 
+                  <img
+                    src={testimonial.image}
+                    alt={testimonial.name}
                     className="w-12 h-12 rounded-full object-cover mr-4"
                   />
                   <div>
-                    <h4 className="font-semibold text-purple-900">{testimonial.name}</h4>
+                    <h4 className="font-semibold text-purple-900">
+                      {testimonial.name}
+                      {testimonial.location && <span className="font-normal text-gray-600">, {testimonial.location}</span>}
+                    </h4>
                     <p className="text-sm text-purple-600">{testimonial.session}</p>
                   </div>
                 </div>
