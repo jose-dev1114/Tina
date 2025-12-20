@@ -38,7 +38,7 @@ const Learn = () => {
       category: "Spiritual Growth",
       readTime: "6 min read",
       author: "Tina Maat",
-      image: "https://images.pexels.com/photos/1034659/pexels-photo-1034659.jpeg?auto=compress&cs=tinysrgb&w=400"
+      image: "https://images.unsplash.com/photo-1540518614846-7eded433c457?w=400&q=80"
     }
   ];
 
@@ -48,42 +48,48 @@ const Learn = () => {
       title: "Lunar Nidra vs Traditional Meditation: What's the Difference?",
       category: "Meditation",
       readTime: "10 min read",
-      excerpt: "Understanding the unique benefits of astrologically-aligned meditation practices."
+      excerpt: "Understanding the unique benefits of astrologically-aligned meditation practices.",
+      image: "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&q=80"
     },
     {
       slug: "astral-projection-science",
       title: "The Science Behind Astral Projection During Yoga Nidra",
       category: "Sleep Science",
       readTime: "15 min read",
-      excerpt: "Explore the neuroscience of consciousness during the liminal state."
+      excerpt: "Explore the neuroscience of consciousness during the liminal state.",
+      image: "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=400&q=80"
     },
     {
       slug: "calculate-moon-sign",
       title: "How to Calculate Your Moon Sign (Free Guide)",
       category: "Astrology",
       readTime: "5 min read",
-      excerpt: "Step-by-step instructions for finding your lunar placement."
+      excerpt: "Step-by-step instructions for finding your lunar placement.",
+      image: "https://images.unsplash.com/photo-1532693322450-2cb5c511067d?w=400&q=80"
     },
     {
       slug: "cancer-moon-healing",
       title: "Emotional Healing Through Cancer Moon Meditations",
       category: "Spiritual Growth",
       readTime: "8 min read",
-      excerpt: "Special considerations for water sign emotional processing."
+      excerpt: "Special considerations for water sign emotional processing.",
+      image: "https://images.unsplash.com/photo-1505142468610-359e7d316be0?w=400&q=80"
     },
     {
       slug: "fire-sign-meditation",
       title: "Fire Sign Meditation: Working with Aries, Leo, and Sagittarius Energy",
       category: "Astrology",
       readTime: "12 min read",
-      excerpt: "Techniques for channeling fiery energy into peaceful practice."
+      excerpt: "Techniques for channeling fiery energy into peaceful practice.",
+      image: "https://images.unsplash.com/photo-1495567720989-cebdbdd97913?w=400&q=80"
     },
     {
       slug: "intention-setting-meditation",
       title: "The Role of Intention Setting in Personalized Meditation",
       category: "Meditation",
       readTime: "7 min read",
-      excerpt: "How to align your practice with your soul's true desires."
+      excerpt: "How to align your practice with your soul's true desires.",
+      image: "https://images.unsplash.com/photo-1528715471579-d1bcf0ba5e83?w=400&q=80"
     }
   ];
 
@@ -248,22 +254,29 @@ const Learn = () => {
           ))}
           
           {allArticles.map((article, index) => (
-            <div key={index} className="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow duration-300">
-              <div className="flex items-center space-x-4 text-sm text-gray-500 mb-3">
-                <span className="bg-primary-100 text-primary-700 px-3 py-1 rounded-full">{article.category}</span>
-                <span className="flex items-center space-x-1">
-                  <Clock className="h-4 w-4" />
-                  <span>{article.readTime}</span>
-                </span>
+            <div key={index} className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+              <img
+                src={article.image}
+                alt={article.title}
+                className="w-full h-48 object-cover"
+              />
+              <div className="p-6">
+                <div className="flex items-center space-x-4 text-sm text-gray-500 mb-3">
+                  <span className="bg-primary-100 text-primary-700 px-3 py-1 rounded-full">{article.category}</span>
+                  <span className="flex items-center space-x-1">
+                    <Clock className="h-4 w-4" />
+                    <span>{article.readTime}</span>
+                  </span>
+                </div>
+                <h3 className="text-xl font-semibold text-primary-700 mb-3 leading-tight">{article.title}</h3>
+                <p className="text-gray-600 text-sm mb-4 leading-relaxed">{article.excerpt}</p>
+                <Link
+                  to={`/learn/${article.slug}`}
+                  className="text-primary-700 hover:text-primary-900 font-medium text-sm"
+                >
+                  Read More →
+                </Link>
               </div>
-              <h3 className="text-xl font-semibold text-primary-700 mb-3 leading-tight">{article.title}</h3>
-              <p className="text-gray-600 text-sm mb-4 leading-relaxed">{article.excerpt}</p>
-              <Link
-                to={`/learn/${article.slug}`}
-                className="text-primary-700 hover:text-primary-900 font-medium text-sm"
-              >
-                Read More →
-              </Link>
             </div>
           ))}
         </div>
