@@ -107,7 +107,7 @@ const About = () => {
             {/* Left Side - Image */}
             <div className="relative h-[600px] lg:h-auto">
               <img
-                src="https://ourhealingpractices.com/wp-content/uploads/2024/04/DSC03289-scaled.jpg"
+                src="/Tina.webp"
                 alt="Tina"
                 className="w-full h-full object-cover"
               />

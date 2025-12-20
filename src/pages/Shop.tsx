@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
-import { Star, Play, Download, ShoppingCart, Package, Music, Sparkles, Check, Clock, Infinity, Shield, Headphones, Heart } from 'lucide-react';
+import ReactDOM from 'react-dom';
+import { Star, Play, Download, ShoppingCart, Package, Music, Sparkles, Check, Clock, Infinity, Shield, Headphones, Heart, LogIn, X } from 'lucide-react';
 import toast from 'react-hot-toast';
 import { useCart } from '../contexts/CartContext';
 import { Product } from '../types/database';
 import AudioPlayer from '../components/AudioPlayer';
-import { useUser } from '@clerk/clerk-react';
+import { useUser, SignInButton, SignUpButton } from '@clerk/clerk-react';
 
 const Shop = () => {
   const [selectedFilter, setSelectedFilter] = useState('all');
@@ -14,6 +15,7 @@ const Shop = () => {
   const [currentRecording, setCurrentRecording] = useState<{ title: string; fileName: string } | null>(null);
   const { user } = useUser();
   const [expandedDescriptions, setExpandedDescriptions] = useState<Set<string>>(new Set());
+  const [showAuthModal, setShowAuthModal] = useState(false);
 
   // Scroll to top when component mounts and handle loading
   useEffect(() => {
@@ -25,6 +27,12 @@ const Shop = () => {
 
     return () => clearTimeout(timer);
   }, []);
+
+  // Debug modal state
+  useEffect(() => {
+    console.log('showAuthModal:', showAuthModal);
+    console.log('user:', user);
+  }, [showAuthModal, user]);
 
   // Lunar Nidra Recordings - $5/month subscription access
   const lunarNidraRecordings = [
@@ -529,7 +537,7 @@ const Shop = () => {
 
         {/* Free Access Banner for Recordings */}
         {selectedTab === 'recordings' && (
-          <div className="relative bg-gradient-to-br from-emerald-500 via-teal-600 to-cyan-700 rounded-3xl p-8 md:p-10 text-white mb-12 shadow-2xl overflow-hidden">
+          <div className="relative bg-gradient-to-br from-primary-600 via-primary-700 to-purple-800 rounded-3xl p-8 md:p-10 text-white mb-12 shadow-2xl overflow-hidden">
             {/* Decorative Background Elements */}
             <div className="absolute inset-0 opacity-20">
               <div className="absolute top-0 right-0 w-96 h-96 bg-white rounded-full blur-3xl"></div>
@@ -543,13 +551,13 @@ const Shop = () => {
                 <div className="bg-white/15 backdrop-blur-md p-4 rounded-2xl border border-white/20 shadow-xl">
                   <Headphones className="h-10 w-10" />
                 </div>
-                <div className="text-center md:text-left">
-                  <h2 className="text-3xl md:text-4xl font-serif font-bold mb-1">Free Lunar Nidra Library</h2>
+                <div className="text-center">
+                  <h2 className="text-3xl md:text-4xl font-serif font-bold mb-1">Lunar Nidra Library</h2>
                   <p className="text-white/90 text-base font-medium">Complete Moon Phase Collection</p>
                 </div>
               </div>
               <p className="text-base mb-6 max-w-3xl mx-auto text-center text-white/90 leading-relaxed">
-                All guided Lunar Nidra meditations are now completely free! Stream unlimited meditations aligned with every moon phase and astrological sign.
+                Stream guided Lunar Nidra meditations aligned with every moon phase and astrological sign. Experience deep rest and transformation through the lunar cycle.
               </p>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-6 max-w-4xl mx-auto">
               {/* Card 1 - Free */}
@@ -559,11 +567,11 @@ const Shop = () => {
                   <div className="relative inline-block mb-5">
                     <div className="absolute inset-0 bg-white/30 rounded-full blur-lg opacity-50"></div>
                     <div className="relative bg-white/95 w-16 h-16 rounded-full flex items-center justify-center mx-auto shadow-lg">
-                      <Sparkles className="h-7 w-7 text-emerald-600" />
+                      <Sparkles className="h-7 w-7 text-primary-600" />
                     </div>
                   </div>
-                  <div className="text-4xl font-bold mb-1.5 tracking-tight">100%</div>
-                  <div className="text-sm text-white/90 font-semibold">Free Forever</div>
+                  <div className="text-4xl font-bold mb-1.5 tracking-tight">24</div>
+                  <div className="text-sm text-white/90 font-semibold">Moon Phases</div>
                 </div>
               </div>
 
@@ -574,7 +582,7 @@ const Shop = () => {
                   <div className="relative inline-block mb-5">
                     <div className="absolute inset-0 bg-white/30 rounded-full blur-lg opacity-50"></div>
                     <div className="relative bg-white/95 w-16 h-16 rounded-full flex items-center justify-center mx-auto shadow-lg">
-                      <Music className="h-7 w-7 text-emerald-600" />
+                      <Music className="h-7 w-7 text-primary-600" />
                     </div>
                   </div>
                   <div className="text-4xl font-bold mb-1.5 tracking-tight">19+</div>
@@ -589,7 +597,7 @@ const Shop = () => {
                   <div className="relative inline-block mb-5">
                     <div className="absolute inset-0 bg-white/30 rounded-full blur-lg opacity-50"></div>
                     <div className="relative bg-white/95 w-16 h-16 rounded-full flex items-center justify-center mx-auto shadow-lg">
-                      <Infinity className="h-7 w-7 text-emerald-600" />
+                      <Infinity className="h-7 w-7 text-primary-600" />
                     </div>
                   </div>
                   <div className="text-4xl font-bold mb-1.5 tracking-tight">Unlimited</div>
@@ -630,21 +638,37 @@ const Shop = () => {
               >
                 {/* Recording Header with Image */}
                 <div className="relative h-48 overflow-hidden">
-                  {/* Background Image */}
+                  {/* Background Image - Moon phase themed */}
                   <img
                     src={
-                      recording.sign === 'Aries' ? 'https://images.unsplash.com/photo-1518837695005-2083093ee35b?w=800&q=80' : // Fire/Ram - Sunset
-                      recording.sign === 'Taurus' ? 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&q=80' : // Earth/Bull - Rocky landscape
-                      recording.sign === 'Gemini' ? 'https://images.unsplash.com/photo-1534088568595-a066f410bcda?w=800&q=80' : // Air/Twins - Clouds
-                      recording.sign === 'Cancer' ? 'https://images.unsplash.com/photo-1505142468610-359e7d316be0?w=800&q=80' : // Water/Crab - Ocean
-                      recording.sign === 'Leo' ? 'https://images.unsplash.com/photo-1495567720989-cebdbdd97913?w=800&q=80' : // Fire/Lion - Golden sunset
-                      recording.sign === 'Virgo' ? 'https://images.unsplash.com/photo-1511497584788-876760111969?w=800&q=80' : // Earth/Maiden - Green nature
-                      recording.sign === 'Libra' ? 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80' : // Air/Scales - Balanced sky
-                      recording.sign === 'Scorpio' ? 'https://images.unsplash.com/photo-1509773896068-7fd415d91e2e?w=800&q=80' : // Water/Scorpion - Deep ocean
-                      recording.sign === 'Sagittarius' ? 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80' : // Fire/Archer - Mountains
-                      recording.sign === 'Capricorn' ? 'https://images.unsplash.com/photo-1519904981063-b0cf448d479e?w=800&q=80' : // Earth/Goat - Mountain peaks
-                      recording.sign === 'Aquarius' ? 'https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=800&q=80' : // Air/Water bearer - Night sky with stars
-                      'https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800&q=80' // Pisces - Dreamy water
+                      recording.moonPhase === 'Full Moon' ? (
+                        // Full Moon images - bright, prominent full moons
+                        recording.sign === 'Aries' ? 'https://images.unsplash.com/photo-1532693322450-2cb5c511067d?w=800&q=80' : // Red/orange full moon
+                        recording.sign === 'Gemini' ? 'https://images.unsplash.com/photo-1509803874385-db7c23652552?w=800&q=80' : // Bright full moon
+                        recording.sign === 'Capricorn' ? 'https://images.unsplash.com/photo-1506318137071-a8e063b4bec0?w=800&q=80' : // Full moon in night sky
+                        recording.sign === 'Taurus' ? 'https://images.unsplash.com/photo-1517685352821-92cf88aee5a5?w=800&q=80' : // Golden full moon
+                        recording.sign === 'Sagittarius' ? 'https://images.unsplash.com/photo-1495567720989-cebdbdd97913?w=800&q=80' : // Full moon at dusk
+                        recording.sign === 'Libra' ? 'https://images.unsplash.com/photo-1518837695005-2083093ee35b?w=800&q=80' : // Full moon rising
+                        recording.sign === 'Scorpio' ? 'https://images.unsplash.com/photo-1511497584788-876760111969?w=800&q=80' : // Full moon through clouds
+                        recording.sign === 'Aquarius' ? 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80' : // Full moon over landscape
+                        'https://images.unsplash.com/photo-1532693322450-2cb5c511067d?w=800&q=80' // Default full moon
+                      ) : recording.moonPhase === 'New Moon' ? (
+                        // New Moon images - crescent moons prominently featured
+                        recording.sign === 'Cancer' ? 'https://images.unsplash.com/photo-1502134249126-9f3755a50d78?w=800&q=80' : // Crescent moon close-up
+                        recording.sign === 'Gemini' ? 'https://images.unsplash.com/photo-1538370965046-79c0d6907d47?w=800&q=80' : // Thin crescent moon
+                        recording.sign === 'Scorpio' ? 'https://images.unsplash.com/photo-1505506874110-6a7a69069a08?w=800&q=80' : // Crescent moon in dark sky
+                        recording.sign === 'Virgo' ? 'https://images.unsplash.com/photo-1543722530-d2c3201371e7?w=800&q=80' : // Crescent moon with stars
+                        recording.sign === 'Aries' ? 'https://images.unsplash.com/photo-1532693322450-2cb5c511067d?w=800&q=80' : // Moon in night
+                        recording.sign === 'Leo' ? 'https://images.unsplash.com/photo-1509803874385-db7c23652552?w=800&q=80' : // Moon silhouette
+                        recording.sign === 'Libra' ? 'https://images.unsplash.com/photo-1506318137071-a8e063b4bec0?w=800&q=80' : // Moon in starry sky
+                        recording.sign === 'Taurus' ? 'https://images.unsplash.com/photo-1517685352821-92cf88aee5a5?w=800&q=80' : // Moon at twilight
+                        'https://images.unsplash.com/photo-1502134249126-9f3755a50d78?w=800&q=80' // Default crescent moon
+                      ) : (
+                        // Eclipse images - dramatic eclipse photos
+                        recording.sign === 'Virgo' ? 'https://images.unsplash.com/photo-1504333638930-c8787321eee0?w=800&q=80' : // Solar eclipse
+                        recording.sign === 'Pisces' ? 'https://images.unsplash.com/photo-1532693322450-2cb5c511067d?w=800&q=80' : // Lunar eclipse (red moon)
+                        'https://images.unsplash.com/photo-1504333638930-c8787321eee0?w=800&q=80' // Default eclipse
+                      )
                     }
                     alt={`${recording.sign} ${recording.moonPhase}`}
                     className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
@@ -681,31 +705,31 @@ const Shop = () => {
                     </div>
                   </div>
 
-                  {/* Play Button - Free for All */}
-                  <button
-                    onClick={() => {
-                      if (!user) {
-                        toast.error('Please sign in to listen to meditations', {
-                          duration: 3000,
-                          icon: '🔒',
-                          style: {
-                            borderRadius: '12px',
-                            background: '#333',
-                            color: '#fff',
-                            padding: '16px',
-                          },
-                        });
-                        return;
-                      }
-                      setCurrentRecording({ title: recording.title, fileName: recording.fileName });
-                    }}
-                    className="w-full bg-gradient-to-r from-emerald-600 to-teal-500 text-white py-3 rounded-2xl font-bold text-sm hover:from-emerald-700 hover:to-teal-600 transition-all duration-300 flex items-center justify-center space-x-2 shadow-lg hover:shadow-xl hover:scale-105 group/play"
-                  >
-                    <div className="bg-white/20 p-1 rounded-full group-hover/play:scale-110 transition-transform">
-                      <Play className="h-4 w-4 fill-white" />
-                    </div>
-                    <span>Play Free</span>
-                  </button>
+                  {/* Play/Sign In Button */}
+                  {user ? (
+                    <button
+                      onClick={() => setCurrentRecording({ title: recording.title, fileName: recording.fileName })}
+                      className="w-full bg-gradient-to-r from-primary-600 to-primary-500 text-white py-3 rounded-2xl font-bold text-sm hover:from-primary-700 hover:to-primary-600 transition-all duration-300 flex items-center justify-center space-x-2 shadow-lg hover:shadow-xl hover:scale-105 group/play"
+                    >
+                      <div className="bg-white/20 p-1 rounded-full group-hover/play:scale-110 transition-transform">
+                        <Play className="h-4 w-4 fill-white" />
+                      </div>
+                      <span>Stream Now</span>
+                    </button>
+                  ) : (
+                    <button
+                      onClick={() => {
+                        console.log('Button clicked, opening modal');
+                        setShowAuthModal(true);
+                      }}
+                      className="w-full bg-gradient-to-r from-primary-600 to-primary-500 text-white py-3 rounded-2xl font-bold text-sm hover:from-primary-700 hover:to-primary-600 transition-all duration-300 flex items-center justify-center space-x-2 shadow-lg hover:shadow-xl hover:scale-105 group/play"
+                    >
+                      <div className="bg-white/20 p-1 rounded-full group-hover/play:scale-110 transition-transform">
+                        <LogIn className="h-4 w-4" />
+                      </div>
+                      <span>Sign In To Stream</span>
+                    </button>
+                  )}
                 </div>
               </div>
             ))}
@@ -897,6 +921,46 @@ const Shop = () => {
           fileName={currentRecording.fileName}
           onClose={() => setCurrentRecording(null)}
         />
+      )}
+
+      {/* Auth Modal - Using Portal to render at root level */}
+      {showAuthModal && ReactDOM.createPortal(
+        <div
+          className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4"
+          style={{ zIndex: 99999 }}
+          onClick={() => setShowAuthModal(false)}
+        >
+          <div className="bg-white rounded-3xl shadow-2xl max-w-md w-full p-8" onClick={(e) => e.stopPropagation()}>
+            <div className="flex justify-between items-center mb-6">
+              <h2 className="text-2xl font-bold text-gray-900">Welcome to Lunar</h2>
+              <button onClick={() => setShowAuthModal(false)} className="p-2 hover:bg-gray-100 rounded-full">
+                <X className="h-5 w-5" />
+              </button>
+            </div>
+            <p className="text-gray-600 mb-8">Sign in or create an account to start streaming</p>
+
+            <div className="space-y-4">
+              <SignInButton mode="modal" forceRedirectUrl="/shop">
+                <button
+                  onClick={() => setShowAuthModal(false)}
+                  className="w-full bg-gradient-to-r from-primary-600 to-primary-500 text-white py-4 rounded-2xl font-bold hover:from-primary-700 hover:to-primary-600 transition-all"
+                >
+                  Sign In
+                </button>
+              </SignInButton>
+
+              <SignUpButton mode="modal" forceRedirectUrl="/shop">
+                <button
+                  onClick={() => setShowAuthModal(false)}
+                  className="w-full border-2 border-primary-600 text-primary-600 py-4 rounded-2xl font-bold hover:bg-primary-50 transition-all"
+                >
+                  Create Account
+                </button>
+              </SignUpButton>
+            </div>
+          </div>
+        </div>,
+        document.body
       )}
     </div>
   );

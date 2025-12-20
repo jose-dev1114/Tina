@@ -104,18 +104,18 @@ const Community = () => {
           </div>
 
           <h1 className="text-4xl md:text-5xl font-serif font-bold text-primary-700 mb-4">
-            Join Our Sacred Circle
+            Let's Build This Together
           </h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed mb-8">
-            Connect with like-minded souls on the path of conscious healing. Experience live group meditations,
-            receive ongoing guidance from Tina, and be part of a supportive spiritual community.
+            I'm creating a sacred space for us to practice Lunar Nidra together, connect deeply, and support
+            each other's healing. Join as a founding member and help shape this community from the ground up.
           </p>
 
-          <div className="bg-gradient-to-r from-primary-100 to-primary-200 rounded-xl p-6 max-w-2xl mx-auto">
-            <h3 className="font-semibold text-primary-700 mb-2">🌙 What Makes Our Community Special</h3>
+          <div className="bg-gradient-to-r from-purple-100 to-primary-200 rounded-xl p-6 max-w-2xl mx-auto">
+            <h3 className="font-semibold text-primary-700 mb-2">✨ Why Join as a Founding Member?</h3>
             <p className="text-gray-700 text-sm leading-relaxed">
-              Unlike generic meditation apps, our community is built around your unique astrological blueprint.
-              Every practice, teaching, and connection is designed to support your personal spiritual evolution.
+              Be part of something special from day one. As a founding member, you'll have direct access to me through
+              weekly calls, help shape our community culture, and receive exclusive benefits as we grow together.
             </p>
           </div>
         </div>
@@ -126,9 +126,9 @@ const Community = () => {
             <div className="grid lg:grid-cols-2 gap-0">
               {/* Left Side - Content */}
               <div className="p-12 flex flex-col justify-center">
-                <div className="inline-flex items-center space-x-2 bg-primary-100 px-4 py-2 rounded-full text-sm text-primary-700 font-medium mb-6 w-fit">
+                <div className="inline-flex items-center space-x-2 bg-gradient-to-r from-purple-100 to-primary-100 px-4 py-2 rounded-full text-sm text-primary-700 font-medium mb-6 w-fit">
                   <Sparkles className="h-4 w-4" />
-                  <span>Join Our Community</span>
+                  <span>Be a Founding Member</span>
                 </div>
 
                 <h2 className="text-4xl font-serif font-bold text-gray-900 mb-6">
@@ -136,48 +136,58 @@ const Community = () => {
                 </h2>
 
                 <p className="text-lg text-gray-700 mb-6 leading-relaxed">
-                  Lunar Nidra is a fusion of the moon's energy and the yogic sleep practice.
-                  Join our thriving community on Skool where you'll discover peace in just 20 minutes.
+                  I'm building something special—a sacred space where we can practice Lunar Nidra together,
+                  connect deeply, and support each other's healing journey. Join as a founding member!
                 </p>
 
                 <div className="space-y-4 mb-8">
                   <div className="flex items-start space-x-3">
-                    <div className="bg-green-100 rounded-full p-1 mt-1">
-                      <Check className="h-4 w-4 text-green-600" />
+                    <div className="bg-purple-100 rounded-full p-1 mt-1">
+                      <Check className="h-4 w-4 text-purple-600" />
                     </div>
                     <div>
-                      <p className="font-semibold text-gray-900">20-minute guided yoga nidra</p>
-                      <p className="text-sm text-gray-600">Deep rest and nervous system restoration</p>
+                      <p className="font-semibold text-gray-900">Weekly live calls with Tina</p>
+                      <p className="text-sm text-gray-600">Connect directly, ask questions, and receive guidance</p>
                     </div>
                   </div>
 
                   <div className="flex items-start space-x-3">
-                    <div className="bg-green-100 rounded-full p-1 mt-1">
-                      <Check className="h-4 w-4 text-green-600" />
+                    <div className="bg-purple-100 rounded-full p-1 mt-1">
+                      <Check className="h-4 w-4 text-purple-600" />
                     </div>
                     <div>
-                      <p className="font-semibold text-gray-900">Full Library of 100+ recordings</p>
+                      <p className="font-semibold text-gray-900">Group Lunar Nidra sessions</p>
+                      <p className="text-sm text-gray-600">Experience the power of meditating together</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start space-x-3">
+                    <div className="bg-purple-100 rounded-full p-1 mt-1">
+                      <Check className="h-4 w-4 text-purple-600" />
+                    </div>
+                    <div>
+                      <p className="font-semibold text-gray-900">Full library of 100+ recordings</p>
                       <p className="text-sm text-gray-600">Access to extensive meditation collection</p>
                     </div>
                   </div>
 
                   <div className="flex items-start space-x-3">
-                    <div className="bg-green-100 rounded-full p-1 mt-1">
-                      <Check className="h-4 w-4 text-green-600" />
+                    <div className="bg-purple-100 rounded-full p-1 mt-1">
+                      <Check className="h-4 w-4 text-purple-600" />
                     </div>
                     <div>
-                      <p className="font-semibold text-gray-900">Relief from insomnia & burnout</p>
-                      <p className="text-sm text-gray-600">Release overwhelm, anxiety, and stress</p>
+                      <p className="font-semibold text-gray-900">Private community forum</p>
+                      <p className="text-sm text-gray-600">Share your journey with like-minded souls</p>
                     </div>
                   </div>
 
                   <div className="flex items-start space-x-3">
-                    <div className="bg-green-100 rounded-full p-1 mt-1">
-                      <Check className="h-4 w-4 text-green-600" />
+                    <div className="bg-purple-100 rounded-full p-1 mt-1">
+                      <Check className="h-4 w-4 text-purple-600" />
                     </div>
                     <div>
-                      <p className="font-semibold text-gray-900">Supportive community space</p>
-                      <p className="text-sm text-gray-600">Connect with 748+ members on the same journey</p>
+                      <p className="font-semibold text-gray-900">Moon phase rituals & teachings</p>
+                      <p className="text-sm text-gray-600">Align with lunar cycles for deeper transformation</p>
                     </div>
                   </div>
                 </div>
@@ -188,19 +198,19 @@ const Community = () => {
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center space-x-3 bg-gradient-to-r from-yellow-400 to-yellow-500 text-gray-900 px-8 py-4 rounded-full font-bold text-lg hover:shadow-2xl hover:scale-105 transition-all duration-300"
                 >
-                  <span>Join the Community on Skool</span>
+                  <span>Become a Founding Member</span>
                   <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
                   </svg>
                 </a>
 
                 <p className="text-sm text-gray-500 mt-4">
-                  🍯 Pay what you can • Free to join • 748 members
+                  🍯 Pay what you can • Free to join • Help us grow together
                 </p>
               </div>
 
               {/* Right Side - Visual */}
-              <div className="bg-gradient-to-br from-primary-600 to-primary-700 p-12 flex flex-col justify-center items-center text-white relative overflow-hidden">
+              <div className="bg-gradient-to-br from-purple-600 to-primary-700 p-12 flex flex-col justify-center items-center text-white relative overflow-hidden">
                 {/* Decorative elements */}
                 <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -mr-32 -mt-32"></div>
                 <div className="absolute bottom-0 left-0 w-48 h-48 bg-white/10 rounded-full -ml-24 -mb-24"></div>
@@ -211,25 +221,25 @@ const Community = () => {
                     <div className="text-6xl font-black mb-2" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
                       Skool
                     </div>
-                    <div className="text-primary-100 text-sm font-medium tracking-wider">
+                    <div className="text-purple-100 text-sm font-medium tracking-wider">
                       COMMUNITY PLATFORM
                     </div>
                   </div>
 
                   <div className="space-y-6">
                     <div className="bg-white/20 backdrop-blur-sm rounded-2xl p-6">
-                      <div className="text-5xl font-bold mb-2">748+</div>
-                      <div className="text-primary-100">Active Members</div>
+                      <div className="text-4xl font-bold mb-2">✨ Founding Members</div>
+                      <div className="text-purple-100">Join us from the beginning</div>
                     </div>
 
                     <div className="bg-white/20 backdrop-blur-sm rounded-2xl p-6">
                       <div className="text-5xl font-bold mb-2">100+</div>
-                      <div className="text-primary-100">Yoga Nidra Recordings</div>
+                      <div className="text-purple-100">Yoga Nidra Recordings</div>
                     </div>
 
                     <div className="bg-white/20 backdrop-blur-sm rounded-2xl p-6">
                       <div className="text-3xl font-bold mb-2">🌙✨</div>
-                      <div className="text-primary-100">"When in doubt, nidra out"</div>
+                      <div className="text-purple-100">"When in doubt, nidra out"</div>
                     </div>
                   </div>
                 </div>
@@ -396,26 +406,31 @@ const Community = () => {
         </div>
 
         {/* CTA Section */}
-        <div className="bg-gradient-to-r from-primary-700 to-primary-600 rounded-2xl p-8 md:p-12 text-white text-center">
+        <div className="bg-gradient-to-r from-purple-700 to-primary-600 rounded-2xl p-8 md:p-12 text-white text-center">
           <div className="max-w-3xl mx-auto">
             <h2 className="text-3xl md:text-4xl font-serif font-bold mb-6">
-              Your Sacred Community Awaits
+              Ready to Be a Founding Member?
             </h2>
-            <p className="text-xl text-primary-100 mb-8 leading-relaxed">
-              Stop walking the spiritual path alone. Join hundreds of conscious souls who support each other's
-              growth and healing. Your transformation accelerates when you're held by community.
+            <p className="text-xl text-purple-100 mb-8 leading-relaxed">
+              Join me in creating something beautiful. Together, we'll build a supportive space where
+              healing happens, connections deepen, and transformation unfolds naturally.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="bg-white text-primary-700 px-8 py-4 rounded-full font-medium text-lg hover:bg-primary-50 transition-colors duration-300 flex items-center justify-center space-x-2">
-                <Users className="h-5 w-5" />
-                <span>Start Your Journey Today</span>
-              </button>
+              <a
+                href="https://www.skool.com/novanidracommunity/about"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-white text-primary-700 px-8 py-4 rounded-full font-medium text-lg hover:bg-primary-50 transition-colors duration-300 flex items-center justify-center space-x-2"
+              >
+                <Sparkles className="h-5 w-5" />
+                <span>Join the Community</span>
+              </a>
               <button className="border-2 border-white text-white px-8 py-4 rounded-full font-medium text-lg hover:bg-white hover:text-primary-700 transition-colors duration-300">
-                Ask Tina a Question
+                Learn More
               </button>
             </div>
-            <p className="text-sm text-primary-100 mt-6">
-              30-day money-back guarantee • Join risk-free
+            <p className="text-sm text-purple-100 mt-6">
+              🍯 Pay what you can • Free to join • Let's grow together
             </p>
           </div>
         </div>

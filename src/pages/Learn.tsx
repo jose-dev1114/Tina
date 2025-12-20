@@ -1,9 +1,11 @@
 
-import { BookOpen, Play, Star, Clock, User } from 'lucide-react';
-import { useEffect } from 'react';
+import { BookOpen, Play, Star, Clock, User, X, Sparkles } from 'lucide-react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 const Learn = () => {
+  const [showComingSoonModal, setShowComingSoonModal] = useState(false);
+
   // Scroll to top when component mounts
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -98,19 +100,22 @@ const Learn = () => {
       title: "5-Minute Morning Moon Salutation",
       duration: "5:23",
       description: "Start your day with lunar energy alignment",
-      thumbnail: "https://images.pexels.com/photos/1051838/pexels-photo-1051838.jpeg?auto=compress&cs=tinysrgb&w=400"
+      thumbnail: "https://images.pexels.com/photos/1051838/pexels-photo-1051838.jpeg?auto=compress&cs=tinysrgb&w=400",
+      videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ" // Replace with actual video URL
     },
     {
       title: "Understanding Your Astrological Chart",
       duration: "18:45",
       description: "Learn to read your birth chart with Tina",
-      thumbnail: "https://images.pexels.com/photos/1292843/pexels-photo-1292843.jpeg?auto=compress&cs=tinysrgb&w=400"
+      thumbnail: "https://images.pexels.com/photos/1292843/pexels-photo-1292843.jpeg?auto=compress&cs=tinysrgb&w=400",
+      videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ" // Replace with actual video URL
     },
     {
       title: "Breathwork for Each Zodiac Element",
       duration: "12:30",
       description: "Element-specific breathing techniques",
-      thumbnail: "https://images.pexels.com/photos/3822583/pexels-photo-3822583.jpeg?auto=compress&cs=tinysrgb&w=400"
+      thumbnail: "https://images.pexels.com/photos/3822583/pexels-photo-3822583.jpeg?auto=compress&cs=tinysrgb&w=400",
+      videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ" // Replace with actual video URL
     }
   ];
 
@@ -187,16 +192,22 @@ const Learn = () => {
           </h2>
           <div className="grid md:grid-cols-3 gap-8">
             {videos.map((video, index) => (
-              <div key={index} className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 group">
+              <div
+                key={index}
+                onClick={() => setShowComingSoonModal(true)}
+                className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 group cursor-pointer"
+              >
                 <div className="relative">
                   <img
                     src={video.thumbnail}
                     alt={video.title}
                     className="w-full h-48 object-cover"
                   />
-                  <div className="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <div className="bg-white/90 w-16 h-16 rounded-full flex items-center justify-center">
-                      <Play className="h-8 w-8 text-primary-700 ml-1" />
+                  {/* Coming Soon Overlay */}
+                  <div className="absolute inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-10">
+                    <div className="bg-gradient-to-r from-purple-600 to-primary-600 text-white px-5 py-2.5 rounded-xl text-sm font-bold shadow-2xl border-2 border-white/30 flex items-center space-x-2 animate-pulse">
+                      <Sparkles className="h-4 w-4" />
+                      <span>Coming Soon</span>
                     </div>
                   </div>
                   <div className="absolute bottom-2 right-2 bg-black/70 text-white px-2 py-1 rounded text-sm">
@@ -303,6 +314,51 @@ const Learn = () => {
             </div>
           </div>
         </div>
+
+        {/* Coming Soon Modal */}
+        {showComingSoonModal && (
+          <div
+            className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-fade-in"
+            onClick={() => setShowComingSoonModal(false)}
+          >
+            <div
+              className="bg-white rounded-2xl shadow-2xl max-w-md w-full overflow-hidden animate-scale-in"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Modal Header */}
+              <div className="bg-gradient-to-r from-purple-600 to-primary-600 text-white p-6 text-center relative">
+                <button
+                  onClick={() => setShowComingSoonModal(false)}
+                  className="absolute top-4 right-4 p-2 hover:bg-white/20 rounded-full transition-colors"
+                >
+                  <X className="h-5 w-5" />
+                </button>
+                <div className="flex justify-center mb-4">
+                  <div className="bg-white/20 p-4 rounded-full">
+                    <Sparkles className="h-12 w-12" />
+                  </div>
+                </div>
+                <h3 className="font-serif font-bold text-2xl mb-2">Coming Soon!</h3>
+                <p className="text-purple-100">These videos are being created just for you</p>
+              </div>
+
+              {/* Modal Body */}
+              <div className="p-6 text-center">
+                <p className="text-gray-700 mb-6 leading-relaxed">
+                  I'm working on creating beautiful video content to support your practice.
+                  Join our community to be notified when these teachings are released!
+                </p>
+                <a
+                  href="/community"
+                  className="inline-flex items-center justify-center space-x-2 bg-gradient-to-r from-purple-600 to-primary-600 text-white px-6 py-3 rounded-full font-medium hover:shadow-lg transition-all duration-300"
+                >
+                  <span>Join the Community</span>
+                  <Sparkles className="h-4 w-4" />
+                </a>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
