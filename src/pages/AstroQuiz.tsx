@@ -1,11 +1,13 @@
 import { useState, useEffect } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
-import { Star, Moon, Sun, Download, ShoppingCart, X, Loader2 } from 'lucide-react';
+import { Star, Moon, Sun, Download, ShoppingCart, X, Loader2, Calendar } from 'lucide-react';
 import { geocodeBirthPlace } from '../utils/geocoding';
 import { useAuth } from '../hooks/useClerkAuth';
 import SignUpButton from '../components/auth/SignUpButton';
 import SignInButton from '../components/auth/SignInButton';
 import toast from 'react-hot-toast';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
 interface QuizData {
   birthDate: string;
@@ -507,23 +509,47 @@ const AstroQuiz = () => {
               <div className="space-y-6">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">Birth Date</label>
-                  <input
-                    type="date"
-                    value={quizData.birthDate}
-                    onChange={(e) => setQuizData(prev => ({ ...prev, birthDate: e.target.value }))}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-200 hover:border-primary-300"
-                    max={new Date().toISOString().split('T')[0]}
-                  />
+                  <div className="relative">
+                    <DatePicker
+                      selected={quizData.birthDate ? new Date(quizData.birthDate) : null}
+                      onChange={(date: Date | null) => {
+                        if (date) {
+                          const year = date.getFullYear();
+                          const month = String(date.getMonth() + 1).padStart(2, '0');
+                          const day = String(date.getDate()).padStart(2, '0');
+                          setQuizData(prev => ({ ...prev, birthDate: `${year}-${month}-${day}` }));
+                        } else {
+                          setQuizData(prev => ({ ...prev, birthDate: '' }));
+                        }
+                      }}
+                      dateFormat="MMMM d, yyyy"
+                      placeholderText="Select your birth date"
+                      maxDate={new Date()}
+                      showYearDropdown
+                      showMonthDropdown
+                      dropdownMode="select"
+                      yearDropdownItemNumber={100}
+                      scrollableYearDropdown
+                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-400 focus:border-primary-400 transition-all duration-200 hover:border-primary-300 bg-white shadow-sm hover:shadow-md text-gray-700 font-medium cursor-pointer"
+                      calendarClassName="custom-calendar"
+                      wrapperClassName="w-full"
+                    />
+                  </div>
                 </div>
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">Birth Time (if known)</label>
-                  <input
-                    type="time"
-                    value={quizData.birthTime}
-                    onChange={(e) => setQuizData(prev => ({ ...prev, birthTime: e.target.value }))}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-200 hover:border-primary-300"
-                  />
+                  <div className="relative">
+                    <input
+                      type="time"
+                      value={quizData.birthTime}
+                      onChange={(e) => setQuizData(prev => ({ ...prev, birthTime: e.target.value }))}
+                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-400 focus:border-primary-400 transition-all duration-200 hover:border-primary-300 bg-white shadow-sm hover:shadow-md text-gray-700 font-medium cursor-pointer"
+                      style={{
+                        colorScheme: 'light',
+                      }}
+                    />
+                  </div>
                   <p className="text-sm text-gray-500 mt-1">Birth time helps us be more accurate, but isn't required</p>
                 </div>
                 
