@@ -131,7 +131,7 @@ const Community = () => {
                   <span>Be a Founding Member</span>
                 </div>
 
-                <h2 className="text-4xl font-serif font-bold text-gray-900 mb-6">
+                <h2 className="text-3xl font-serif font-bold text-gray-900 mb-6">
                   Lunar Nidra Community on Skool
                 </h2>
 
