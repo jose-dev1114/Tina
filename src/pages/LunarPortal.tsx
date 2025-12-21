@@ -218,7 +218,7 @@ export default function LunarPortal() {
                 <div className="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 p-6">
                   <h2 className="text-2xl font-serif font-bold text-white flex items-center gap-2">
                     <Moon className="h-6 w-6" />
-                    Your Birth Moon Phase
+                    Moon Phase Report
                   </h2>
                   <p className="text-purple-100 text-sm mt-1">
                     {birthChart.moonPhaseReport.consideredDate}

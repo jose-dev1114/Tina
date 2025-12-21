@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useAuth } from '../hooks/useClerkAuth';
-import { Moon, Star, Calendar, MapPin, Clock, ArrowRight, Download } from 'lucide-react';
+import { Moon, Star, Calendar, MapPin, Clock, ArrowRight, Download, Edit } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 
@@ -32,36 +32,24 @@ export default function Dashboard() {
 
     try {
       setDownloading(true);
-      console.log('📥 Downloading chart from:', chartUrl);
+      console.log('📥 Opening chart from:', chartUrl);
 
-      // Fetch the image
-      const response = await fetch(chartUrl);
-      if (!response.ok) {
-        throw new Error('Failed to fetch chart image');
-      }
-
-      // Convert to blob
-      const blob = await response.blob();
-
-      // Create download link
-      const url = window.URL.createObjectURL(blob);
+      // Create a temporary link element
       const link = document.createElement('a');
-      link.href = url;
+      link.href = chartUrl;
+      link.target = '_blank';
       link.download = `birth-chart-${userProfile?.birthDate || 'chart'}.png`;
 
-      // Trigger download
+      // Trigger download/open
       document.body.appendChild(link);
       link.click();
-
-      // Cleanup
       document.body.removeChild(link);
-      window.URL.revokeObjectURL(url);
 
-      toast.success('Birth chart downloaded successfully! 🎉');
-      console.log('✅ Chart downloaded successfully');
+      toast.success('Birth chart opened! Right-click to save the image. 🎉');
+      console.log('✅ Chart opened successfully');
     } catch (error) {
-      console.error('❌ Error downloading chart:', error);
-      toast.error('Failed to download chart. Please try again.');
+      console.error('❌ Error opening chart:', error);
+      toast.error('Failed to open chart. Please try again.');
     } finally {
       setDownloading(false);
     }
@@ -158,9 +146,37 @@ export default function Dashboard() {
                   <span className="text-2xl font-semibold text-blue-300">{moonHouse}</span>
                 </div>
               )}
-              <p className="text-white/70 text-base leading-relaxed">
+              <p className="text-white/70 text-base leading-relaxed mb-6">
                 Your emotional nature and inner world
               </p>
+
+              {/* Action Buttons */}
+              <div className="flex flex-col gap-3 mt-6">
+                <button
+                  onClick={() => navigate('/shop')}
+                  className="w-full bg-gradient-to-r from-primary-600 to-primary-700 text-white px-6 py-3 rounded-full font-semibold hover:shadow-lg transition-all duration-300 flex items-center justify-center space-x-2"
+                >
+                  <span>Explore Personalized Meditations</span>
+                  <ArrowRight className="h-4 w-4" />
+                </button>
+                <button
+                  onClick={handleDownloadChart}
+                  disabled={downloading}
+                  className="w-full bg-white/10 hover:bg-white/20 text-white px-6 py-3 rounded-full font-semibold border border-white/30 hover:border-white/50 transition-all duration-300 flex items-center justify-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {downloading ? (
+                    <>
+                      <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
+                      <span>Downloading...</span>
+                    </>
+                  ) : (
+                    <>
+                      <Download className="h-4 w-4" />
+                      <span>Download Birth Chart</span>
+                    </>
+                  )}
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -172,7 +188,7 @@ export default function Dashboard() {
               <div className="flex items-center space-x-3">
                 <Moon className="h-8 w-8 text-white" />
                 <div>
-                  <h2 className="text-2xl font-bold text-white">Your Birth Moon Phase</h2>
+                  <h2 className="text-2xl font-bold text-white">Moon Phase Report</h2>
                   <p className="text-white/80 text-sm mt-1">
                     {birthChart.moonPhaseReport.consideredDate}
                   </p>
@@ -214,7 +230,16 @@ export default function Dashboard() {
 
         {/* Birth Information */}
         <div className="bg-white/10 backdrop-blur-md rounded-2xl border border-white/20 p-8 shadow-xl">
-          <h2 className="text-2xl font-bold text-white mb-6">Birth Information</h2>
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-2xl font-bold text-white">Birth Information</h2>
+            <button
+              onClick={() => navigate('/quiz')}
+              className="flex items-center space-x-2 bg-white/10 hover:bg-white/20 text-white px-4 py-2 rounded-lg transition-all duration-300 border border-white/20 hover:border-white/40"
+            >
+              <Edit className="h-4 w-4" />
+              <span className="text-sm font-medium">Edit</span>
+            </button>
+          </div>
           <div className="grid md:grid-cols-3 gap-6">
             {/* Birth Date */}
             <div className="flex items-start space-x-4">
@@ -255,37 +280,6 @@ export default function Dashboard() {
               </div>
             </div>
           </div>
-        </div>
-
-        {/* CTA Buttons */}
-        <div className="mt-12 flex flex-col sm:flex-row gap-4 justify-center items-center">
-          {/* Download Chart Button */}
-          <button
-            onClick={handleDownloadChart}
-            disabled={downloading || !chartUrl}
-            className="bg-gradient-to-r from-green-600 to-green-700 text-white px-8 py-4 rounded-full font-semibold hover:shadow-lg transition-all duration-300 text-lg flex items-center justify-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            {downloading ? (
-              <>
-                <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
-                <span>Downloading...</span>
-              </>
-            ) : (
-              <>
-                <Download className="h-5 w-5" />
-                <span>Download Birth Chart</span>
-              </>
-            )}
-          </button>
-
-          {/* Explore Meditations Button */}
-          <button
-            onClick={() => navigate('/meditations')}
-            className="bg-gradient-to-r from-primary-600 to-primary-700 text-white px-8 py-4 rounded-full font-semibold hover:shadow-lg transition-all duration-300 text-lg flex items-center justify-center space-x-2"
-          >
-            <span>Explore Personalized Meditations</span>
-            <ArrowRight className="h-5 w-5" />
-          </button>
         </div>
       </div>
     </div>
