@@ -820,10 +820,16 @@ const Shop = () => {
                     </div>
                   )}
                   {product.type === 'physical' && (
-                    <div className="flex items-center text-sm text-blue-600 font-medium">
-                      <Package className="h-4 w-4 mr-2" />
-                      <span>Ships within 3-5 business days</span>
-                    </div>
+                    <>
+                      <div className="flex items-center text-sm text-blue-600 font-medium">
+                        <Package className="h-4 w-4 mr-2" />
+                        <span>Ships within 3-5 business days</span>
+                      </div>
+                      <div className="flex items-center text-sm text-amber-600 font-medium mt-2 bg-amber-50 px-3 py-2 rounded-lg border border-amber-200">
+                        <Clock className="h-4 w-4 mr-2" />
+                        <span>Next ship date: January 5, 2026</span>
+                      </div>
+                    </>
                   )}
                 </div>
 
