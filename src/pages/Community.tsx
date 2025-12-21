@@ -132,7 +132,7 @@ const Community = () => {
                 </div>
 
                 <h2 className="text-4xl font-serif font-bold text-gray-900 mb-6">
-                  Nova Nidra Community on Skool
+                  Lunar Nidra Community on Skool
                 </h2>
 
                 <p className="text-lg text-gray-700 mb-6 leading-relaxed">
