@@ -1,21 +1,17 @@
 import { useState, useEffect } from 'react';
-import ReactDOM from 'react-dom';
-import { Star, Play, Download, ShoppingCart, Package, Music, Sparkles, Check, Clock, Infinity, Shield, Headphones, Heart, LogIn, X } from 'lucide-react';
+import { Star, Play, Download, ShoppingCart, Package, Music, Sparkles, Check, Clock, Infinity, Shield, Headphones, Heart } from 'lucide-react';
 import toast from 'react-hot-toast';
 import { useCart } from '../contexts/CartContext';
 import { Product } from '../types/database';
-import AudioPlayer from '../components/AudioPlayer';
-import { useUser, SignInButton, SignUpButton } from '@clerk/clerk-react';
+import { ref, getDownloadURL } from 'firebase/storage';
+import { storage } from '../lib/firebase';
 
 const Shop = () => {
   const [selectedFilter, setSelectedFilter] = useState('all');
   const [selectedTab, setSelectedTab] = useState<'recordings' | 'cards'>('recordings');
   const { addToCart, cart } = useCart();
   const [isLoading, setIsLoading] = useState(true);
-  const [currentRecording, setCurrentRecording] = useState<{ title: string; fileName: string } | null>(null);
-  const { user } = useUser();
   const [expandedDescriptions, setExpandedDescriptions] = useState<Set<string>>(new Set());
-  const [showAuthModal, setShowAuthModal] = useState(false);
 
   // Scroll to top when component mounts and handle loading
   useEffect(() => {
@@ -28,11 +24,24 @@ const Shop = () => {
     return () => clearTimeout(timer);
   }, []);
 
-  // Debug modal state
-  useEffect(() => {
-    console.log('showAuthModal:', showAuthModal);
-    console.log('user:', user);
-  }, [showAuthModal, user]);
+  // Handle opening audio in new tab
+  const handlePlayAudio = async (fileName: string) => {
+    try {
+      toast.loading('Loading audio...', { id: 'audio-loading' });
+
+      // Get download URL from Firebase Storage
+      const audioRef = ref(storage, fileName);
+      const url = await getDownloadURL(audioRef);
+
+      // Open in new tab
+      window.open(url, '_blank');
+
+      toast.success('Opening audio in new tab! 🎵', { id: 'audio-loading' });
+    } catch (error) {
+      console.error('Error fetching audio URL:', error);
+      toast.error('Failed to load audio', { id: 'audio-loading' });
+    }
+  };
 
   // Lunar Nidra Recordings - $5/month subscription access
   const lunarNidraRecordings = [
@@ -526,6 +535,8 @@ const Shop = () => {
           </button>
         </div>
 
+
+
         {/* CTA to take quiz */}
         {/* <div className="bg-gradient-to-r from-primary-600 to-primary-500 rounded-xl p-8 text-white text-center mb-12">
           <h2 className="text-2xl font-serif font-bold mb-4">Not Sure Which Meditation is Right for You?</h2>
@@ -705,31 +716,16 @@ const Shop = () => {
                     </div>
                   </div>
 
-                  {/* Play/Sign In Button */}
-                  {user ? (
-                    <button
-                      onClick={() => setCurrentRecording({ title: recording.title, fileName: recording.fileName })}
-                      className="w-full bg-gradient-to-r from-primary-600 to-primary-500 text-white py-3 rounded-2xl font-bold text-sm hover:from-primary-700 hover:to-primary-600 transition-all duration-300 flex items-center justify-center space-x-2 shadow-lg hover:shadow-xl hover:scale-105 group/play"
-                    >
-                      <div className="bg-white/20 p-1 rounded-full group-hover/play:scale-110 transition-transform">
-                        <Play className="h-4 w-4 fill-white" />
-                      </div>
-                      <span>Stream Now</span>
-                    </button>
-                  ) : (
-                    <button
-                      onClick={() => {
-                        console.log('Button clicked, opening modal');
-                        setShowAuthModal(true);
-                      }}
-                      className="w-full bg-gradient-to-r from-primary-600 to-primary-500 text-white py-3 rounded-2xl font-bold text-sm hover:from-primary-700 hover:to-primary-600 transition-all duration-300 flex items-center justify-center space-x-2 shadow-lg hover:shadow-xl hover:scale-105 group/play"
-                    >
-                      <div className="bg-white/20 p-1 rounded-full group-hover/play:scale-110 transition-transform">
-                        <LogIn className="h-4 w-4" />
-                      </div>
-                      <span>Sign In To Stream</span>
-                    </button>
-                  )}
+                  {/* Play Button - Opens audio in new tab */}
+                  <button
+                    onClick={() => handlePlayAudio(recording.fileName)}
+                    className="w-full bg-gradient-to-r from-primary-600 to-primary-500 text-white py-3 rounded-2xl font-bold text-sm hover:from-primary-700 hover:to-primary-600 transition-all duration-300 flex items-center justify-center space-x-2 shadow-lg hover:shadow-xl hover:scale-105 group/play"
+                  >
+                    <div className="bg-white/20 p-1 rounded-full group-hover/play:scale-110 transition-transform">
+                      <Play className="h-4 w-4 fill-white" />
+                    </div>
+                    <span>Play</span>
+                  </button>
                 </div>
               </div>
             ))}
@@ -919,55 +915,6 @@ const Shop = () => {
           </div>
         </div>
       </div>
-
-      {/* Audio Player - Fixed at bottom when playing */}
-      {currentRecording && (
-        <AudioPlayer
-          title={currentRecording.title}
-          fileName={currentRecording.fileName}
-          onClose={() => setCurrentRecording(null)}
-        />
-      )}
-
-      {/* Auth Modal - Using Portal to render at root level */}
-      {showAuthModal && ReactDOM.createPortal(
-        <div
-          className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4"
-          style={{ zIndex: 99999 }}
-          onClick={() => setShowAuthModal(false)}
-        >
-          <div className="bg-white rounded-3xl shadow-2xl max-w-md w-full p-8" onClick={(e) => e.stopPropagation()}>
-            <div className="flex justify-between items-center mb-6">
-              <h2 className="text-2xl font-bold text-gray-900">Welcome to Lunar</h2>
-              <button onClick={() => setShowAuthModal(false)} className="p-2 hover:bg-gray-100 rounded-full">
-                <X className="h-5 w-5" />
-              </button>
-            </div>
-            <p className="text-gray-600 mb-8">Sign in or create an account to start streaming</p>
-
-            <div className="space-y-4">
-              <SignInButton mode="modal" forceRedirectUrl="/shop">
-                <button
-                  onClick={() => setShowAuthModal(false)}
-                  className="w-full bg-gradient-to-r from-primary-600 to-primary-500 text-white py-4 rounded-2xl font-bold hover:from-primary-700 hover:to-primary-600 transition-all"
-                >
-                  Sign In
-                </button>
-              </SignInButton>
-
-              <SignUpButton mode="modal" forceRedirectUrl="/shop">
-                <button
-                  onClick={() => setShowAuthModal(false)}
-                  className="w-full border-2 border-primary-600 text-primary-600 py-4 rounded-2xl font-bold hover:bg-primary-50 transition-all"
-                >
-                  Create Account
-                </button>
-              </SignUpButton>
-            </div>
-          </div>
-        </div>,
-        document.body
-      )}
     </div>
   );
 };

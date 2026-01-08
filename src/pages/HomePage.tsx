@@ -79,11 +79,11 @@ const HomePage = () => {
   const faqs = [
     {
       question: "How does Lunar Nidra differ from regular meditation?",
-      answer: "Lunar Nidra combines the ancient practice of Yoga Nidra (yogic sleep) with astrological wisdom. Unlike traditional meditation where you focus on staying alert, Lunar Nidra guides you into a state between waking and sleeping—where deep healing happens. Each practice is personalized to your Sun and Moon signs, aligning with lunar phases for maximum spiritual benefit. It's meditation without the mental effort, perfect for those who struggle with traditional practices."
+      answer: "Lunar Nidra combines the ancient practice of Yoga Nidra (yogic sleep) with astrological wisdom. Unlike traditional meditation where you focus on staying alert, Lunar Nidra guides you into a state between waking and sleeping—where deep healing happens. Each practice is personalized to your natal Moon placement or the current New or Full Moon, aligning your rest with cosmic cycles. It's meditation without the mental effort, perfect for those who struggle with traditional practices."
     },
     {
       question: "Do I need to know my exact birth time?",
-      answer: "While knowing your exact birth time gives us the most accurate Moon sign and Rising sign, you can still experience profound benefits with just your birth date and location. Our quiz will calculate your Sun sign and approximate Moon sign. If you don't know your birth time, we recommend checking your birth certificate or asking family members—but it's not required to get started on your healing journey."
+      answer: "Knowing your birthdate, place, and exact birth time is wonderful for diving deep into your Natal Moon, but it is not a requirement. You can start your healing journey by aligning with the collective New Moon and Full Moon energy instead. If you do want to find your exact time, check your long-form birth certificate. (It is usually listed in a specific box labeled 'Time of Birth' or 'Hour' near your birth date)"
     },
     {
       question: "Is Lunar Nidra suitable for beginners?",
