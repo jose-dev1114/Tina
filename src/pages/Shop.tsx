@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
-import { Star, Play, Download, ShoppingCart, Package, Music, Sparkles, Check, Clock, Infinity, Shield, Headphones, Heart } from 'lucide-react';
+import { Star, Play, Download, ShoppingCart, Package, Music, Sparkles, Check, Clock, Infinity, Shield, Headphones, Heart, Lock } from 'lucide-react';
 import toast from 'react-hot-toast';
 import { useCart } from '../contexts/CartContext';
 import { Product } from '../types/database';
 import { ref, getDownloadURL } from 'firebase/storage';
 import { storage } from '../lib/firebase';
+import { useUser } from '@clerk/clerk-react';
 
 const Shop = () => {
   const [selectedFilter, setSelectedFilter] = useState('all');
@@ -12,6 +13,7 @@ const Shop = () => {
   const { addToCart, cart } = useCart();
   const [isLoading, setIsLoading] = useState(true);
   const [expandedDescriptions, setExpandedDescriptions] = useState<Set<string>>(new Set());
+  const { isSignedIn, isLoaded } = useUser();
 
   // Scroll to top when component mounts and handle loading
   useEffect(() => {
@@ -26,6 +28,19 @@ const Shop = () => {
 
   // Handle opening audio in new tab
   const handlePlayAudio = async (fileName: string) => {
+    // Check if user is signed in
+    if (!isLoaded) {
+      toast.error('Loading... Please wait.');
+      return;
+    }
+
+    if (!isSignedIn) {
+      toast.error('Please sign in to play audio 🔒', {
+        duration: 4000,
+      });
+      return;
+    }
+
     try {
       toast.loading('Loading audio...', { id: 'audio-loading' });
 
@@ -716,15 +731,23 @@ const Shop = () => {
                     </div>
                   </div>
 
-                  {/* Play Button - Opens audio in new tab */}
+                  {/* Play Button - Opens audio in new tab (requires login) */}
                   <button
                     onClick={() => handlePlayAudio(recording.fileName)}
-                    className="w-full bg-gradient-to-r from-primary-600 to-primary-500 text-white py-3 rounded-2xl font-bold text-sm hover:from-primary-700 hover:to-primary-600 transition-all duration-300 flex items-center justify-center space-x-2 shadow-lg hover:shadow-xl hover:scale-105 group/play"
+                    className={`w-full py-3 rounded-2xl font-bold text-sm transition-all duration-300 flex items-center justify-center space-x-2 shadow-lg hover:shadow-xl hover:scale-105 group/play ${
+                      isSignedIn
+                        ? 'bg-gradient-to-r from-primary-600 to-primary-500 text-white hover:from-primary-700 hover:to-primary-600'
+                        : 'bg-gray-400 text-white cursor-not-allowed opacity-75'
+                    }`}
                   >
                     <div className="bg-white/20 p-1 rounded-full group-hover/play:scale-110 transition-transform">
-                      <Play className="h-4 w-4 fill-white" />
+                      {isSignedIn ? (
+                        <Play className="h-4 w-4 fill-white" />
+                      ) : (
+                        <Lock className="h-4 w-4" />
+                      )}
                     </div>
-                    <span>Play</span>
+                    <span>{isSignedIn ? 'Play' : 'Sign In to Play'}</span>
                   </button>
                 </div>
               </div>

@@ -2,14 +2,44 @@
 import { BookOpen, Play, Star, Clock, User, X, Sparkles } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import toast from 'react-hot-toast';
 
 const Learn = () => {
   const [showComingSoonModal, setShowComingSoonModal] = useState(false);
+  const [newsletterEmail, setNewsletterEmail] = useState('');
+  const [isSubmittingNewsletter, setIsSubmittingNewsletter] = useState(false);
 
   // Scroll to top when component mounts
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  const handleNewsletterSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    // Validate email
+    if (!newsletterEmail || !newsletterEmail.includes('@')) {
+      toast.error('Please enter a valid email address');
+      return;
+    }
+
+    setIsSubmittingNewsletter(true);
+
+    try {
+      // Simulate API call - Replace with actual newsletter API
+      await new Promise(resolve => setTimeout(resolve, 1000));
+
+      toast.success('🌙 Welcome to our sacred circle! Check your email for a special gift.', {
+        duration: 5000,
+      });
+
+      setNewsletterEmail('');
+    } catch (error) {
+      toast.error('Something went wrong. Please try again.');
+    } finally {
+      setIsSubmittingNewsletter(false);
+    }
+  };
   const featuredArticles = [
     {
       id: 1,
@@ -302,16 +332,23 @@ const Learn = () => {
             <p className="text-white/80 mb-6">
               Get our latest articles, moon phase reminders, and exclusive meditations delivered to your inbox with love.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+            <form onSubmit={handleNewsletterSubmit} className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
               <input
                 type="email"
+                value={newsletterEmail}
+                onChange={(e) => setNewsletterEmail(e.target.value)}
                 placeholder="Your sacred email..."
-                className="flex-1 px-4 py-3 rounded-full text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-300"
+                disabled={isSubmittingNewsletter}
+                className="flex-1 px-4 py-3 rounded-full text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-300 disabled:opacity-50"
               />
-              <button className="bg-white text-primary-700 px-8 py-3 rounded-full font-medium hover:bg-primary-50 transition-colors duration-300">
-                Subscribe
+              <button
+                type="submit"
+                disabled={isSubmittingNewsletter}
+                className="bg-white text-primary-700 px-8 py-3 rounded-full font-medium hover:bg-primary-50 transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {isSubmittingNewsletter ? 'Subscribing...' : 'Subscribe'}
               </button>
-            </div>
+            </form>
           </div>
         </div>
 

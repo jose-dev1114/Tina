@@ -193,7 +193,7 @@ const Coaching = () => {
                 <h3 className="text-2xl font-serif font-bold text-center mb-2">
                   Exploring Your Astrological Signature
                 </h3>
-                <p className="text-center text-primary-100 text-sm">Deep Dive Journey</p>
+                <p className="text-center text-primary-100 text-sm">Lunar Immersion Journey</p>
               </div>
 
               <div className="p-8">
@@ -203,8 +203,7 @@ const Coaching = () => {
                 </div>
 
                 <p className="text-gray-700 mb-6 leading-relaxed">
-                  Deep dive into Sun, Moon, Rising, then full chart themes and planetary influences.
-                  Includes journal prompts + aligned Lunar Nidra practices.
+                  Unlock the secrets of your unique cosmic blueprint to reveal the 'why' behind your patterns and fully own your strengths.
                 </p>
 
                 <div className="bg-primary-50 rounded-xl p-4 mb-6">
@@ -434,7 +433,7 @@ const Coaching = () => {
                 <span>Book Your Session</span>
               </a>
               <a
-                href="mailto:tina@lunarnidra.com"
+                href="mailto:tina@orhealingpratices.com"
                 className="flex items-center space-x-2 text-primary-100 hover:text-white transition-colors duration-300"
               >
                 <MessageCircle className="h-5 w-5" />

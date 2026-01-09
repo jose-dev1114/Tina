@@ -1,8 +1,40 @@
 
 import { Instagram, Youtube, Mail } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import toast from 'react-hot-toast';
 
 const Footer = () => {
+  const [email, setEmail] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleNewsletterSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    // Validate email
+    if (!email || !email.includes('@')) {
+      toast.error('Please enter a valid email address');
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      // Simulate API call - Replace with actual newsletter API
+      await new Promise(resolve => setTimeout(resolve, 1000));
+
+      toast.success('🌙 Welcome to our sacred circle! Check your email for a special gift.', {
+        duration: 5000,
+      });
+
+      setEmail('');
+    } catch (error) {
+      toast.error('Something went wrong. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <footer className="bg-primary-700 text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -30,16 +62,23 @@ const Footer = () => {
             {/* Newsletter Signup */}
             <div className="bg-primary-600/30 rounded-2xl p-6 backdrop-blur-sm">
               <h4 className="font-medium mb-3 text-white">Receive Moon Phase Reminders & Free Meditations</h4>
-              <div className="flex">
+              <form onSubmit={handleNewsletterSubmit} className="flex">
                 <input
                   type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   placeholder="Your sacred email..."
-                  className="flex-1 px-4 py-3 rounded-l-full bg-white/10 text-white placeholder-primary-200 border-0 focus:outline-none focus:ring-2 focus:ring-primary-300 backdrop-blur-sm"
+                  disabled={isSubmitting}
+                  className="flex-1 px-4 py-3 rounded-l-full bg-white/10 text-white placeholder-primary-200 border-0 focus:outline-none focus:ring-2 focus:ring-primary-300 backdrop-blur-sm disabled:opacity-50"
                 />
-                <button className="px-6 py-3 bg-primary-500 hover:bg-primary-400 rounded-r-full transition-colors duration-200 font-medium text-white">
-                  JOIN
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="px-6 py-3 bg-primary-500 hover:bg-primary-400 rounded-r-full transition-colors duration-200 font-medium text-white disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {isSubmitting ? '...' : 'JOIN'}
                 </button>
-              </div>
+              </form>
             </div>
           </div>
 

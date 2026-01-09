@@ -1,8 +1,11 @@
 
 import { Users, Star, Calendar, MessageCircle, Video, Gift, Check, Crown, Sparkles } from 'lucide-react';
 import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Community = () => {
+  const navigate = useNavigate();
+
   // Scroll to top when component mounts
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -425,7 +428,10 @@ const Community = () => {
                 <Sparkles className="h-5 w-5" />
                 <span>Join the Community</span>
               </a>
-              <button className="border-2 border-white text-white px-8 py-4 rounded-full font-medium text-lg hover:bg-white hover:text-primary-700 transition-colors duration-300">
+              <button
+                onClick={() => navigate('/learn')}
+                className="border-2 border-white text-white px-8 py-4 rounded-full font-medium text-lg hover:bg-white hover:text-primary-700 transition-colors duration-300"
+              >
                 Learn More
               </button>
             </div>
