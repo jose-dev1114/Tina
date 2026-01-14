@@ -5,6 +5,7 @@ import { geocodeBirthPlace } from '../utils/geocoding';
 import { useAuth } from '../hooks/useClerkAuth';
 import SignUpButton from '../components/auth/SignUpButton';
 import SignInButton from '../components/auth/SignInButton';
+import LocationAutocomplete from '../components/LocationAutocomplete';
 import toast from 'react-hot-toast';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -555,13 +556,12 @@ const AstroQuiz = () => {
                 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">Birth Place</label>
-                  <input
-                    type="text"
-                    placeholder="e.g., New York, USA"
+                  <LocationAutocomplete
                     value={quizData.birthPlace}
-                    onChange={(e) => setQuizData(prev => ({ ...prev, birthPlace: e.target.value }))}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-200 hover:border-primary-300"
+                    onChange={(value) => setQuizData(prev => ({ ...prev, birthPlace: value }))}
+                    placeholder="e.g., New York, USA"
                   />
+                  <p className="text-sm text-gray-500 mt-1">Start typing to search for your birth city</p>
                 </div>
               </div>
             </div>
