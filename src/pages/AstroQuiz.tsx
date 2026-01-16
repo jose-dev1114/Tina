@@ -512,7 +512,11 @@ const AstroQuiz = () => {
                   <label className="block text-sm font-medium text-gray-700 mb-2">Birth Date</label>
                   <div className="relative">
                     <DatePicker
-                      selected={quizData.birthDate ? new Date(quizData.birthDate) : null}
+                      selected={quizData.birthDate ? (() => {
+                        // Parse the date string as local time to avoid timezone offset issues
+                        const [year, month, day] = quizData.birthDate.split('-').map(Number);
+                        return new Date(year, month - 1, day);
+                      })() : null}
                       onChange={(date: Date | null) => {
                         if (date) {
                           const year = date.getFullYear();

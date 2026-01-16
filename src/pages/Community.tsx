@@ -196,7 +196,7 @@ const Community = () => {
                 </div>
 
                 <a
-                  href="https://www.skool.com/novanidracommunity/about"
+                  href="https://www.ourhealingpractices.com/community"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center space-x-3 bg-gradient-to-r from-yellow-400 to-yellow-500 text-gray-900 px-8 py-4 rounded-full font-bold text-lg hover:shadow-2xl hover:scale-105 transition-all duration-300"

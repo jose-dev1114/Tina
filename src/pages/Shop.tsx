@@ -26,15 +26,26 @@ const Shop = () => {
     return () => clearTimeout(timer);
   }, []);
 
+  // Free sample recordings that anyone can listen to
+  const freeRecordings = [
+    'LN Sagittarius NM - Vision- 12.19.25 final.mp3',  // Sagittarius New Moon (newest)
+    'LN Capricorn NM 01.19.25 w.music final.mp3',      // Capricorn New Moon
+    'Arie Full Moon LN 10.6.25.mp3'                     // Aries Full Moon
+  ];
+
+  // Check if a recording is free to play
+  const isFreeRecording = (fileName: string) => freeRecordings.includes(fileName);
+
   // Handle opening audio in new tab
   const handlePlayAudio = async (fileName: string) => {
-    // Check if user is signed in
+    // Check if user is signed in (unless it's a free recording)
     if (!isLoaded) {
       toast.error('Loading... Please wait.');
       return;
     }
 
-    if (!isSignedIn) {
+    // Allow free recordings without sign in
+    if (!isSignedIn && !isFreeRecording(fileName)) {
       toast.error('Please sign in to play audio 🔒', {
         duration: 4000,
       });
@@ -61,10 +72,30 @@ const Shop = () => {
   // Lunar Nidra Recordings - $5/month subscription access
   const lunarNidraRecordings = [
     {
+      id: 'rec-new-2',
+      title: 'Sagittarius New Moon',
+      date: 'December 19, 2025',
+      duration: '24 min',
+      moonPhase: 'New Moon',
+      sign: 'Sagittarius',
+      fileName: 'LN Sagittarius NM - Vision- 12.19.25 final.mp3',
+      description: 'Expand your vision and embrace adventure with Sagittarius New Moon energy for truth-seeking and growth.'
+    },
+    {
+      id: 'rec-new-1',
+      title: 'Capricorn New Moon',
+      date: 'January 19, 2025',
+      duration: '27 min',
+      moonPhase: 'New Moon',
+      sign: 'Capricorn',
+      fileName: 'LN Capricorn NM 01.19.25 w.music final.mp3',
+      description: 'Set powerful intentions for structure, discipline, and long-term goals with Capricorn New Moon energy.'
+    },
+    {
       id: 'rec-1',
       title: 'Aries Full Moon',
       date: 'October 6, 2025',
-      duration: '45 min',
+      duration: '18 min',
       moonPhase: 'Full Moon',
       sign: 'Aries',
       fileName: 'Arie Full Moon LN 10.6.25.mp3',
@@ -73,7 +104,7 @@ const Shop = () => {
     {
       id: 'rec-2',
       title: 'Gemini Full Moon',
-      date: 'May 12, 2025',
+      date: 'December 4, 2025',
       duration: '45 min',
       moonPhase: 'Full Moon',
       sign: 'Gemini',
@@ -659,11 +690,32 @@ const Shop = () => {
             {lunarNidraRecordings.map((recording, index) => (
               <div
                 key={recording.id}
-                className="bg-white rounded-3xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-500 group border border-gray-100 hover:border-primary-200 hover:-translate-y-2"
+                className={`bg-white rounded-3xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-500 group border hover:-translate-y-2 ${
+                  index === 0
+                    ? 'border-primary-300 ring-2 ring-primary-200 hover:border-primary-400'
+                    : 'border-gray-100 hover:border-primary-200'
+                }`}
                 style={{ animationDelay: `${index * 50}ms` }}
               >
                 {/* Recording Header with Image */}
                 <div className="relative h-48 overflow-hidden">
+                  {/* Badges */}
+                  <div className="absolute top-3 left-3 z-20 flex flex-col gap-2">
+                    {/* NEW Badge for newest recordings (first two) */}
+                    {(index === 0 || index === 1) && (
+                      <span className="bg-gradient-to-r from-yellow-400 to-orange-500 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg animate-pulse flex items-center space-x-1">
+                        <Sparkles className="h-3 w-3" />
+                        <span>NEW</span>
+                      </span>
+                    )}
+                    {/* FREE SAMPLE Badge */}
+                    {isFreeRecording(recording.fileName) && (
+                      <span className="bg-gradient-to-r from-green-500 to-emerald-600 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg flex items-center space-x-1">
+                        <Play className="h-3 w-3 fill-white" />
+                        <span>FREE SAMPLE</span>
+                      </span>
+                    )}
+                  </div>
                   {/* Background Image - Moon phase themed */}
                   <img
                     src={
@@ -680,6 +732,8 @@ const Shop = () => {
                         'https://images.unsplash.com/photo-1532693322450-2cb5c511067d?w=800&q=80' // Default full moon
                       ) : recording.moonPhase === 'New Moon' ? (
                         // New Moon images - crescent moons prominently featured
+                        recording.sign === 'Sagittarius' ? 'https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?w=800&q=80' : // Night sky with stars (Sagittarius - vision/adventure)
+                        recording.sign === 'Capricorn' ? 'https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?w=800&q=80' : // Starry mountain night (Capricorn - earth/mountain)
                         recording.sign === 'Cancer' ? 'https://images.unsplash.com/photo-1502134249126-9f3755a50d78?w=800&q=80' : // Crescent moon close-up
                         recording.sign === 'Gemini' ? 'https://images.unsplash.com/photo-1538370965046-79c0d6907d47?w=800&q=80' : // Thin crescent moon
                         recording.sign === 'Scorpio' ? 'https://images.unsplash.com/photo-1505506874110-6a7a69069a08?w=800&q=80' : // Crescent moon in dark sky
@@ -731,23 +785,29 @@ const Shop = () => {
                     </div>
                   </div>
 
-                  {/* Play Button - Opens audio in new tab (requires login) */}
+                  {/* Play Button - Opens audio in new tab */}
                   <button
                     onClick={() => handlePlayAudio(recording.fileName)}
                     className={`w-full py-3 rounded-2xl font-bold text-sm transition-all duration-300 flex items-center justify-center space-x-2 shadow-lg hover:shadow-xl hover:scale-105 group/play ${
-                      isSignedIn
+                      isSignedIn || isFreeRecording(recording.fileName)
                         ? 'bg-gradient-to-r from-primary-600 to-primary-500 text-white hover:from-primary-700 hover:to-primary-600'
                         : 'bg-gray-400 text-white cursor-not-allowed opacity-75'
                     }`}
                   >
                     <div className="bg-white/20 p-1 rounded-full group-hover/play:scale-110 transition-transform">
-                      {isSignedIn ? (
+                      {isSignedIn || isFreeRecording(recording.fileName) ? (
                         <Play className="h-4 w-4 fill-white" />
                       ) : (
                         <Lock className="h-4 w-4" />
                       )}
                     </div>
-                    <span>{isSignedIn ? 'Play' : 'Sign In to Play'}</span>
+                    <span>
+                      {isSignedIn
+                        ? 'Play'
+                        : isFreeRecording(recording.fileName)
+                          ? 'Play Free Sample'
+                          : 'Sign In to Play'}
+                    </span>
                   </button>
                 </div>
               </div>
