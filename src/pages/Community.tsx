@@ -83,12 +83,6 @@ const Community = () => {
 
   const upcomingEvents = [
     {
-      title: "New Moon Manifestation",
-      date: "Saturday January 17",
-      time: "9:00am PST",
-      type: "Live Group Meditation"
-    },
-    {
       title: "Full Moon Release Ceremony",
       date: "Saturday January 31",
       time: "9:00am PST",

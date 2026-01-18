@@ -72,16 +72,6 @@ const Shop = () => {
   // Lunar Nidra Recordings - $5/month subscription access
   const lunarNidraRecordings = [
     {
-      id: 'rec-new-2',
-      title: 'Sagittarius New Moon',
-      date: 'December 19, 2025',
-      duration: '24 min',
-      moonPhase: 'New Moon',
-      sign: 'Sagittarius',
-      fileName: 'LN Sagittarius NM - Vision- 12.19.25 final.mp3',
-      description: 'Expand your vision and embrace adventure with Sagittarius New Moon energy for truth-seeking and growth.'
-    },
-    {
       id: 'rec-new-1',
       title: 'Capricorn New Moon',
       date: 'January 19, 2025',
@@ -90,6 +80,16 @@ const Shop = () => {
       sign: 'Capricorn',
       fileName: 'LN Capricorn NM 01.19.25 w.music final.mp3',
       description: 'Set powerful intentions for structure, discipline, and long-term goals with Capricorn New Moon energy.'
+    },
+    {
+      id: 'rec-new-2',
+      title: 'Sagittarius New Moon',
+      date: 'December 19, 2025',
+      duration: '24 min',
+      moonPhase: 'New Moon',
+      sign: 'Sagittarius',
+      fileName: 'LN Sagittarius NM - Vision- 12.19.25 final.mp3',
+      description: 'Expand your vision and embrace adventure with Sagittarius New Moon energy for truth-seeking and growth.'
     },
     {
       id: 'rec-1',
