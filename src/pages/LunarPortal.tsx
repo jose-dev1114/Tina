@@ -267,11 +267,15 @@ export default function LunarPortal() {
                     <p className="text-sm text-gray-600">Birth Date</p>
                     <p className="text-lg font-semibold text-gray-900">
                       {userProfile?.birthDate
-                        ? new Date(userProfile.birthDate).toLocaleDateString('en-US', {
-                            year: 'numeric',
-                            month: 'long',
-                            day: 'numeric'
-                          })
+                        ? (() => {
+                            // Parse as local time to avoid timezone shift
+                            const [year, month, day] = userProfile.birthDate.split('-').map(Number);
+                            return new Date(year, month - 1, day).toLocaleDateString('en-US', {
+                              year: 'numeric',
+                              month: 'long',
+                              day: 'numeric'
+                            });
+                          })()
                         : 'N/A'}
                     </p>
                   </div>
