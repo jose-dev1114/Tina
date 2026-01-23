@@ -1,8 +1,9 @@
 import { useUser, useAuth as useClerkAuthHook } from '@clerk/clerk-react';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { userService } from '../services/firebaseService';
 import { User } from '../types/database';
 import { geocodeBirthPlace } from '../utils/geocoding';
+import toast from 'react-hot-toast';
 
 export const useAuth = () => {
   const { user, isLoaded: userLoaded, isSignedIn } = useUser();
@@ -10,6 +11,7 @@ export const useAuth = () => {
   const [userProfile, setUserProfile] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
   const [hasProcessedUrlParams, setHasProcessedUrlParams] = useState(false);
+  const hasShownLoginToast = useRef(false);
 
   // ✨ NEW: Extract and save birth data from URL parameters after signup
   const saveBirthDataFromUrl = async (userId: string) => {
@@ -194,6 +196,14 @@ export const useAuth = () => {
 
           setUserProfile(profile);
 
+          // Show login success toast (only once per session)
+          if (!hasShownLoginToast.current) {
+            hasShownLoginToast.current = true;
+            toast.success('Login successfully! 🌙', {
+              duration: 3000,
+            });
+          }
+
         } catch (error) {
           console.error('❌ Error syncing user profile:', error);
           setUserProfile(null);
@@ -201,6 +211,8 @@ export const useAuth = () => {
       } else {
         console.log('👋 User signed out, clearing profile');
         setUserProfile(null);
+        // Reset the toast flag when user signs out
+        hasShownLoginToast.current = false;
       }
 
       setLoading(false);
