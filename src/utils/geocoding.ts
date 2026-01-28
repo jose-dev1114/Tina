@@ -53,12 +53,14 @@ export interface GeocodingResult {
  * @param birthPlace - The birth place (e.g., "New York, USA")
  * @param birthDate - Optional birth date (YYYY-MM-DD format)
  * @param birthTime - Optional birth time (HH:MM format)
+ * @param timezone - Optional timezone (IANA format, e.g., "America/New_York")
  * @returns GeocodingResult with lat, lon, timezone, and optional birth chart
  */
 export const geocodeBirthPlace = async (
   birthPlace: string,
   birthDate?: string,
-  birthTime?: string
+  birthTime?: string,
+  timezone?: string
 ): Promise<GeocodingResult> => {
   try {
     console.log('🌍 Starting geocoding for:', birthPlace);
@@ -98,7 +100,8 @@ export const geocodeBirthPlace = async (
       body: JSON.stringify({
         address: birthPlace,
         date: birthDate,
-        ...(formattedTime && { time: formattedTime })
+        ...(formattedTime && { time: formattedTime }),
+        ...(timezone && { timezone })
       })
     });
 
@@ -118,13 +121,14 @@ export const geocodeBirthPlace = async (
     // Extract the fields we need for geocoding
     const lat = data.lat;
     const lon = data.lon;
-    const timezone = data.timezone;
+    // Use the user-provided timezone if available, otherwise use the one from the API
+    const resultTimezone = timezone || data.timezone;
     const formattedAddress = data.formattedAddress;
 
     console.log('✅ Geocoding successful!');
     console.log('📍 Latitude:', lat);
     console.log('📍 Longitude:', lon);
-    console.log('🕐 Timezone:', timezone);
+    console.log('🕐 Timezone:', resultTimezone);
     console.log('📮 Formatted Address:', formattedAddress);
 
     // ✨ The entire response IS the birth chart data
@@ -144,7 +148,7 @@ export const geocodeBirthPlace = async (
       console.warn('📦 Response keys:', Object.keys(data));
     }
 
-    return { lat, lon, timezone, formattedAddress, birthChart };
+    return { lat, lon, timezone: resultTimezone, formattedAddress, birthChart };
   } catch (error) {
     console.error('❌ Geocoding error:', error);
     throw error;

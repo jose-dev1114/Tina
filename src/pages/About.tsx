@@ -105,11 +105,11 @@ const About = () => {
         <div className="bg-white/80 backdrop-blur-sm rounded-3xl shadow-2xl overflow-hidden mb-16">
           <div className="grid lg:grid-cols-2 gap-0">
             {/* Left Side - Image */}
-            <div className="relative h-[600px] lg:h-auto">
+            <div className="relative h-[400px] lg:h-auto lg:min-h-[600px] bg-primary-100">
               <img
-                src="/Tina.webp"
+                src="/img/tina.webp"
                 alt="Tina"
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover object-top"
               />
               {/* Gradient overlay for better text visibility on mobile */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent lg:hidden"></div>

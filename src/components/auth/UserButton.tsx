@@ -28,7 +28,7 @@ const UserButton = ({
         <ClerkUserButton.Link
           label="Lunar Portal"
           labelIcon={<Sparkles size={16} />}
-          href="/portal"
+          href="/dashboard"
         />
       </ClerkUserButton.MenuItems>
     </ClerkUserButton>

@@ -1,9 +1,12 @@
 import { useUser, useAuth as useClerkAuthHook } from '@clerk/clerk-react';
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState } from 'react';
 import { userService } from '../services/firebaseService';
 import { User } from '../types/database';
 import { geocodeBirthPlace } from '../utils/geocoding';
 import toast from 'react-hot-toast';
+
+// Track login toast at module level (shared across all hook instances)
+const LOGIN_TOAST_KEY = 'hasShownLoginToast';
 
 export const useAuth = () => {
   const { user, isLoaded: userLoaded, isSignedIn } = useUser();
@@ -11,7 +14,6 @@ export const useAuth = () => {
   const [userProfile, setUserProfile] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
   const [hasProcessedUrlParams, setHasProcessedUrlParams] = useState(false);
-  const hasShownLoginToast = useRef(false);
 
   // ✨ NEW: Extract and save birth data from URL parameters after signup
   const saveBirthDataFromUrl = async (userId: string) => {
@@ -20,20 +22,22 @@ export const useAuth = () => {
       const birthDate = params.get('birthDate');
       const birthTime = params.get('birthTime');
       const birthPlace = params.get('birthPlace');
+      const timezone = params.get('timezone');
       const spiritualGoalsStr = params.get('spiritualGoals');
       const challengesStr = params.get('challenges');
 
       // Check if we have birth data in URL
       if (birthDate && birthPlace) {
         console.log('✨ Found birth data in URL parameters');
-        console.log('📋 Birth data:', { birthDate, birthTime, birthPlace });
+        console.log('📋 Birth data:', { birthDate, birthTime, birthPlace, timezone });
 
         try {
           // Get geocoding data and birth chart
           const geoData = await geocodeBirthPlace(
             birthPlace,
             birthDate,
-            birthTime || ''
+            birthTime || '',
+            timezone || undefined
           );
 
           console.log('✅ Geocoding successful, birth chart calculated');
@@ -197,8 +201,9 @@ export const useAuth = () => {
           setUserProfile(profile);
 
           // Show login success toast (only once per session)
-          if (!hasShownLoginToast.current) {
-            hasShownLoginToast.current = true;
+          const hasShownToast = sessionStorage.getItem(LOGIN_TOAST_KEY);
+          if (!hasShownToast) {
+            sessionStorage.setItem(LOGIN_TOAST_KEY, 'true');
             toast.success('Login successfully! 🌙', {
               duration: 3000,
             });
@@ -212,7 +217,7 @@ export const useAuth = () => {
         console.log('👋 User signed out, clearing profile');
         setUserProfile(null);
         // Reset the toast flag when user signs out
-        hasShownLoginToast.current = false;
+        sessionStorage.removeItem(LOGIN_TOAST_KEY);
       }
 
       setLoading(false);

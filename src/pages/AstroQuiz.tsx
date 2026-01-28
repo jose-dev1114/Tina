@@ -6,6 +6,7 @@ import { useAuth } from '../hooks/useClerkAuth';
 import SignUpButton from '../components/auth/SignUpButton';
 import SignInButton from '../components/auth/SignInButton';
 import LocationAutocomplete from '../components/LocationAutocomplete';
+import TimezoneAutocomplete from '../components/TimezoneAutocomplete';
 import toast from 'react-hot-toast';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -14,6 +15,7 @@ interface QuizData {
   birthDate: string;
   birthTime: string;
   birthPlace: string;
+  timezone: string;
   spiritualGoals: string[];
   challenges: string[];
 }
@@ -26,6 +28,7 @@ const AstroQuiz = () => {
     birthDate: '',
     birthTime: '',
     birthPlace: '',
+    timezone: '',
     spiritualGoals: [],
     challenges: []
   });
@@ -142,9 +145,9 @@ const AstroQuiz = () => {
       console.log('📋 Quiz Data:', quizData);
 
       // Validate required fields
-      if (!quizData.birthDate || !quizData.birthPlace) {
-        console.warn('⚠️ Missing required fields: Birth Date and Birth Place are required');
-        toast.error('Please fill in your Birth Date and Birth Place');
+      if (!quizData.birthDate || !quizData.birthPlace || !quizData.timezone) {
+        console.warn('⚠️ Missing required fields: Birth Date, Birth Place, and Timezone are required');
+        toast.error('Please fill in your Birth Date, Birth Place, and Timezone');
         return;
       }
 
@@ -156,6 +159,7 @@ const AstroQuiz = () => {
           birthDate: quizData.birthDate,
           birthTime: quizData.birthTime,
           birthPlace: quizData.birthPlace,
+          timezone: quizData.timezone,
           spiritualGoals: quizData.spiritualGoals,
           challenges: quizData.challenges
         });
@@ -165,6 +169,7 @@ const AstroQuiz = () => {
           birthDate: quizData.birthDate,
           birthTime: quizData.birthTime || '',
           birthPlace: quizData.birthPlace,
+          timezone: quizData.timezone,
           spiritualGoals: JSON.stringify(quizData.spiritualGoals),
           challenges: JSON.stringify(quizData.challenges)
         });
@@ -181,7 +186,8 @@ const AstroQuiz = () => {
       const geoData = await geocodeBirthPlace(
         quizData.birthPlace,
         quizData.birthDate,
-        quizData.birthTime
+        quizData.birthTime,
+        quizData.timezone
       );
 
       // Log all the data
@@ -451,6 +457,7 @@ const AstroQuiz = () => {
                   birthDate: '',
                   birthTime: '',
                   birthPlace: '',
+                  timezone: '',
                   spiritualGoals: [],
                   challenges: []
                 });
@@ -566,6 +573,18 @@ const AstroQuiz = () => {
                     placeholder="e.g., New York, USA"
                   />
                   <p className="text-sm text-gray-500 mt-1">Start typing to search for your birth city</p>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Timezone <span className="text-red-500">*</span>
+                  </label>
+                  <TimezoneAutocomplete
+                    value={quizData.timezone}
+                    onChange={(value) => setQuizData(prev => ({ ...prev, timezone: value }))}
+                    placeholder="Search and select your timezone"
+                  />
+                  <p className="text-sm text-gray-500 mt-1">Search by city name or timezone for accurate chart calculation</p>
                 </div>
               </div>
             </div>
@@ -693,7 +712,7 @@ const AstroQuiz = () => {
                   setCurrentStep(Math.min(4, currentStep + 1));
                 }
               }}
-              disabled={isSubmitting}
+              disabled={isSubmitting || (currentStep === 1 && (!quizData.birthDate || !quizData.birthPlace || !quizData.timezone))}
               className="bg-gradient-to-r from-primary-700 to-primary-600 text-white px-8 py-3 rounded-full font-medium hover:shadow-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center space-x-2"
             >
               {isSubmitting && <Loader2 className="h-5 w-5 animate-spin" />}
