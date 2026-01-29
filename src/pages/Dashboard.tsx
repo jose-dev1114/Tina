@@ -133,7 +133,7 @@ export default function Dashboard() {
           </div>
 
           {/* Moon Sign Card */}
-          <div className="bg-gradient-to-br from-blue-500/20 to-purple-500/20 backdrop-blur-md rounded-2xl border border-white/20 p-8 shadow-xl hover:shadow-2xl transition-all duration-300 flex flex-col justify-center">
+          <div className="bg-gradient-to-br from-blue-500/20 to-purple-500/20 backdrop-blur-md rounded-2xl border border-white/20 p-8 shadow-xl hover:shadow-2xl transition-all duration-300 flex flex-col justify-center text-center items-center">
             <div className="flex items-center space-x-4 mb-6">
               <Moon className="h-12 w-12 text-blue-300" />
               <h2 className="text-3xl font-bold text-white">Moon Sign</h2>
@@ -141,7 +141,7 @@ export default function Dashboard() {
             <div className="space-y-4">
               <div className="text-5xl font-bold text-blue-200">{moonSign || 'N/A'}</div>
               {moonHouse && (
-                <div className="flex items-center space-x-2 text-white/80">
+                <div className="flex items-center space-x-2 text-white/80 justify-center">
                   <span className="text-base">House:</span>
                   <span className="text-2xl font-semibold text-blue-300">{moonHouse}</span>
                 </div>
@@ -189,7 +189,7 @@ export default function Dashboard() {
         </div>
 
         {/* Moon Phase Report */}
-        {birthChart?.moonPhaseReport && (
+        {/* {birthChart?.moonPhaseReport && (
           <div className="mb-12 bg-gradient-to-br from-indigo-500/20 via-purple-500/20 to-pink-500/20 backdrop-blur-md rounded-2xl border border-white/30 overflow-hidden shadow-2xl">
             <div className="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 p-6">
               <div className="flex items-center space-x-3">
@@ -204,7 +204,6 @@ export default function Dashboard() {
             </div>
 
             <div className="p-8 space-y-6">
-              {/* Moon Phase Name */}
               <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
                 <p className="text-white/60 text-sm mb-2">Moon Phase</p>
                 <p className="text-4xl font-bold text-white">
@@ -212,7 +211,6 @@ export default function Dashboard() {
                 </p>
               </div>
 
-              {/* Significance */}
               {birthChart.moonPhaseReport.significance && (
                 <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
                   <p className="text-lg font-semibold text-purple-200 mb-3">Significance</p>
@@ -222,7 +220,6 @@ export default function Dashboard() {
                 </div>
               )}
 
-              {/* Personal Report */}
               {birthChart.moonPhaseReport.report && (
                 <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
                   <p className="text-lg font-semibold text-purple-200 mb-3">Your Moon Phase Guidance</p>
@@ -233,7 +230,7 @@ export default function Dashboard() {
               )}
             </div>
           </div>
-        )}
+        )} */}
 
         {/* Birth Information */}
         <div className="bg-white/10 backdrop-blur-md rounded-2xl border border-white/20 p-8 shadow-xl">
