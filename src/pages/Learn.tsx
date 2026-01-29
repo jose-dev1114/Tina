@@ -1,5 +1,5 @@
 
-import { BookOpen, Play, Star, Clock, User, X, Sparkles } from 'lucide-react';
+import { BookOpen, Play, Star, Clock, User, X, Sparkles, ExternalLink } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import toast from 'react-hot-toast';
@@ -164,7 +164,7 @@ const Learn = () => {
           </div>
 
           <h1 className="text-4xl md:text-5xl font-serif font-bold text-primary-700 mb-4">
-            Learn & Grow
+            Resources & Grow
           </h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
             Deepen your practice with articles, videos, and guides on meditation, astrology, 
@@ -250,6 +250,90 @@ const Learn = () => {
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+
+        {/* Resources Section */}
+        <div className="mb-16">
+          <h2 className="text-3xl font-serif font-bold text-primary-700 mb-8 text-center">
+            Resources
+          </h2>
+          <div className="grid md:grid-cols-2 gap-8">
+            {/* Heidi's Daily Moon Notes */}
+            <a
+              href="https://heidiroserobbins.substack.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 group"
+            >
+              <div className="p-6">
+                <div className="flex items-center justify-between mb-3">
+                  <span className="bg-primary-100 text-primary-700 px-3 py-1 rounded-full text-sm">Daily Practice</span>
+                  <ExternalLink className="h-4 w-4 text-gray-400 group-hover:text-primary-600 transition-colors" />
+                </div>
+                <h3 className="text-xl font-semibold text-primary-700 mb-3 leading-tight">Heidi's Daily Moon Notes</h3>
+                <p className="text-gray-600 text-sm leading-relaxed">
+                  My mentor and friend, Heidi Rose Robbins, blends astrology and poetry for a gentle daily grounding. A beautiful way to stay tethered to the lunar rhythm.
+                </p>
+              </div>
+            </a>
+
+            {/* The Work of Byron Katie */}
+            <a
+              href="https://thework.com/books/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 group"
+            >
+              <div className="p-6">
+                <div className="flex items-center justify-between mb-3">
+                  <span className="bg-primary-100 text-primary-700 px-3 py-1 rounded-full text-sm">Books</span>
+                  <ExternalLink className="h-4 w-4 text-gray-400 group-hover:text-primary-600 transition-colors" />
+                </div>
+                <h3 className="text-xl font-semibold text-primary-700 mb-3 leading-tight">The Work of Byron Katie</h3>
+                <p className="text-gray-600 text-sm leading-relaxed">
+                  My go-to resource for over 20 years. The Work of Byron Katie offers a radical path to clarity, helping you dismantle painful beliefs and wake up to reality.
+                </p>
+              </div>
+            </a>
+
+            {/* Breaking the Habit of Being Yourself */}
+            <a
+              href="https://drjoedispenza.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 group"
+            >
+              <div className="p-6">
+                <div className="flex items-center justify-between mb-3">
+                  <span className="bg-primary-100 text-primary-700 px-3 py-1 rounded-full text-sm">Books</span>
+                  <ExternalLink className="h-4 w-4 text-gray-400 group-hover:text-primary-600 transition-colors" />
+                </div>
+                <h3 className="text-xl font-semibold text-primary-700 mb-3 leading-tight">Breaking the Habit of Being Yourself</h3>
+                <p className="text-gray-600 text-sm leading-relaxed">
+                  The science behind the magic. Dr. Joe Dispenza explains the neuroscience of how we change, providing the intellectual framework for why practices like Lunar Nidra are so effective.
+                </p>
+              </div>
+            </a>
+
+            {/* Dr. Andrew Huberman - Yoga Nidra */}
+            <a
+              href="https://www.youtube.com/shorts/TGiAo39mkQw"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 group"
+            >
+              <div className="p-6">
+                <div className="flex items-center justify-between mb-3">
+                  <span className="bg-primary-100 text-primary-700 px-3 py-1 rounded-full text-sm">Video</span>
+                  <ExternalLink className="h-4 w-4 text-gray-400 group-hover:text-primary-600 transition-colors" />
+                </div>
+                <h3 className="text-xl font-semibold text-primary-700 mb-3 leading-tight">Dr. Andrew Huberman on Yoga Nidra</h3>
+                <p className="text-gray-600 text-sm leading-relaxed">
+                  The science of rest. Dr. Andrew Huberman explains why the 'twilight state' of Yoga Nidra is so effective for calming the nervous system and quieting a busy mind.
+                </p>
+              </div>
+            </a>
           </div>
         </div>
 

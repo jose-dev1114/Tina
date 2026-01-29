@@ -130,8 +130,8 @@ const Coaching = () => {
 
           <div className="grid lg:grid-cols-3 gap-8">
             {/* Offering 1: Sun • Moon • Rising Recording */}
-            <div className="bg-white rounded-2xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-300">
-              <div className="bg-gradient-to-br from-yellow-400 to-orange-500 p-6 text-white">
+            <div className="bg-white rounded-2xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-300 flex flex-col">
+              <div className="bg-gradient-to-br from-yellow-400 to-orange-500 p-6 text-white h-40 flex flex-col items-center justify-center">
                 <div className="flex items-center justify-center mb-4">
                   <Sparkles className="h-8 w-8" />
                 </div>
@@ -185,8 +185,8 @@ const Coaching = () => {
             </div>
 
             {/* Offering 2: Exploring Your Astrological Signature */}
-            <div className="bg-white rounded-2xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-300">
-              <div className="bg-gradient-to-br from-primary-600 to-primary-700 p-6 text-white">
+            <div className="bg-white rounded-2xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-300 flex flex-col">
+              <div className="bg-gradient-to-br from-primary-600 to-primary-700 p-6 text-white h-40 flex flex-col items-center justify-center">
                 <div className="flex items-center justify-center mb-4">
                   <BookOpen className="h-8 w-8" />
                 </div>
@@ -243,8 +243,8 @@ const Coaching = () => {
             </div>
 
             {/* Offering 3: Personalised Lunar Nidra */}
-            <div className="bg-white rounded-2xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-300">
-              <div className="bg-gradient-to-br from-indigo-500 to-purple-600 p-6 text-white">
+            <div className="bg-white rounded-2xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-300 flex flex-col">
+              <div className="bg-gradient-to-br from-indigo-500 to-purple-600 p-6 text-white h-40 flex flex-col items-center justify-center">
                 <div className="flex items-center justify-center mb-4">
                   <Moon className="h-8 w-8" />
                 </div>
