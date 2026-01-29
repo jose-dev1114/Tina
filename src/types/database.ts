@@ -25,6 +25,7 @@ export interface User {
   birthDate?: string;
   birthTime?: string;
   birthPlace?: string;
+  timezone?: string;  // IANA timezone (e.g., "America/New_York", "Europe/Brussels")
   sunSign?: string;
   moonSign?: string;
   risingSign?: string;

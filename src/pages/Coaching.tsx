@@ -292,7 +292,7 @@ const Coaching = () => {
                   <span>Book Now</span>
                 </a>
 
-                <p className="text-xs text-center text-gray-500 mt-4">Schedule via Calendly • Personalized Lunar Nidra</p>
+                <p className="text-xs text-center text-gray-500 mt-4">Personalized Lunar Nidra</p>
               </div>
             </div>
           </div>

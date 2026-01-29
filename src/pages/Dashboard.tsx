@@ -153,7 +153,14 @@ export default function Dashboard() {
               {/* Action Buttons */}
               <div className="flex flex-col gap-3 mt-6">
                 <button
-                  onClick={() => navigate('/shop')}
+                  onClick={() => toast('Coming Soon! ✨', {
+                    icon: '🌙',
+                    style: {
+                      borderRadius: '10px',
+                      background: '#4c1d95',
+                      color: '#fff',
+                    },
+                  })}
                   className="w-full bg-gradient-to-r from-primary-600 to-primary-700 text-white px-6 py-3 rounded-full font-semibold hover:shadow-lg transition-all duration-300 flex items-center justify-center space-x-2"
                 >
                   <span>Explore Personalized Meditations</span>
@@ -248,11 +255,15 @@ export default function Dashboard() {
                 <p className="text-white/60 text-sm">Birth Date</p>
                 <p className="text-white text-lg font-semibold">
                   {userProfile?.birthDate
-                    ? new Date(userProfile.birthDate).toLocaleDateString('en-US', {
-                        year: 'numeric',
-                        month: 'long',
-                        day: 'numeric'
-                      })
+                    ? (() => {
+                        // Parse as local time to avoid timezone offset issues
+                        const [year, month, day] = userProfile.birthDate.split('-').map(Number);
+                        return new Date(year, month - 1, day).toLocaleDateString('en-US', {
+                          year: 'numeric',
+                          month: 'long',
+                          day: 'numeric'
+                        });
+                      })()
                     : 'N/A'}
                 </p>
               </div>

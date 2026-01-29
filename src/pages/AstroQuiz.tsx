@@ -55,7 +55,8 @@ const AstroQuiz = () => {
           const geoData = await geocodeBirthPlace(
             tempBirthData.birthPlace,
             tempBirthData.birthDate,
-            tempBirthData.birthTime
+            tempBirthData.birthTime,
+            tempBirthData.timezone
           );
 
           // Save birth data to user profile
