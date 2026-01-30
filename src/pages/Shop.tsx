@@ -72,9 +72,19 @@ const Shop = () => {
   // Lunar Nidra Recordings - $5/month subscription access
   const lunarNidraRecordings = [
     {
+      id: 'rec-new-0',
+      title: 'Leo Full Moon',
+      date: 'January 30, 2026',
+      duration: '19 min',
+      moonPhase: 'Full Moon',
+      sign: 'Leo',
+      fileName: 'LN Leo FM - Authenticity 2.1.26final.mp3',
+      description: 'Embrace your authentic self and shine your inner light with Leo Full Moon energy for creativity and self-expression.'
+    },
+    {
       id: 'rec-new-1',
       title: 'Capricorn New Moon',
-      date: 'January 19, 2025',
+      date: 'January 19, 2026',
       duration: '27 min',
       moonPhase: 'New Moon',
       sign: 'Capricorn',
