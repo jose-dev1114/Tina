@@ -3,6 +3,7 @@ import { Instagram, Youtube, Mail } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
+import { subscribeToNewsletter } from '../services/newsletterService';
 
 const Footer = () => {
   const [email, setEmail] = useState('');
@@ -11,7 +12,6 @@ const Footer = () => {
   const handleNewsletterSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Validate email
     if (!email || !email.includes('@')) {
       toast.error('Please enter a valid email address');
       return;
@@ -20,16 +20,11 @@ const Footer = () => {
     setIsSubmitting(true);
 
     try {
-      // Simulate API call - Replace with actual newsletter API
-      await new Promise(resolve => setTimeout(resolve, 1000));
-
-      toast.success('🌙 Welcome to our sacred circle! Check your email for a special gift.', {
-        duration: 5000,
-      });
-
+      const result = await subscribeToNewsletter(email);
+      toast.success(result.message, { duration: 5000 });
       setEmail('');
     } catch (error) {
-      toast.error('Something went wrong. Please try again.');
+      toast.error(error instanceof Error ? error.message : 'Something went wrong. Please try again.');
     } finally {
       setIsSubmitting(false);
     }

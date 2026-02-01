@@ -28,7 +28,8 @@ const Shop = () => {
 
   // Free sample recordings that anyone can listen to
   const freeRecordings = [
-    'LN Sagittarius NM - Vision- 12.19.25 final.mp3',  // Sagittarius New Moon (newest)
+    'LN Leo FM - Authenticity 2.1.26final.mp3',        // Leo Full Moon (newest)
+    'LN Sagittarius NM - Vision- 12.19.25 final.mp3',  // Sagittarius New Moon
     'LN Capricorn NM 01.19.25 w.music final.mp3',      // Capricorn New Moon
     'Arie Full Moon LN 10.6.25.mp3'                     // Aries Full Moon
   ];

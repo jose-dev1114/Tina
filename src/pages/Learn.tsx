@@ -3,6 +3,7 @@ import { BookOpen, Play, Star, Clock, User, X, Sparkles, ExternalLink } from 'lu
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import toast from 'react-hot-toast';
+import { subscribeToNewsletter } from '../services/newsletterService';
 
 const Learn = () => {
   const [showComingSoonModal, setShowComingSoonModal] = useState(false);
@@ -17,7 +18,6 @@ const Learn = () => {
   const handleNewsletterSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Validate email
     if (!newsletterEmail || !newsletterEmail.includes('@')) {
       toast.error('Please enter a valid email address');
       return;
@@ -26,16 +26,11 @@ const Learn = () => {
     setIsSubmittingNewsletter(true);
 
     try {
-      // Simulate API call - Replace with actual newsletter API
-      await new Promise(resolve => setTimeout(resolve, 1000));
-
-      toast.success('🌙 Welcome to our sacred circle! Check your email for a special gift.', {
-        duration: 5000,
-      });
-
+      const result = await subscribeToNewsletter(newsletterEmail);
+      toast.success(result.message, { duration: 5000 });
       setNewsletterEmail('');
     } catch (error) {
-      toast.error('Something went wrong. Please try again.');
+      toast.error(error instanceof Error ? error.message : 'Something went wrong. Please try again.');
     } finally {
       setIsSubmittingNewsletter(false);
     }

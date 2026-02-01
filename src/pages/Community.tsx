@@ -190,7 +190,7 @@ const Community = () => {
                 </div>
 
                 <a
-                  href="https://www.ourhealingpractices.com/community"
+                  href="https://www.skool.com/lunar-nidra-ohp-6069"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center space-x-3 bg-gradient-to-r from-yellow-400 to-yellow-500 text-gray-900 px-8 py-4 rounded-full font-bold text-lg hover:shadow-2xl hover:scale-105 transition-all duration-300"
@@ -414,7 +414,7 @@ const Community = () => {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
-                href="https://www.skool.com/novanidracommunity/about"
+                href="https://www.skool.com/lunar-nidra-ohp-6069"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="bg-white text-primary-700 px-8 py-4 rounded-full font-medium text-lg hover:bg-primary-50 transition-colors duration-300 flex items-center justify-center space-x-2"

@@ -1,11 +1,12 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { useAuth } from '@clerk/clerk-react';
+import { useAuth, useUser } from '@clerk/clerk-react';
 import { Menu, X, ShoppingCart } from 'lucide-react';
 import SignInButton from './auth/SignInButton';
 import SignUpButton from './auth/SignUpButton';
 import UserButton from './auth/UserButton';
 import { useCart } from '../contexts/CartContext';
+import toast from 'react-hot-toast';
 
 // Cart button component - Amazon inspired
 const CartButton = () => {
@@ -38,6 +39,32 @@ const CartButton = () => {
 // Auth buttons component
 const AuthButtons = () => {
   const { isSignedIn, isLoaded } = useAuth();
+  const { user } = useUser();
+
+  // Show login toast when user signs in
+  useEffect(() => {
+    if (isSignedIn && user) {
+      const hasShownToast = sessionStorage.getItem('loginToastShown');
+      if (!hasShownToast) {
+        toast.success(`Hi ${user.firstName}! 👋`, {
+          duration: 3000,
+          style: {
+            borderRadius: '10px',
+            background: '#4c1d95',
+            color: '#fff',
+          },
+        });
+        sessionStorage.setItem('loginToastShown', 'true');
+      }
+    }
+  }, [isSignedIn, user]);
+
+  // Clear toast flag when user signs out
+  useEffect(() => {
+    if (!isSignedIn && isLoaded) {
+      sessionStorage.removeItem('loginToastShown');
+    }
+  }, [isSignedIn, isLoaded]);
 
   // Show loading state while Clerk is initializing
   if (!isLoaded) {
@@ -52,7 +79,7 @@ const AuthButtons = () => {
   if (isSignedIn) {
     return (
       <div className="flex items-center">
-        <UserButton afterSignOutUrl="/" showName={false} />
+        <UserButton afterSignOutUrl="/" showName={true} />
       </div>
     );
   }

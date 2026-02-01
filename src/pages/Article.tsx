@@ -1,6 +1,8 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Clock, User, ArrowLeft, Calendar } from 'lucide-react';
+import toast from 'react-hot-toast';
+import { subscribeToNewsletter } from '../services/newsletterService';
 
 interface ArticleData {
   title: string;
@@ -18,10 +20,33 @@ interface ArticleProps {
 
 const Article = ({ articles }: ArticleProps) => {
   const { slug } = useParams<{ slug: string }>();
-  
+  const [newsletterEmail, setNewsletterEmail] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [slug]);
+
+  const handleNewsletterSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (!newsletterEmail || !newsletterEmail.includes('@')) {
+      toast.error('Please enter a valid email address');
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      const result = await subscribeToNewsletter(newsletterEmail);
+      toast.success(result.message, { duration: 5000 });
+      setNewsletterEmail('');
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : 'Something went wrong. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   if (!slug || !articles[slug]) {
     return (
@@ -120,16 +145,23 @@ const Article = ({ articles }: ArticleProps) => {
           <p className="text-white/90 mb-6 max-w-2xl mx-auto">
             Get more sacred wisdom, moon phase reminders, and exclusive meditations delivered to your inbox.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+          <form onSubmit={handleNewsletterSubmit} className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
             <input
               type="email"
+              value={newsletterEmail}
+              onChange={(e) => setNewsletterEmail(e.target.value)}
               placeholder="Your email..."
-              className="flex-1 px-4 py-3 rounded-full text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-300"
+              disabled={isSubmitting}
+              className="flex-1 px-4 py-3 rounded-full text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-300 disabled:opacity-50"
             />
-            <button className="bg-white text-primary-700 px-8 py-3 rounded-full font-medium hover:bg-primary-50 transition-colors duration-300">
-              Subscribe
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              className="bg-white text-primary-700 px-8 py-3 rounded-full font-medium hover:bg-primary-50 transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {isSubmitting ? 'Subscribing...' : 'Subscribe'}
             </button>
-          </div>
+          </form>
         </div>
       </div>
     </div>
