@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { Moon, Stars } from 'lucide-react';
 
 type CardState = 'idle' | 'shuffling' | 'revealed';
 
@@ -7,9 +6,12 @@ const CardShuffle = () => {
   const [cardState, setCardState] = useState<CardState>('idle');
   const [revealedCardIndex, setRevealedCardIndex] = useState<number | null>(null);
 
-  // Generate array of card image paths
-  const cards = Array.from({ length: 20 }, (_, i) =>
-    `/img/card/Selfdiscovery cards 100final_pages-to-jpg-${String(i + 1).padStart(4, '0')}.jpg`
+  // Card back image path
+  const cardBackImage = '/img/card/Selfdiscovery cards 100final_pages-to-jpg-0001.jpg';
+
+  // Generate array of card image paths (starting from 0002 since 0001 is the back)
+  const cards = Array.from({ length: 19 }, (_, i) =>
+    `/img/card/Selfdiscovery cards 100final_pages-to-jpg-${String(i + 2).padStart(4, '0')}.jpg`
   );
 
   const handleShuffle = () => {
@@ -31,44 +33,16 @@ const CardShuffle = () => {
     setRevealedCardIndex(null);
   };
 
-  // Card back component with beautiful design
+  // Card back component using the actual card back image
   const CardBack = ({ className = '', style = {} }: { className?: string; style?: React.CSSProperties }) => (
     <div
-      className={`rounded-2xl shadow-xl overflow-hidden ${className}`}
-      style={{
-        background: 'linear-gradient(145deg, #8B7EC8 0%, #6B6CAC 30%, #5C5DA0 60%, #4D4E94 100%)',
-        ...style
-      }}
+      className={`rounded-2xl shadow-xl overflow-hidden border-4 border-white/90 ring-1 ring-primary-300/50 ${className}`}
+      style={style}
     >
-      {/* Outer border */}
-      <div className="absolute inset-2 border-2 border-white/20 rounded-xl" />
-
-      {/* Inner decorative frame */}
-      <div className="absolute inset-4 border border-white/10 rounded-lg" />
-
-      {/* Center design */}
-      <div className="absolute inset-0 flex items-center justify-center">
-        <div className="relative">
-          {/* Glowing circle behind */}
-          <div className="absolute inset-0 bg-white/10 rounded-full blur-xl scale-150" />
-
-          {/* Moon icon */}
-          <div className="relative bg-gradient-to-br from-white/20 to-white/5 p-4 rounded-full border border-white/20">
-            <Moon className="w-8 h-8 text-white/70" />
-          </div>
-        </div>
-      </div>
-
-      {/* Corner stars */}
-      <Stars className="absolute top-4 left-4 w-4 h-4 text-white/30" />
-      <Stars className="absolute top-4 right-4 w-4 h-4 text-white/30" />
-      <Stars className="absolute bottom-4 left-4 w-4 h-4 text-white/30" />
-      <Stars className="absolute bottom-4 right-4 w-4 h-4 text-white/30" />
-
-      {/* Subtle shimmer effect */}
-      <div
-        className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-transparent"
-        style={{ transform: 'rotate(-45deg) scale(2)' }}
+      <img
+        src={cardBackImage}
+        alt="Card back"
+        className="w-full h-full object-cover rounded-xl"
       />
     </div>
   );

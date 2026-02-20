@@ -136,11 +136,11 @@ const HomePage = () => {
                   to="/quiz"
                   className="bg-primary-600 text-white px-8 py-4 rounded-full font-semibold text-base hover:bg-primary-700 transition-all duration-300 transform hover:scale-105 flex items-center justify-center space-x-2 shadow-lg uppercase tracking-wide"
                 >
-                  <span>FIND YOUR PRACTICE</span>
+                  <span>Reveal your moon</span>
                 </Link>
 
                 <Link
-                  to="/community"
+                  to="https://www.skool.com/lunar-nidra-ohp-6069"
                   className="bg-white/90 backdrop-blur-sm text-primary-600 px-8 py-4 rounded-full font-semibold text-base hover:bg-white transition-all duration-300 flex items-center justify-center space-x-2 border-2 border-white/50 shadow-sm"
                 >
                   <Users className="h-5 w-5" />
@@ -150,7 +150,7 @@ const HomePage = () => {
 
               <p className="text-sm text-gray-600">
                 Not sure of your Moon sign?
-                <a href="#" className="text-primary-600 hover:text-primary-700 underline ml-1 font-medium">Take our free quiz</a>
+                {/* <a href="#" className="text-primary-600 hover:text-primary-700 underline ml-1 font-medium">Take our free quiz</a> */}
               </p>
             </div>
 

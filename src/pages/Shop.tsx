@@ -28,6 +28,7 @@ const Shop = () => {
 
   // Free sample recordings that anyone can listen to
   const freeRecordings = [
+    'LN Aquarius NM 2.16.26 body scan w_m.mp3',
     'LN Leo FM - Authenticity 2.1.26final.mp3',        // Leo Full Moon (newest)
     'LN Sagittarius NM - Vision- 12.19.25 final.mp3',  // Sagittarius New Moon
     'LN Capricorn NM 01.19.25 w.music final.mp3',      // Capricorn New Moon
@@ -72,6 +73,16 @@ const Shop = () => {
 
   // Lunar Nidra Recordings - $5/month subscription access
   const lunarNidraRecordings = [
+    {
+      id: 'rec-new-00',
+      title: 'Aquarius New Moon',
+      date: 'February 16, 2026',
+      duration: '13 min',
+      moonPhase: 'New Moon',
+      sign: 'Aquarius',
+      fileName: 'LN Aquarius NM 2.16.26 body scan w_m.mp3',
+      description: 'Set intentions for innovation, community, and humanitarian vision with Aquarius New Moon energy for forward-thinking transformation.'
+    },
     {
       id: 'rec-new-0',
       title: 'Leo Full Moon',
@@ -909,7 +920,7 @@ const Shop = () => {
                       <span>Instant Download + Free PDF Guide</span>
                     </div>
                   )}
-                  {product.type === 'physical' && (
+                  {/* {product.type === 'physical' && (
                     <>
                       <div className="flex items-center text-sm text-blue-600 font-medium">
                         <Package className="h-4 w-4 mr-2" />
@@ -920,7 +931,7 @@ const Shop = () => {
                         <span>Next ship date: January 5, 2026</span>
                       </div>
                     </>
-                  )}
+                  )} */}
                 </div>
 
                 {/* Price and Actions */}
