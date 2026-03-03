@@ -28,8 +28,9 @@ const Shop = () => {
 
   // Free sample recordings that anyone can listen to
   const freeRecordings = [
+    'LN Virgo FM 3.2.26final.mp3',                      // Virgo Full Moon (newest)
     'LN Aquarius NM 2.16.26 body scan w_m.mp3',
-    'LN Leo FM - Authenticity 2.1.26final.mp3',        // Leo Full Moon (newest)
+    'LN Leo FM - Authenticity 2.1.26final.mp3',        // Leo Full Moon
     'LN Sagittarius NM - Vision- 12.19.25 final.mp3',  // Sagittarius New Moon
     'LN Capricorn NM 01.19.25 w.music final.mp3',      // Capricorn New Moon
     'Arie Full Moon LN 10.6.25.mp3'                     // Aries Full Moon
@@ -73,6 +74,16 @@ const Shop = () => {
 
   // Lunar Nidra Recordings - $5/month subscription access
   const lunarNidraRecordings = [
+    {
+      id: 'rec-new-virgo-fm',
+      title: 'Virgo Full Moon & Lunar Eclipse',
+      date: 'March 2, 2026',
+      duration: '18 min',
+      moonPhase: 'Full Moon',
+      sign: 'Virgo',
+      fileName: 'LN Virgo FM 3.2.26final.mp3',
+      description: 'Embrace the Virgo Full Moon energy for purification, organization, and practical self-improvement. Release what no longer serves your highest good.'
+    },
     {
       id: 'rec-new-00',
       title: 'Aquarius New Moon',
