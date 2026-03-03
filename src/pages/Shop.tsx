@@ -55,6 +55,13 @@ const Shop = () => {
       return;
     }
 
+    // Open a blank window immediately (before async) to avoid iOS popup blocker
+    const newWindow = window.open('', '_blank');
+    if (!newWindow) {
+      toast.error('Please allow popups to play audio');
+      return;
+    }
+
     try {
       toast.loading('Loading audio...', { id: 'audio-loading' });
 
@@ -62,12 +69,13 @@ const Shop = () => {
       const audioRef = ref(storage, fileName);
       const url = await getDownloadURL(audioRef);
 
-      // Open in new tab
-      window.open(url, '_blank');
+      // Navigate the already-opened window to the audio URL
+      newWindow.location.href = url;
 
       toast.success('Opening audio in new tab! 🎵', { id: 'audio-loading' });
     } catch (error) {
       console.error('Error fetching audio URL:', error);
+      newWindow.close(); // Close the blank window on error
       toast.error('Failed to load audio', { id: 'audio-loading' });
     }
   };
