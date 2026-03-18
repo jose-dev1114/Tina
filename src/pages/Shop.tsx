@@ -28,6 +28,7 @@ const Shop = () => {
 
   // Free sample recordings that anyone can listen to
   const freeRecordings = [
+    'LN Pisces NM 3.18.26 w_m final.mp3',
     'LN Virgo FM 3.2.26final.mp3',                      // Virgo Full Moon (newest)
     'LN Aquarius NM 2.16.26 body scan w_m.mp3',
     'LN Leo FM - Authenticity 2.1.26final.mp3',        // Leo Full Moon
@@ -82,6 +83,16 @@ const Shop = () => {
 
   // Lunar Nidra Recordings - $5/month subscription access
   const lunarNidraRecordings = [
+    {
+      id: 'rec-new-pisces-nm',
+      title: 'Endings',
+      date: 'March 18, 2026',
+      duration: '22 min',
+      moonPhase: 'New Moon',
+      sign: 'Pisces',
+      fileName: 'LN Pisces NM 3.18.26 w_m final.mp3',
+      description: 'Dive deep into Pisces New Moon energy for intuition, dreams, and spiritual connection. Set intentions for compassion and creative flow.'
+    },
     {
       id: 'rec-new-virgo-fm',
       title: 'Virgo Full Moon & Lunar Eclipse',
