@@ -28,6 +28,7 @@ const Shop = () => {
 
   // Free sample recordings that anyone can listen to
   const freeRecordings = [
+    'LN Libra Full Moon 4.1.26 final.mp3',
     'LN Pisces NM 3.18.26 w_m final.mp3',
     'LN Virgo FM 3.2.26final.mp3',                      // Virgo Full Moon (newest)
     'LN Aquarius NM 2.16.26 body scan w_m.mp3',
@@ -83,6 +84,16 @@ const Shop = () => {
 
   // Lunar Nidra Recordings - $5/month subscription access
   const lunarNidraRecordings = [
+    {
+      id: 'rec-new-libra-fm',
+      title: 'Libra Full Moon',
+      date: 'April 1, 2026',
+      duration: '20 min',
+      moonPhase: 'Full Moon',
+      sign: 'Libra',
+      fileName: 'LN Libra Full Moon 4.1.26 final.mp3',
+      description: 'Find balance and harmony with Libra Full Moon grace.'
+    },
     {
       id: 'rec-new-pisces-nm',
       title: 'Endings',
